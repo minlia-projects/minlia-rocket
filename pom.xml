@@ -12,7 +12,7 @@
 
   <properties>
     <main.basedir>${basedir}</main.basedir>
-    <revision>2.0.3-SNAPSHOT</revision>
+    <revision>2.0.3.RELEASE</revision>
   </properties>
 
   <profiles>
