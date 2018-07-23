@@ -29,9 +29,10 @@ public class Lang {
       ApplicationContext context = ContextHolder.getContext();
       if (null != context) {
         result = context.getBean(MessageSource.class).getMessage(key, arguments, result, locale);
+      }else {
+        log.warn(
+            "ContextHolder is null at this time, please import minlia-rocket-starter-context first");
       }
-      log.warn(
-          "ContextHolder is null at this time, please import minlia-rocket-starter-context first");
     } catch (org.springframework.context.NoSuchMessageException e) {
       log.warn("No translated message found for key: {}", key);
 //      log.warn("No translated message found for key: {}" , key);
