@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "system.swagger",ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "system.swagger", ignoreInvalidFields = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

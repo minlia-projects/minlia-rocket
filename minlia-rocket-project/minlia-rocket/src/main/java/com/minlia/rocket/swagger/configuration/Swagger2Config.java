@@ -61,8 +61,9 @@ public class Swagger2Config {
   @Bean
   @ConditionalOnMissingBean
   SecurityScheme apiKey() {
-    return new ApiKey("apiKey", swaggerConfigurationProperties.getKeyName(), swaggerConfigurationProperties
-        .getPassAs());
+    return new ApiKey("apiKey", swaggerConfigurationProperties.getKeyName(),
+        swaggerConfigurationProperties
+            .getPassAs());
   }
 
   private List<SecurityReference> defaultAuth() {

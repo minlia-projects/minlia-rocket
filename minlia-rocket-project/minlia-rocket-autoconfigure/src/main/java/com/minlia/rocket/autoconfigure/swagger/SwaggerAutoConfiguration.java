@@ -25,22 +25,4 @@ public class SwaggerAutoConfiguration {
   }
 
 
-//  /**
-//   * TODO problem has one WebMvcConfigurer
-//   * merged
-//   */
-//  @Configuration
-////  @EnableWebMvc
-//  public static class EnableMinliaStaticResourceConfiguration implements WebMvcConfigurer {
-//    private final String[] CLASSPATH_RESOURCE_LOCATIONS = {
-//        "classpath:/META-INF/resources/", "classpath:/resources/",
-//        "classpath:/static/", "classpath:/public/"};
-//
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//      registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
-//    }
-//  }
-
-
 }

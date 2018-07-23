@@ -26,7 +26,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
     JpaTransactionManager.class, HibernateExceptionTranslator.class})
 @ConditionalOnMissingBean({JpaTransactionManager.class,
     PersistenceExceptionTranslator.class})
-//@ConditionalOnProperty(prefix = "spring.data.jpa.repositories", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class DataJpaAutoConfiguration {
 
 
