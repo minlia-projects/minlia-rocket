@@ -169,7 +169,6 @@ public abstract class JsonUtils {
    * json转换为指定类型(支持泛型)
    * <pre class="code">
    * 示例 :
-   * ResponseEntity< User > responseEntity = JsonUtils.jsonToType( jscksonJsonValue,new TypeReference< ResponseEntity< User > >() {} );
    * </pre>
    *
    * @param inputJson : json

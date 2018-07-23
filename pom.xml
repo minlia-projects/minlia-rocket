@@ -13,6 +13,7 @@
   <properties>
     <main.basedir>${basedir}</main.basedir>
     <revision>2.0.3.RELEASE</revision>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <profiles>
@@ -100,7 +101,23 @@
             </executions>
 
           </plugin>
-
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.0.0</version>
+            <configuration>
+              <encoding>${project.build.sourceEncoding}</encoding>
+              <additionalOptions>${javadoc.opts}</additionalOptions>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
       </build>
     </profile>
@@ -124,6 +141,17 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+
+
+    <profile>
+      <id>java8-doclint-disabled</id>
+      <activation>
+        <jdk>[1.8,)</jdk>
+      </activation>
+      <properties>
+        <javadoc.opts>-Xdoclint:none</javadoc.opts>
+      </properties>
     </profile>
 
   </profiles>
