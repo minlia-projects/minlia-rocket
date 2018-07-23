@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.minlia.rocket</groupId>
+    <artifactId>minlia-rocket-parent</artifactId>
+    <version>${revision}</version>
+    <relativePath>../minlia-rocket-parent</relativePath>
+  </parent>
+
+  <artifactId>minlia-rocket-starters</artifactId>
+
+  <name>Minlia Rocket Starters</name>
+  <description>Minlia Rocket Starters</description>
+  <packaging>pom</packaging>
+  <url>https://github.com/minlia-projects/minlia-rocket</url>
+
+  <properties>
+    <main.basedir>${basedir}/..</main.basedir>
+  </properties>
+
+  <modules>
+    <module>minlia-rocket-starter</module>
+    <!--<module>minlia-rocket-starter-context</module>-->
+    <module>minlia-rocket-starter-data-jpa</module>
+    <module>minlia-rocket-starter-data-mybatis</module>
+    <module>minlia-rocket-starter-i18n</module>
+    <!--<module>minlia-rocket-starter-ignored</module>-->
+    <module>minlia-rocket-starter-loggable</module>
+    <module>minlia-rocket-starter-parent</module>
+    <module>minlia-rocket-starter-pretend</module>
+    <module>minlia-rocket-starter-problem</module>
+    <!--<module>minlia-rocket-starter-stateful</module>-->
+    <module>minlia-rocket-starter-swagger</module>
+    <module>minlia-rocket-starter-security</module>
+
+  </modules>
+
+</project>

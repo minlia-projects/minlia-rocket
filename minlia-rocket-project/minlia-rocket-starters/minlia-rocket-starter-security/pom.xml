@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.minlia.rocket</groupId>
+    <artifactId>minlia-rocket-starters</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <artifactId>minlia-rocket-starter-security</artifactId>
+  <name>Minlia Rocket Starter Security</name>
+  <description>Minlia Rocket Starter Security</description>
+  <properties>
+    <main.basedir>${basedir}/../..</main.basedir>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>com.minlia.rocket</groupId>
+      <artifactId>minlia-rocket-starter</artifactId>
+    </dependency>
+
+
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+    </dependency>
+
+
+  </dependencies>
+
+</project>

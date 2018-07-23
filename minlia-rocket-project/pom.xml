@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.minlia.rocket</groupId>
+    <artifactId>minlia-rocket-build</artifactId>
+    <version>${revision}</version>
+
+  </parent>
+  <artifactId>minlia-rocket-project</artifactId>
+  <packaging>pom</packaging>
+  <name>Minlia Rocket Build</name>
+  <description>Minlia Rocket Build</description>
+  <properties>
+    <main.basedir>${basedir}/../..</main.basedir>
+  </properties>
+  <modules>
+    <module>minlia-rocket-dependencies</module>
+    <module>minlia-rocket-parent</module>
+    <module>minlia-rocket</module>
+    <!-- <module>minlia-rocket-actuator</module>
+		<module>minlia-rocket-actuator-autoconfigure</module> -->
+    <module>minlia-rocket-autoconfigure</module>
+    <!-- <module>minlia-rocket-devtools</module>
+		<module>minlia-rocket-properties-migrator</module> -->
+    <!-- <module>minlia-rocket-test</module> -->
+
+
+    <!-- <module>minlia-rocket-test-autoconfigure</module>
+		<module>minlia-rocket-tools</module> -->
+    <module>minlia-rocket-starters</module>
+    <!-- <module>minlia-rocket-cli</module> -->
+
+
+    <!-- <module>minlia-rocket-docs</module> -->
+
+  </modules>
+</project>
