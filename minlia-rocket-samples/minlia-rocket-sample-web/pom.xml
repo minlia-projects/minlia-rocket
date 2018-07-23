@@ -15,7 +15,7 @@
   <parent>
     <groupId>com.minlia.rocket</groupId>
     <artifactId>minlia-rocket-starter-parent</artifactId>
-    <version>2.0.3-SNAPSHOT</version>
+    <version>2.0.3.RELEASE</version>
     <relativePath/>
   </parent>
 
@@ -131,5 +131,13 @@
     </plugins>
   </build>
 
+
+  <repositories>
+    <repository>
+      <url>https://oss.sonatype.org/service/local/repositories/releases/content/</url>
+      <name>oss</name>
+      <id>oss</id>
+    </repository>
+  </repositories>
 
 </project>
