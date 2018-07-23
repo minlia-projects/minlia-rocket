@@ -23,7 +23,6 @@
       </activation>
       <modules>
         <module>minlia-rocket-project</module>
-        <!--<module>minlia-rocket-samples</module>-->
       </modules>
     </profile>
     <profile>
@@ -44,7 +43,87 @@
         <plugins>
 
           <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.8</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-release-plugin</artifactId>
+            <version>2.5.3</version>
+            <configuration>
+              <mavenExecutorId>forked-path</mavenExecutorId>
+              <autoVersionSubmodules>true</autoVersionSubmodules>
+              <useReleaseProfile>false</useReleaseProfile>
+              <releaseProfiles>release</releaseProfiles>
+              <goals>deploy</goals>
+            </configuration>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.0.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <configuration>
+                  <gpgArguments>
+                    <gpgArgument>--no-tty</gpgArgument>
+                  </gpgArguments>
+                </configuration>
+              </execution>
+            </executions>
+
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>release-sign-artifacts</id>
+      <build>
+        <plugins>
+          <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
             <version>1.6</version>
             <executions>
@@ -60,17 +139,45 @@
         </plugins>
       </build>
     </profile>
+
   </profiles>
 
   <distributionManagement>
     <snapshotRepository>
-      <id>oss</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <repository>
-      <id>oss</id>
+      <id>ossrh</id>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <url>http://minlia.com/</url>
+  <inceptionYear>2016</inceptionYear>
 
+  <developers>
+    <developer>
+      <name>will</name>
+      <email>will@minlia.com</email>
+      <organization>minlia</organization>
+      <organizationUrl>https://www.minlia.com</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>
+      scm:git:https://github.com/minlia-projects/minlia-rocket.git
+    </connection>
+    <developerConnection>
+      scm:git:https://github.com/minlia-projects/minlia-rocket.git
+    </developerConnection>
+    <url>https://github.com/minlia-projects/minlia-rocket</url>
+    <tag>HEAD</tag>
+  </scm>
 </project>
