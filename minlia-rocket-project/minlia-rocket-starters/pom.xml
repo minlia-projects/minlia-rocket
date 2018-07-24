@@ -26,6 +26,7 @@
     <module>minlia-rocket-starter-data-jpa</module>
     <module>minlia-rocket-starter-data-mybatis</module>
     <module>minlia-rocket-starter-i18n</module>
+    <module>minlia-rocket-starter-i18n-system</module>
     <!--<module>minlia-rocket-starter-ignored</module>-->
     <module>minlia-rocket-starter-loggable</module>
     <module>minlia-rocket-starter-parent</module>

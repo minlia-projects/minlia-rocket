@@ -66,6 +66,11 @@
       <groupId>com.minlia.rocket</groupId>
       <artifactId>minlia-rocket-starter-data-mybatis</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.minlia.rocket</groupId>
+      <artifactId>minlia-rocket-starter-i18n-system</artifactId>
+      <version>2.0.5-SNAPSHOT</version>
+    </dependency>
 
 
     <dependency>

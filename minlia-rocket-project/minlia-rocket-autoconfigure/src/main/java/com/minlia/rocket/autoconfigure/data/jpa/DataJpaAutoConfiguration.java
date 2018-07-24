@@ -27,8 +27,8 @@ import org.springframework.util.StopWatch;
 @AutoConfigureAfter(JpaRepositoriesAutoConfiguration.class)
 @ConditionalOnClass({JpaRepository.class, LocalContainerEntityManagerFactoryBean.class,
     JpaTransactionManager.class, HibernateExceptionTranslator.class})
-@ConditionalOnMissingBean({JpaTransactionManager.class,
-    PersistenceExceptionTranslator.class})
+//@ConditionalOnMissingBean({JpaTransactionManager.class,
+//    PersistenceExceptionTranslator.class})
 @Slf4j
 public class DataJpaAutoConfiguration {
 
