@@ -28,13 +28,13 @@ mvn clean install
 java -Dthin.root=./target -Dserver.port=1025 -Dspring.profiles.active=dev -jar target/minlia-rocket-sample-web.jar
 ```
 
-# Quick start as 
+# Quick start  
 
 ```
 <parent>
   <groupId>com.minlia.rocket</groupId>
   <artifactId>minlia-rocket-starter-parent</artifactId>
-  <version>2.0.3.RELEASE</version>
+  <version>2.0.4.RELEASE</version>
   <relativePath/>
 </parent>
 
