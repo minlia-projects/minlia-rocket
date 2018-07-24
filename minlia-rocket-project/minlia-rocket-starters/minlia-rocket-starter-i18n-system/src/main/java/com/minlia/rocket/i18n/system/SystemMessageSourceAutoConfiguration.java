@@ -19,6 +19,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.Ordered;
@@ -28,6 +29,9 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.util.ConcurrentReferenceHashMap;
 import org.springframework.util.StopWatch;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * {@link EnableAutoConfiguration Auto-configuration} for {@link MessageSource}.
@@ -48,7 +52,7 @@ public class SystemMessageSourceAutoConfiguration {
   private static final Resource[] NO_RESOURCES = {};
 
   @Bean
-  @ConfigurationProperties(prefix = "system.messages")
+  @ConfigurationProperties(prefix = "system.i18n")
   public MessageSourceProperties messageSourceProperties() {
     return new MessageSourceProperties();
   }
@@ -58,11 +62,36 @@ public class SystemMessageSourceAutoConfiguration {
   private TranslationRepository translationRepository;
 
 
+  /**
+   * WARNING: Never config interceptors out of WebMvcConfigurer, it will cause stack overflow
+   * exception at runtime.
+   */
+  @Configuration
+  public static class SystemI18nValidatorConfiguration implements WebMvcConfigurer {
+
+    @Autowired
+    private MessageSource messageSource;
+
+    @Lazy
+    @Bean(name = "validator")
+    public LocalValidatorFactoryBean validator() {
+      LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+      bean.setValidationMessageSource(messageSource);
+      return bean;
+    }
+
+
+    @Override
+    public Validator getValidator() {
+      return validator();
+    }
+  }
+
   @Primary
   @Bean
   public MessageSource databaseDrivenMessageSource() {
 
-    log.debug("Starting system message source configuration");
+    log.debug("Starting i18n system message source configuration");
     StopWatch watch = new StopWatch();
     watch.start();
 
@@ -73,7 +102,7 @@ public class SystemMessageSourceAutoConfiguration {
     }
 
     watch.stop();
-    log.debug("Finishing system message source configuration in {} ms",
+    log.debug("Finishing i18n system message source configuration in {} ms",
         watch.getTotalTimeMillis());
 
     return systemMessageSource;
@@ -108,7 +137,7 @@ public class SystemMessageSourceAutoConfiguration {
     public ConditionOutcome getMatchOutcome(ConditionContext context,
         AnnotatedTypeMetadata metadata) {
       String basename = context.getEnvironment()
-          .getProperty("system.messages.basename", "messages");
+          .getProperty("system.i18n.basename", "messages");
       ConditionOutcome outcome = cache.get(basename);
       if (outcome == null) {
         outcome = getMatchOutcomeForBasename(context, basename);

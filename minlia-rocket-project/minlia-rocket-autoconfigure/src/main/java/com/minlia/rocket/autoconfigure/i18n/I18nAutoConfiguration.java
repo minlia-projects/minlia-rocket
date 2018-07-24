@@ -35,38 +35,18 @@ public class I18nAutoConfiguration {
 
 
 
-
   /**
    * WARNING: Never config interceptors out of WebMvcConfigurer, it will cause stack overflow
    * exception at runtime.
    */
   @Configuration
   public static class SystemI18nConfiguration implements WebMvcConfigurer {
-//    @Autowired
-//    private MessageSource messageSource;
-
 
     @Primary
     @Bean(name = "localeResolver")
-//  @ConditionalOnMissingBean
     public LanguageRequestLocaleResolver localeResolver() {
       return new LanguageRequestLocaleResolver();
     }
-
-//    @Lazy
-//    @Bean(name = "validator")
-//    public LocalValidatorFactoryBean validator() {
-//      LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-//      bean.setValidationMessageSource(messageSource);
-//      return bean;
-//    }
-//
-//
-//    @Override
-//    public Validator getValidator() {
-//      return validator();
-//    }
-
 
     @Value(value = "${system.i18n.language-request-parameter-name:lang}")
     private String parameterName;
