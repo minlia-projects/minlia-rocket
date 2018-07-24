@@ -33,6 +33,18 @@ public class TestEndpoint {
   @GetMapping(value = "417")
   @Loggable
   public String exception() {
+    ApiPreconditions.throwException(4104);
+    return "OK";
+  }
+  
+  /**
+   * excepted status 417 with code 4104
+   *
+   * @return
+   */
+  @GetMapping(value = "4172")
+  @Loggable
+  public String exception2() {
     ApiPreconditions.throwException(41042);
     return "OK";
   }
