@@ -17,7 +17,7 @@ Minlia rocket is a set of libraries that makes it easy to development enterprise
 ```
 cd minlia-rocket/minlia-rocket-samples/minlia-rocket-sample-web
 mvn spring-boot run
-http://localhost:7000/swagger-ui.html
+http://localhost:7001/swagger-ui.html
 
 ```
 
