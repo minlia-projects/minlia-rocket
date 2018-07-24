@@ -1,17 +1,34 @@
 # Minlia Rocket  
-Minlia rocket is a set of libraries that makes it easy to development enterprise platform.
+Minlia rocket is a set of libraries that makes it easy to development enterprise platform.  
 
-# Dry
+# Dry  
 
-# Powered by Spring&reg; Products
+# Powered by Spring&reg; Products  
 
 # Api problem conception 
 
-# Api code conception
+# Api code conception  
 
-# Stateful body conception
+# Stateful body conception  
 
-# Quick start
+# Samples  
+
+### Running by source code  
+```
+cd minlia-rocket/minlia-rocket-samples/minlia-rocket-sample-web
+mvn spring-boot run
+http://localhost:7000/swagger-ui.html
+
+```
+
+### Running by thin jar file  
+
+```
+mvn clean install
+java -Dthin.root=./target -Dserver.port=1025 -Dspring.profiles.active=dev -jar target/minlia-rocket-sample-web.jar
+```
+
+# Quick start as 
 
 ```
 <parent>

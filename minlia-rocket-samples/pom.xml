@@ -16,6 +16,8 @@
   </properties>
   <modules>
     <module>minlia-rocket-sample-web</module>
+    <module>minlia-rocket-sample-web-as-dependencies</module>
+    <module>minlia-rocket-sample-web-spring-boot</module>
 
   </modules>
 </project>

@@ -18,7 +18,6 @@
   <properties>
 
 
-
     <spring.boot.version>2.0.3.RELEASE</spring.boot.version>
     <spring.cloud.version>Finchley.RELEASE</spring.cloud.version>
 
@@ -62,7 +61,6 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-
       <dependency>
         <groupId>com.minlia.rocket</groupId>
         <artifactId>minlia-rocket</artifactId>
@@ -82,9 +80,9 @@
       </dependency>
 
       <!--<dependency>-->
-        <!--<groupId>com.minlia.rocket</groupId>-->
-        <!--<artifactId>minlia-rocket-starter-context</artifactId>-->
-        <!--<version>${revision}</version>-->
+      <!--<groupId>com.minlia.rocket</groupId>-->
+      <!--<artifactId>minlia-rocket-starter-context</artifactId>-->
+      <!--<version>${revision}</version>-->
       <!--</dependency>-->
 
       <dependency>
@@ -94,9 +92,9 @@
       </dependency>
 
       <!--<dependency>-->
-        <!--<groupId>com.minlia.rocket</groupId>-->
-        <!--<artifactId>minlia-rocket-starter-stateful</artifactId>-->
-        <!--<version>${revision}</version>-->
+      <!--<groupId>com.minlia.rocket</groupId>-->
+      <!--<artifactId>minlia-rocket-starter-stateful</artifactId>-->
+      <!--<version>${revision}</version>-->
       <!--</dependency>-->
 
       <dependency>
@@ -106,9 +104,9 @@
       </dependency>
 
       <!--<dependency>-->
-        <!--<groupId>com.minlia.rocket</groupId>-->
-        <!--<artifactId>minlia-rocket-starter-ignored</artifactId>-->
-        <!--<version>${revision}</version>-->
+      <!--<groupId>com.minlia.rocket</groupId>-->
+      <!--<artifactId>minlia-rocket-starter-ignored</artifactId>-->
+      <!--<version>${revision}</version>-->
       <!--</dependency>-->
 
       <dependency>
@@ -146,8 +144,6 @@
         <artifactId>minlia-rocket-starter-data-mybatis</artifactId>
         <version>${revision}</version>
       </dependency>
-
-
 
 
       <!--for minlia rocket starter pretend-->
@@ -249,6 +245,19 @@
       </dependency>
 
 
+      <!--Add as dependency-->
+
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring.boot.version}</version>
+      </dependency>
 
     </dependencies>
   </dependencyManagement>
@@ -260,6 +269,11 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.7.0</version>
+          <configuration>
+            <compilerVersion>${java.version}</compilerVersion>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -280,6 +294,23 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>${spring.boot.version}</version>
+          <!--<configuration>-->
+          <!--<layout>JAR</layout>-->
+          <!--</configuration>-->
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
+          <dependencies>
+            <dependency>
+              <groupId>org.springframework.boot.experimental</groupId>
+              <artifactId>spring-boot-thin-layout</artifactId>
+              <version>1.0.12.RELEASE</version>
+            </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -340,6 +371,7 @@
           </execution>
         </executions>
       </plugin>
+
     </plugins>
   </build>
 </project>
