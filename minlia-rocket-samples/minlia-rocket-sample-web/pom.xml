@@ -69,12 +69,6 @@
 
 
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-    </dependency>
-
-
-    <dependency>
       <groupId>org.lazyluke</groupId>
       <artifactId>log4jdbc-remix</artifactId>
       <version>0.2.7</version>
@@ -93,5 +87,32 @@
     </plugins>
   </build>
 
+
+  <profiles>
+    <profile>
+      <id>mysql</id>
+      <properties>
+        <spring.profiles.active>dev-mysql</spring.profiles.active>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>h2</id>
+      <properties>
+        <spring.profiles.active>dev-h2</spring.profiles.active>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 
 </project>
