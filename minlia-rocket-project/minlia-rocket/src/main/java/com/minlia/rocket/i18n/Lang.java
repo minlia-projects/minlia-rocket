@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.LocaleResolver;
@@ -29,25 +30,30 @@ public class Lang {
 
   public static String get(String key, Object[] arguments, Locale locale) {
 
-    String result = "{{" + key + "}}";
+    String result = null;
     try {
       ApplicationContext context = ContextHolder.getContext();
       if (null != context) {
 
-        if(null==locale){
-          LocaleResolver localeResolver=context.getBean(LocaleResolver.class);
-          HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder .getRequestAttributes()).getRequest();
-          locale=localeResolver.resolveLocale(request);
-        }
+        result=context.getMessage(key,arguments,result,locale);
 
-        result = context.getBean(MessageSource.class).getMessage(key, arguments, result, locale);
+        if(StringUtils.isEmpty(result)) {
+          if (null == locale) {
+            LocaleResolver localeResolver = context.getBean(LocaleResolver.class);
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes()).getRequest();
+            locale = localeResolver.resolveLocale(request);
+          }
+
+          MessageSource messageSource = context.getBean(MessageSource.class);
+          log.debug("MessageSource {}",messageSource);
+          result = messageSource.getMessage(key, arguments, result, locale);
+        }
       }else {
-        log.warn(
-            "ContextHolder is null at this time, please import minlia-rocket-starter-context first");
+        log.error("{}","No ApplicationContext Found");
       }
     } catch (org.springframework.context.NoSuchMessageException e) {
       log.warn("No translated message found for key: {}", key);
-//      log.warn("No translated message found for key: {}" , key);
     }
     return result;
   }

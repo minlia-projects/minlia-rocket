@@ -1,8 +1,6 @@
-
 server:
   compression:
     enabled: true
-  port: 7001
   servlet:
     context-path: /
   error:
@@ -133,7 +131,7 @@ security:
 logging:
   level:
     ROOT: info
-    com.minlia: trace
+    com.minlia: debug
     hk.com.jetco.ekyc: trace
     jdbc.audit: error
     jdbc.sqltiming: error
@@ -141,3 +139,5 @@ logging:
     jdbc.connection: error
     jdbc.sqlonly: info
     jdbc.resultsettable: info
+    org.springframework.boot.autoconfigure: info
+    org.springframework.boot.web.servlet.context: debug

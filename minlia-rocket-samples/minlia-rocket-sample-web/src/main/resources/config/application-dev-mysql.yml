@@ -2,7 +2,6 @@
 server:
   compression:
     enabled: true
-  port: 7001
   servlet:
     context-path: /
   error:
