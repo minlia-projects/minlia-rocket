@@ -33,7 +33,7 @@ import org.springframework.util.StopWatch;
 public class DataJpaAutoConfiguration {
 
 
-  @SuppressWarnings("SpringComponentScan")
+//  @SuppressWarnings("SpringComponentScan")
   @Configuration
   @EntityScan(basePackages = {".**.entity", "org.springframework.data.jpa.convert.threeten"})
   @EnableJpaRepositories(value = {
@@ -42,7 +42,7 @@ public class DataJpaAutoConfiguration {
   public static class ImportDataJpaConfiguration {
 
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+//    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean;
 

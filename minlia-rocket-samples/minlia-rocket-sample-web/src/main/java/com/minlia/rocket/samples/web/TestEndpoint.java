@@ -5,6 +5,7 @@ import com.minlia.rocket.loggable.annotation.Loggable;
 import com.minlia.rocket.problem.ApiPreconditions;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,8 @@ public class TestEndpoint {
   @Loggable
   public String ok() {
     ApplicationContext ac = ContextHolder.getContext();
+    MessageSource messageSource= (MessageSource) ac.getBean("databaseDrivenMessageSource");
+    log.debug("MessageSource : {}", messageSource);
     log.debug("ContextHolder with context: {}", ac);
     return "OK";
   }

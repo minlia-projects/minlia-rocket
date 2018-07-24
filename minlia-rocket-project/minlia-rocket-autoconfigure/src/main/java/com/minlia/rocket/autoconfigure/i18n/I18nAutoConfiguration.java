@@ -11,10 +11,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
 import org.springframework.util.StopWatch;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -23,30 +26,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author will
  */
 @Configuration
+@ComponentScan
 @ConditionalOnWebApplication(type = Type.SERVLET)
 @ConditionalOnClass(WebMvcConfigurer.class)
-@ConditionalOnMissingBean({LanguageRequestInterceptor.class, LanguageRequestLocaleResolver.class})
+@ConditionalOnMissingBean({LanguageRequestInterceptor.class})
 @Slf4j
 public class I18nAutoConfiguration {
 
-  @Autowired
-  @Lazy
-  private MessageSource messageSource;
 
-  @Bean
-//  @ConditionalOnMissingBean
-  public LanguageRequestLocaleResolver localeResolver() {
-    return new LanguageRequestLocaleResolver();
-  }
 
-  @Lazy
-  @Bean
-  @ConditionalOnMissingBean
-  public LocalValidatorFactoryBean validator() {
-    LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-    bean.setValidationMessageSource(messageSource);
-    return bean;
-  }
 
   /**
    * WARNING: Never config interceptors out of WebMvcConfigurer, it will cause stack overflow
@@ -54,6 +42,30 @@ public class I18nAutoConfiguration {
    */
   @Configuration
   public static class SystemI18nConfiguration implements WebMvcConfigurer {
+//    @Autowired
+//    private MessageSource messageSource;
+
+
+    @Primary
+    @Bean(name = "localeResolver")
+//  @ConditionalOnMissingBean
+    public LanguageRequestLocaleResolver localeResolver() {
+      return new LanguageRequestLocaleResolver();
+    }
+
+//    @Lazy
+//    @Bean(name = "validator")
+//    public LocalValidatorFactoryBean validator() {
+//      LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+//      bean.setValidationMessageSource(messageSource);
+//      return bean;
+//    }
+//
+//
+//    @Override
+//    public Validator getValidator() {
+//      return validator();
+//    }
 
 
     @Value(value = "${system.i18n.language-request-parameter-name:lang}")
