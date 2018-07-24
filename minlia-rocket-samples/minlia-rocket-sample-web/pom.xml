@@ -91,9 +91,6 @@
   <profiles>
     <profile>
       <id>mysql</id>
-      <properties>
-        <spring.profiles.active>dev-mysql</spring.profiles.active>
-      </properties>
       <dependencies>
         <dependency>
           <groupId>mysql</groupId>
@@ -103,9 +100,9 @@
     </profile>
     <profile>
       <id>h2</id>
-      <properties>
-        <spring.profiles.active>dev-h2</spring.profiles.active>
-      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <dependencies>
         <dependency>
           <groupId>com.h2database</groupId>

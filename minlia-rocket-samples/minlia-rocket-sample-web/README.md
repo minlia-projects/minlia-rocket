@@ -7,6 +7,10 @@
 ```
 mvn -P h2 -Dspring.profiles.active=dev-h2 spring-boot:run
 
+or 
+
+mvn spring-boot:run
+
 ```
 
 
