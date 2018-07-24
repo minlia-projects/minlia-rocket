@@ -36,7 +36,7 @@ public class TestEndpoint {
     ApiPreconditions.throwException(4104);
     return "OK";
   }
-  
+
   /**
    * excepted status 417 with code 4104
    *
