@@ -157,9 +157,10 @@ public class LanguageRequestInterceptor extends HandlerInterceptorAdapter {
 			newLocale=headerLocale;
 		}
 
+		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
 		if (newLocale != null) {
 			if (checkHttpMethod(request.getMethod())) {
-				LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+
 				if (localeResolver == null) {
 					throw new IllegalStateException(
 							"No LocaleResolver found: not in a DispatcherServlet request?");
@@ -176,6 +177,8 @@ public class LanguageRequestInterceptor extends HandlerInterceptorAdapter {
 					}
 				}
 			}
+		}else{
+			localeResolver.setLocale(request, response,Locale.getDefault());
 		}
 		// Proceed in any case.
 		return true;
