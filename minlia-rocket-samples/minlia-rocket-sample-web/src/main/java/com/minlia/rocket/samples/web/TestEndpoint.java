@@ -33,7 +33,7 @@ public class TestEndpoint {
   @GetMapping(value = "417")
   @Loggable
   public String exception() {
-    ApiPreconditions.throwException(4104);
+    ApiPreconditions.throwException(41042);
     return "OK";
   }
 

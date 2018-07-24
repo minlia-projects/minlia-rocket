@@ -79,7 +79,6 @@ public class SystemMessageSourceAutoConfiguration {
     return systemMessageSource;
   }
 
-  //	@Bean
   private MessageSource parentMessageSource() {
     MessageSourceProperties properties = messageSourceProperties();
     ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();

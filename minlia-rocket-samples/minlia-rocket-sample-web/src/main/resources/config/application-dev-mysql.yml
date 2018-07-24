@@ -33,9 +33,9 @@ spring:
   jpa:
     show-sql: false
     # 自动生成表结构
-    generate-ddl: true
+#    generate-ddl: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 #  # Redis
 ##  redis:
 ##    host: 127.0.0.1
