@@ -129,3 +129,15 @@ system:
 security:
   basic:
     enabled: false
+
+logging:
+  level:
+    ROOT: info
+    com.minlia: trace
+    hk.com.jetco.ekyc: trace
+    jdbc.audit: error
+    jdbc.sqltiming: error
+    jdbc.resultset: error
+    jdbc.connection: error
+    jdbc.sqlonly: info
+    jdbc.resultsettable: info

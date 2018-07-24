@@ -17,7 +17,6 @@ import org.springframework.util.StopWatch;
 @Configuration
 @Slf4j
 @ConditionalOnClass(value = {org.aspectj.lang.JoinPoint.class,Aspect.class})
-//@ConditionalOnProperty(prefix = "system.mvc.loggable", name = "enabled", havingValue = "true")
 public class LoggableAutoConfiguration {
 
   @Bean
@@ -35,7 +34,7 @@ public class LoggableAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public LoggerFormats loggerFormats() {
-    log.debug("Starting Loggable Configuration");
+    log.debug("Starting loggable configuration");
     StopWatch watch = new StopWatch();
     watch.start();
 
@@ -53,7 +52,7 @@ public class LoggableAutoConfiguration {
             + "from ${error.source.class.name}[${error.source.line}] in ${method.duration}")
         .build();
     watch.stop();
-    log.debug("Finished Loggable Configuration in {} ms", watch.getTotalTimeMillis());
+    log.debug("Finishing loggable configuration in {} ms", watch.getTotalTimeMillis());
     return loggerFormats;
   }
 }

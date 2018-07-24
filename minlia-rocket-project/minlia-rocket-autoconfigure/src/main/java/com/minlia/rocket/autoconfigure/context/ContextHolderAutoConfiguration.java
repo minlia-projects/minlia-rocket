@@ -25,12 +25,12 @@ public class ContextHolderAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public ContextHolder applicationContextHolder() {
-    log.debug("Starting Context#ContextHolder Configuration");
+    log.debug("Starting Context#ContextHolder configuration");
     StopWatch watch = new StopWatch();
     watch.start();
     ContextHolder contextHolder=new ContextHolder();
     watch.stop();
-    log.debug("Finished Context#ContextHolder Configuration in {} ms", watch.getTotalTimeMillis());
+    log.debug("Finishing Context#ContextHolder configuration in {} ms", watch.getTotalTimeMillis());
     return contextHolder;
   }
 
@@ -38,12 +38,12 @@ public class ContextHolderAutoConfiguration {
   @ConditionalOnMissingBean
   public EnvironmentHolder environmentHolder() {
 
-    log.debug("Starting Context#EnvironmentHolder Configuration");
+    log.debug("Starting Context#EnvironmentHolder configuration");
     StopWatch watch = new StopWatch();
     watch.start();
     EnvironmentHolder environmentHolder=new EnvironmentHolder();
     watch.stop();
-    log.debug("Finished Context#EnvironmentHolder Configuration in {} ms", watch.getTotalTimeMillis());
+    log.debug("Finishing Context#EnvironmentHolder configuration in {} ms", watch.getTotalTimeMillis());
     return environmentHolder;
   }
 

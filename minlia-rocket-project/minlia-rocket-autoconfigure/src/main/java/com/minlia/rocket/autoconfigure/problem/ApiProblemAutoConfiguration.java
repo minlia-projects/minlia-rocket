@@ -7,6 +7,7 @@ import com.minlia.rocket.problem.ApiExceptionHandler;
 import com.minlia.rocket.problem.ErrorAttributes;
 import com.minlia.rocket.problem.Intrinsics;
 import com.minlia.rocket.problem.ProblemProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -14,6 +15,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.StopWatch;
 import org.zalando.problem.AbstractThrowableProblem;
 import org.zalando.problem.ProblemModule;
 import org.zalando.problem.spring.web.advice.ProblemHandling;
@@ -26,6 +28,7 @@ import org.zalando.problem.violations.ConstraintViolationProblemModule;
 @ConditionalOnClass(value = {ConstraintViolationProblemModule.class, ProblemHandling.class,
     ProblemModule.class,Intrinsics.class,AbstractThrowableProblem.class})
 @EnableConfigurationProperties(value = {ProblemProperties.class})
+@Slf4j
 public class ApiProblemAutoConfiguration {
 
 
@@ -38,7 +41,12 @@ public class ApiProblemAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public ApiExceptionHandler apiExceptionHandler() {
-    return new ApiExceptionHandler();
+    log.debug("Starting api problem configuration");
+    StopWatch watch = new StopWatch();
+    watch.start();
+    ApiExceptionHandler apiExceptionHandler= new ApiExceptionHandler();
+    log.debug("Finishing api problem configuration in {} ms", watch.getTotalTimeMillis());
+    return apiExceptionHandler;
   }
 
 

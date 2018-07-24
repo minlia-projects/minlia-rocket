@@ -25,6 +25,7 @@ import org.springframework.util.StopWatch;
 
 /**
  * Minlia Data Batis Auto Configuration
+ * @author will
  */
 @Configuration
 @AutoConfigureAfter(MybatisPlusAutoConfiguration.class)
@@ -63,6 +64,7 @@ public class DataBatisAutoConfiguration {
 
     /**
      * mybatis-plus SQL执行效率插件【生产环境可以关闭】
+     * @return PerformanceInterceptor
      */
     @Bean
     @ConditionalOnMissingBean(value = {PerformanceInterceptor.class})
@@ -101,18 +103,19 @@ public class DataBatisAutoConfiguration {
 
     /**
      * mybatis-plus分页插件<br> 文档：http://mp.baomidou.com<br>
+     *  @return  PaginationInterceptor
      */
     @Bean
     @ConditionalOnMissingBean(value = {PaginationInterceptor.class})
     @ConditionalOnClass(value = {PaginationInterceptor.class})
     public PaginationInterceptor paginationInterceptor() {
-      log.debug("Starting Batis Configuration");
+      log.debug("Starting batis configuration");
       StopWatch watch = new StopWatch();
       watch.start();
       PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
       paginationInterceptor.setLocalPage(true);
       watch.stop();
-      log.debug("Finished Batis Configuration in {} ms", watch.getTotalTimeMillis());
+      log.debug("Finishing batis configuration in {} ms", watch.getTotalTimeMillis());
       return paginationInterceptor;
     }
 
