@@ -1,10 +1,14 @@
 
 server:
+  compression:
+    enabled: true
   port: 7001
   servlet:
     context-path: /
   error:
     include-stacktrace: never
+  http2:
+    enabled: true
 spring:
   # 数据源
   datasource:

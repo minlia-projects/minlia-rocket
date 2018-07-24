@@ -25,7 +25,6 @@ import org.zalando.problem.violations.ConstraintViolationProblemModule;
 @Configuration
 @ConditionalOnClass(value = {ConstraintViolationProblemModule.class, ProblemHandling.class,
     ProblemModule.class,Intrinsics.class,AbstractThrowableProblem.class})
-@ConditionalOnWebApplication(type = SERVLET)
 @EnableConfigurationProperties(value = {ProblemProperties.class})
 public class ApiProblemAutoConfiguration {
 

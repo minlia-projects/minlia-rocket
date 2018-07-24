@@ -23,6 +23,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
+
   </properties>
 
   <dependencies>
@@ -32,7 +33,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -86,6 +86,11 @@
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
+
+      <!--Running-->
+      <!--Use dyser's thin layout, to reduce the size of jar as a thin jar, to download dependencies at runtime-->
+      <!--java -Dthin.root=./target -Dserver.port=1025 -Dspring.profiles.active=dev -jar target/*.jar-->
+
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
@@ -97,10 +102,6 @@
           </dependency>
         </dependencies>
       </plugin>
-
-      <!--Running-->
-      <!--java -Dthin.root=./target -Dserver.port=1025 -Dspring.profiles.active=dev -jar target/*.jar-->
-
 
     </plugins>
   </build>
