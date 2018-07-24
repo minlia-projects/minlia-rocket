@@ -6,10 +6,12 @@ import com.baomidou.mybatisplus.plugins.PerformanceInterceptor;
 import com.baomidou.mybatisplus.plugins.SqlExplainInterceptor;
 import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
 import com.baomidou.mybatisplus.spring.boot.starter.MybatisPlusAutoConfiguration;
+import com.minlia.rocket.context.ContextHolder;
 import com.minlia.rocket.data.batis.event.publisher.AfterCreatedEventPublisher;
 import com.minlia.rocket.data.batis.event.publisher.BeforeCreatedEventPublisher;
 import com.minlia.rocket.data.batis.interceptor.CreatedMethodInterceptor;
 import com.minlia.rocket.data.scope.DataScopeInterceptor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -19,6 +21,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.util.StopWatch;
 
 /**
  * Minlia Data Batis Auto Configuration
@@ -26,6 +29,7 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 @AutoConfigureAfter(MybatisPlusAutoConfiguration.class)
 @ConditionalOnClass({ SqlSessionFactory.class, SqlSessionFactoryBean.class,MybatisSqlSessionFactoryBean.class})
+@Slf4j
 public class DataBatisAutoConfiguration {
 
 
@@ -102,8 +106,13 @@ public class DataBatisAutoConfiguration {
     @ConditionalOnMissingBean(value = {PaginationInterceptor.class})
     @ConditionalOnClass(value = {PaginationInterceptor.class})
     public PaginationInterceptor paginationInterceptor() {
+      log.debug("Starting Batis Configuration");
+      StopWatch watch = new StopWatch();
+      watch.start();
       PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
       paginationInterceptor.setLocalPage(true);
+      watch.stop();
+      log.debug("Finished Batis Configuration in {} ms", watch.getTotalTimeMillis());
       return paginationInterceptor;
     }
 

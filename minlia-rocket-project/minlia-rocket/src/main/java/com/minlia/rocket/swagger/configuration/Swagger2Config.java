@@ -38,9 +38,10 @@ public class Swagger2Config {
 
   @Bean
   public Docket defaultSpecification() {
-    log.debug("Starting Default Swagger Configuration");
+    log.debug("Starting Swagger Configuration");
     StopWatch watch = new StopWatch();
     watch.start();
+
     String groupName = "Default Api";
     String path = swaggerConfigurationProperties.getPath();
     Docket docket = new Docket(DocumentationType.SWAGGER_2)
@@ -54,7 +55,7 @@ public class Swagger2Config {
         .apiInfo(apiInfo())
         .ignoredParameterTypes(ApiIgnore.class);
     watch.stop();
-    log.debug("Started Default Swagger Configuration in {} ms", watch.getTotalTimeMillis());
+    log.debug("Finished Swagger Configuration in {} ms", watch.getTotalTimeMillis());
     return docket;
   }
 

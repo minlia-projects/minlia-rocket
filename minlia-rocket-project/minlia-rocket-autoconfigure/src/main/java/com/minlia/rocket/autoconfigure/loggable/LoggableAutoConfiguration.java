@@ -35,7 +35,7 @@ public class LoggableAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public LoggerFormats loggerFormats() {
-    log.debug("Starting Minlia Rocket Loggable");
+    log.debug("Starting Loggable Configuration");
     StopWatch watch = new StopWatch();
     watch.start();
 
@@ -53,7 +53,7 @@ public class LoggableAutoConfiguration {
             + "from ${error.source.class.name}[${error.source.line}] in ${method.duration}")
         .build();
     watch.stop();
-    log.debug("Started Minlia Rocket Loggable in {} ms", watch.getTotalTimeMillis());
+    log.debug("Finished Loggable Configuration in {} ms", watch.getTotalTimeMillis());
     return loggerFormats;
   }
 }

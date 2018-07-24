@@ -25,12 +25,12 @@ public class ContextHolderAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public ContextHolder applicationContextHolder() {
-    log.debug("Starting Minlia Rocket Context#ContextHolder");
+    log.debug("Starting Context#ContextHolder Configuration");
     StopWatch watch = new StopWatch();
     watch.start();
     ContextHolder contextHolder=new ContextHolder();
     watch.stop();
-    log.debug("Started Minlia Rocket Context#ContextHolder in {} ms", watch.getTotalTimeMillis());
+    log.debug("Finished Context#ContextHolder Configuration in {} ms", watch.getTotalTimeMillis());
     return contextHolder;
   }
 
@@ -38,12 +38,12 @@ public class ContextHolderAutoConfiguration {
   @ConditionalOnMissingBean
   public EnvironmentHolder environmentHolder() {
 
-    log.debug("Starting Minlia Rocket Context#EnvironmentHolder");
+    log.debug("Starting Context#EnvironmentHolder Configuration");
     StopWatch watch = new StopWatch();
     watch.start();
     EnvironmentHolder environmentHolder=new EnvironmentHolder();
     watch.stop();
-    log.debug("Started Minlia Rocket Context#EnvironmentHolder in {} ms", watch.getTotalTimeMillis());
+    log.debug("Finished Context#EnvironmentHolder Configuration in {} ms", watch.getTotalTimeMillis());
     return environmentHolder;
   }
 
