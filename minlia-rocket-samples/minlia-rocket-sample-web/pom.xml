@@ -15,7 +15,7 @@
   <parent>
     <groupId>com.minlia.rocket</groupId>
     <artifactId>minlia-rocket-starter-parent</artifactId>
-    <version>2.0.3.RELEASE</version>
+    <version>2.0.4-SNAPSHOT</version>
     <relativePath/>
   </parent>
 
@@ -91,9 +91,9 @@
       <!--Use dyser's thin layout, to reduce the size of jar as a thin jar, to download dependencies at runtime-->
       <!--java -Dthin.root=./target -Dserver.port=1025 -Dspring.profiles.active=dev -jar target/*.jar-->
 
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
+      <!--<plugin>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
         <!--<dependencies>-->
           <!--<dependency>-->
             <!--<groupId>org.springframework.boot.experimental</groupId>-->
@@ -101,15 +101,15 @@
             <!--<version>1.0.12.RELEASE</version>-->
           <!--</dependency>-->
         <!--</dependencies>-->
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <!--<configuration>-->
-          <!--<source>${java.version}</source>-->
-          <!--<target>${java.version}</target>-->
-        <!--</configuration>-->
-      </plugin>
+      <!--</plugin>-->
+      <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-compiler-plugin</artifactId>-->
+        <!--&lt;!&ndash;<configuration>&ndash;&gt;-->
+          <!--&lt;!&ndash;<source>${java.version}</source>&ndash;&gt;-->
+          <!--&lt;!&ndash;<target>${java.version}</target>&ndash;&gt;-->
+        <!--&lt;!&ndash;</configuration>&ndash;&gt;-->
+      <!--</plugin>-->
     </plugins>
   </build>
 
