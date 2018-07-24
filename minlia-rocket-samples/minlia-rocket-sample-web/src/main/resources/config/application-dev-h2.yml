@@ -99,17 +99,17 @@ mybatis-plus:
 system:
 # Swagger界面内容配置
   swagger:
-    title: QQ接口文档
-    description: QQ Api Documentation
+    title: Minlia接口文档
+    description: Minlia Api Documentation
     version: 1.0.0
-    termsOfServiceUrl: https://www.qq.com
+    termsOfServiceUrl: http://minlia.com
     contact:
       name: will
-      url: https://www.qq.com
-      email: 111111@qq.com
+      url: http://minlia.com
+      email: will@minlia.com
 
   problem:
-    code-portal-prefix: http://code.qq.com/
+    code-portal-prefix: http://code.minlia.com/
   ignored:
     urls:
       - /api/v1/permission/getMenuList/**
