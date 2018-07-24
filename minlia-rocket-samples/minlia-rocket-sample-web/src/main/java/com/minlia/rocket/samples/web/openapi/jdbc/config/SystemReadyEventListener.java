@@ -1,22 +1,15 @@
 package com.minlia.rocket.samples.web.openapi.jdbc.config;
 
-import com.minlia.rocket.samples.web.openapi.jdbc.DatabaseDrivenMessageSource;
+import com.minlia.rocket.samples.web.openapi.jdbc.SystemMessageSource;
 import com.minlia.rocket.samples.web.openapi.jdbc.repository.TranslationRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
@@ -42,13 +35,13 @@ public class SystemReadyEventListener implements
   @Bean
   @Primary
 //  @ConditionalOnMissingBean
-  public DatabaseDrivenMessageSource databaseDrivenMessageSource() {
-    DatabaseDrivenMessageSource databaseDrivenMessageSource = new DatabaseDrivenMessageSource(
+  public SystemMessageSource databaseDrivenMessageSource() {
+    SystemMessageSource systemMessageSource = new SystemMessageSource(
         translationRepository);
     if(null!=messageSource) {
-      databaseDrivenMessageSource.setParentMessageSource(messageSource);
+      systemMessageSource.setParentMessageSource(messageSource);
     }
-    return databaseDrivenMessageSource;
+    return systemMessageSource;
   }
 
   @Override
@@ -63,7 +56,7 @@ public class SystemReadyEventListener implements
 //
 //    GenericBeanDefinition gbd = new GenericBeanDefinition();
 //
-//    gbd.setBeanClass(DatabaseDrivenMessageSource.class);
+//    gbd.setBeanClass(SystemMessageSource.class);
 //
 //    MutablePropertyValues mpv = new MutablePropertyValues();
 //    mpv.add("translationRepository", translationRepository);
