@@ -83,7 +83,7 @@
 
       <!--Running-->
       <!--Use dyser's thin layout, to reduce the size of jar as a thin jar, and download dependencies at runtime-->
-      <!--java -Dthin.root=./target -Dserver.port=1025 -Dspring.profiles.active=dev -jar target/*.jar-->
+      <!--java -Dthin.root=./target -Dserver.port=7001 -Dspring.profiles.active=dev -jar target/*.jar-->
     </plugins>
   </build>
 
