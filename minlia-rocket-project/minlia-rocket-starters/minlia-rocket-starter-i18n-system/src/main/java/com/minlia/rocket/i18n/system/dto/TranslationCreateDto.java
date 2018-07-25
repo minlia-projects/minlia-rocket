@@ -20,8 +20,8 @@ public class TranslationCreateDto implements TranslationDto {
     private String code;
 
     @NotNull
-    @Enumerated(enumClazz=Translation.AvailableLanguage.class,
-            message="{error.translation.invalid_language}", groups = ValidLanguageGroup.class)
+//    @Enumerated(enumClazz=Translation.AvailableLanguage.class,
+//            message="{error.translation.invalid_language}", groups = ValidLanguageGroup.class)
     private String language;
 
     @NotBlank

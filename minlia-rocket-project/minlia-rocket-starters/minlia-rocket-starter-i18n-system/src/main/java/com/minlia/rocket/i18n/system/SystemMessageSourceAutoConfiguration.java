@@ -41,7 +41,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author Eddú Meléndez
  */
 @Configuration
-//@ConditionalOnMissingBean(value = MessageSource.class, search = SearchStrategy.CURRENT)
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
 @Conditional(ResourceBundleCondition.class)
 @EnableConfigurationProperties
@@ -58,7 +57,6 @@ public class SystemMessageSourceAutoConfiguration {
   }
 
   @Autowired
-//  @Lazy
   private TranslationRepository translationRepository;
 
 
@@ -87,9 +85,14 @@ public class SystemMessageSourceAutoConfiguration {
     }
   }
 
+
+  /**
+   * As primary candidate of MessageSource to force enable system message source.
+   * @return MessageSource
+   */
   @Primary
   @Bean
-  public MessageSource databaseDrivenMessageSource() {
+  public MessageSource systemMessageSource() {
 
     log.debug("Starting i18n system message source configuration");
     StopWatch watch = new StopWatch();
@@ -97,6 +100,12 @@ public class SystemMessageSourceAutoConfiguration {
 
     SystemMessageSource systemMessageSource = new SystemMessageSource(
         translationRepository);
+
+
+    MessageSourceProperties properties = messageSourceProperties();
+    systemMessageSource.setUseCodeAsDefaultMessage(properties.isUseCodeAsDefaultMessage());
+    systemMessageSource.setAlwaysUseMessageFormat(properties.isAlwaysUseMessageFormat());
+
     if (null != parentMessageSource()) {
       systemMessageSource.setParentMessageSource(parentMessageSource());
     }

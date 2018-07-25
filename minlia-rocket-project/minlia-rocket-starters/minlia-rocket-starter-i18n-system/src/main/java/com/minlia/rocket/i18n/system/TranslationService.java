@@ -39,7 +39,8 @@ public class TranslationService {
     return this.translationDao.findAll();
   }
 
-  public Translation findByCodeAndLanguage(String code, Translation.AvailableLanguage language) {
+//  public Translation findByCodeAndLanguage(String code, Translation.AvailableLanguage language) {
+  public Translation findByCodeAndLanguage(String code, String language) {
     return this.translationDao.findByCodeAndLanguage(code, language);
   }
 
@@ -59,17 +60,19 @@ public class TranslationService {
   public Translation create(TranslationCreateDto translationDto) {
     Translation translation = new Translation();
     translation.setCode(translationDto.getCode());
-    translation.setLanguage(Translation.AvailableLanguage.valueOf(translationDto.getLanguage()));
+//    translation.setLanguage(Translation.AvailableLanguage.valueOf(translationDto.getLanguage()));
+    translation.setLanguage(translationDto.getLanguage());
     translation.setValue(translationDto.getValue());
-    translation.setCreatedAt(LocalDateTime.now());
-    translation.setUpdatedAt(LocalDateTime.now());
+//    translation.setCreatedAt(LocalDateTime.now());
+//    translation.setUpdatedAt(LocalDateTime.now());
     this.save(translation);
     return translation;
   }
 
   public boolean isUnique(TranslationDto dto) {
-    Translation.AvailableLanguage language = Translation.AvailableLanguage
-        .valueOf(dto.getLanguage());
+//    Translation.AvailableLanguage language = Translation.AvailableLanguage
+//        .valueOf(dto.getLanguage());
+    String language = dto.getLanguage();
     if (translationDao.findByCodeAndLanguage(dto.getCode(), language) == null) {
       return true;
     }
@@ -83,10 +86,10 @@ public class TranslationService {
     if (messageSource instanceof SystemMessageSource) {
       ((SystemMessageSource) messageSource).reload();
     } else if (messageSource instanceof DelegatingMessageSource) {
-      DelegatingMessageSource myMessage = (DelegatingMessageSource) messageSource;
-      if (myMessage.getParentMessageSource() != null
-          && myMessage.getParentMessageSource() instanceof SystemMessageSource) {
-        ((SystemMessageSource) myMessage.getParentMessageSource()).reload();
+      DelegatingMessageSource delegatingMessageSource = (DelegatingMessageSource) messageSource;
+      if (delegatingMessageSource.getParentMessageSource() != null
+          && delegatingMessageSource.getParentMessageSource() instanceof SystemMessageSource) {
+        ((SystemMessageSource) delegatingMessageSource.getParentMessageSource()).reload();
       }
     }
   }
