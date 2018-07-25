@@ -13,7 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.LocaleResolver;
 
 /**
- * 添加检查是否有启用配置 system.context-holder.enabled=true 如果没启用则抛出开发过程异常
+ * 多国语言译文获取
  *
  * @author will
  */
