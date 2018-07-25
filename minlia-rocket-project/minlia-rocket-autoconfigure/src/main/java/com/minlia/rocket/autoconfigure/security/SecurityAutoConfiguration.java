@@ -28,6 +28,8 @@ import org.springframework.web.filter.CorsFilter;
     name = {"enabled"},
     havingValue = "true"
 )
+
+//com.minlia.rocket.autoconfigure.security.SecurityAutoConfiguration,\
 @EnableConfigurationProperties({JwtProperties.class})
 public class SecurityAutoConfiguration {
   @Autowired
