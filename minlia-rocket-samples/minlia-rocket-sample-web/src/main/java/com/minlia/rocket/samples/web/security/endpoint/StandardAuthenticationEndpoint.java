@@ -13,6 +13,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,6 +33,12 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/v1/open")
+@ConditionalOnProperty(
+    prefix = "system.security",
+    name = {"enabled"},
+    havingValue = "true"
+)
+@ConditionalOnBean
 public class StandardAuthenticationEndpoint {
 
   @Autowired
@@ -40,10 +48,9 @@ public class StandardAuthenticationEndpoint {
   @Lazy
   private AuthenticationManager authenticationManager;
 
-
   @ApiOperation(value = "Authentication", notes = "Authentication")
   @RequestMapping(value = "authentication", method = RequestMethod.POST, produces = "application/json")
-  public ResponseEntity<StatefulBody> login2(@Valid @RequestBody LoginCredential credential) {
+  public ResponseEntity<StatefulBody> authentication(@Valid @RequestBody LoginCredential credential) {
 
     //构造一个用于认证的Authentication对象
     UsernamePasswordAuthenticationToken toBeAuthenticated =
