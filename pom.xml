@@ -15,16 +15,12 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <modules>
+    <module>minlia-rocket-project</module>
+  </modules>
+
   <profiles>
-    <profile>
-      <id>default</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <modules>
-        <module>minlia-rocket-project</module>
-      </modules>
-    </profile>
+
     <profile>
       <id>samples</id>
       <activation>
@@ -179,7 +175,7 @@
       <name>will</name>
       <email>will@minlia.com</email>
       <organization>minlia</organization>
-      <organizationUrl>https://www.minlia.com</organizationUrl>
+      <organizationUrl>http://minlia.com</organizationUrl>
     </developer>
   </developers>
 
