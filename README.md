@@ -74,3 +74,14 @@ java -Dthin.root=./target -Dserver.port=1025 -Dspring.profiles.active=dev -jar t
 ```
 mvn clean deploy -P release -P release-sign-artifacts
 ```
+
+
+# Setup
+
+cat ~/.bash_profile
+
+alias mc="mvn clean -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false $*"
+alias mi="mvn install -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false $*"
+alias ms="mvn spring-boot:run -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false $*"
+
+
