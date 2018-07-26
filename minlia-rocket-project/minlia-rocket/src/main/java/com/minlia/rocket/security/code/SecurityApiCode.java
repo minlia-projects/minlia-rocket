@@ -13,6 +13,7 @@ public class SecurityApiCode extends ApiCode {
   public static final int ACCESS_TOKEN_INVALID = BASE_CODE + 1;
 
 
+  public static final int PASSWORD_SHOWLD_NO_BE_EMPTY = BASE_CODE + 10;
   public static final int PASSWORD_INVALID = BASE_CODE + 11;
   public static final int ACCOUNT_EXPIRED = BASE_CODE + 12;
   public static final int ACCOUNT_LOCKED = BASE_CODE + 13;

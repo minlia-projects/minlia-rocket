@@ -1,4 +1,4 @@
-package com.minlia.rocket.swagger.configuration;
+package com.minlia.rocket.swagger.abstraction;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -42,7 +42,7 @@ public class Swagger2Config {
     StopWatch watch = new StopWatch();
     watch.start();
 
-    String groupName = "Default Api";
+    String groupName = "-The-Default-API-Group-";
     String path = swaggerConfigurationProperties.getPath();
     Docket docket = new Docket(DocumentationType.SWAGGER_2)
         .groupName(groupName)

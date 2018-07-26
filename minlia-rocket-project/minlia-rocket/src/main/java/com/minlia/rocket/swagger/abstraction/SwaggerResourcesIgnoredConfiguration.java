@@ -1,4 +1,4 @@
-package com.minlia.rocket.swagger.configuration;//package com.minlia.cloud.swagger.starter.configuration;
+package com.minlia.rocket.swagger.abstraction;//package com.minlia.cloud.swagger.starter.configuration;
 //
 //import cn.chenhuanming.utils.jwt.JwtSecurityAutoConfiguration;
 //import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

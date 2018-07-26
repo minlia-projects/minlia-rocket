@@ -1,4 +1,4 @@
-package com.minlia.rocket.swagger.configuration;
+package com.minlia.rocket.swagger.abstraction;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -14,6 +14,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * @author will
+ * 提供自定义SwaggerConfig<br />
+ * 一般用于自定义组名
  */
 public class AbstractSwaggerConfig {
 

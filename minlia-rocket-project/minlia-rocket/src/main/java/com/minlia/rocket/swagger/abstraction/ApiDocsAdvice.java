@@ -1,4 +1,4 @@
-package com.minlia.rocket.swagger.configuration;
+package com.minlia.rocket.swagger.abstraction;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

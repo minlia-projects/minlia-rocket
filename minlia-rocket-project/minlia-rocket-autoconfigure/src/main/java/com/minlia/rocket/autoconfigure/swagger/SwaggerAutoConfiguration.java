@@ -1,7 +1,7 @@
 package com.minlia.rocket.autoconfigure.swagger;
 
 import com.minlia.rocket.swagger.EnableDevSwagger;
-import com.minlia.rocket.swagger.configuration.Swagger2Config;
+import com.minlia.rocket.swagger.abstraction.Swagger2Config;
 import com.minlia.rocket.swagger.properties.SwaggerConfigurationProperties;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

@@ -1,4 +1,4 @@
-package com.minlia.rocket.swagger.configuration;//package com.minlia.modules.starter.swagger.configuration;
+package com.minlia.rocket.swagger.abstraction;//package com.minlia.modules.starter.swagger.configuration;
 //
 //import com.google.common.base.Predicate;
 //import com.minlia.modules.starter.swagger.properties.SwaggerConfigurationProperties;

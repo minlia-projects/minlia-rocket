@@ -1,6 +1,6 @@
 package com.minlia.rocket.swagger;
 
-import com.minlia.rocket.swagger.configuration.Swagger2Config;
+import com.minlia.rocket.swagger.abstraction.Swagger2Config;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
