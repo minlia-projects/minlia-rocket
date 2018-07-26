@@ -37,9 +37,6 @@ public class StandardAuthenticationEndpoint {
   private TokenProvider tokenProvider;
 
   @Autowired
-  private JwtProperties jwtProperties;
-
-  @Autowired
   @Lazy
   private AuthenticationManager authenticationManager;
 

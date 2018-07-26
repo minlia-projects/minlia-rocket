@@ -24,16 +24,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+/**
+ * @author will
+ */
 @Configuration
 @ConditionalOnProperty(
-    prefix = "system.security.",
+    prefix = "system.security",
     name = {"enabled"},
     havingValue = "true"
 )
-
-//com.minlia.rocket.autoconfigure.security.SecurityAutoConfiguration,\
 @EnableConfigurationProperties({JwtProperties.class})
 public class SecurityAutoConfiguration {
+
   @Autowired
   private JwtProperties jwtProperties;
 
@@ -94,6 +96,7 @@ public class SecurityAutoConfiguration {
   @Configuration
   @Import({InternalSecurityConfiguration.class})
   public static class TheInternalSecurityConfiguration {
+
     public TheInternalSecurityConfiguration() {
     }
   }

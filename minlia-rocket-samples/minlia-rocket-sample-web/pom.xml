@@ -91,6 +91,13 @@
 
   <build>
     <finalName>${project.artifactId}</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
     <plugins>
 
       <!--Running-->
@@ -102,7 +109,22 @@
 
   <profiles>
     <profile>
-      <id>mysql</id>
+      <id>default</id>
+      <activation>
+        <!-- Default to dev so we avoid any accidents with prod! :) -->
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <!-- This can be a single value, or a comma-separated list -->
+        <activatedProperties>dev-h2</activatedProperties>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>dev-mysql</id>
+      <properties>
+        <activatedProperties>dev-mysql</activatedProperties>
+      </properties>
       <dependencies>
         <dependency>
           <groupId>mysql</groupId>
@@ -111,10 +133,10 @@
       </dependencies>
     </profile>
     <profile>
-      <id>h2</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
+      <id>dev-h2</id>
+      <properties>
+        <activatedProperties>dev-h2</activatedProperties>
+      </properties>
       <dependencies>
         <dependency>
           <groupId>com.h2database</groupId>

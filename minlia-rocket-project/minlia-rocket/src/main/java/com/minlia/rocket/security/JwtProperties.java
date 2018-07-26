@@ -9,7 +9,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class JwtProperties {
 
   private Boolean enabled;
-
   private String issuer;
   private String secretKey;
   private long tokenValidityInSeconds;
