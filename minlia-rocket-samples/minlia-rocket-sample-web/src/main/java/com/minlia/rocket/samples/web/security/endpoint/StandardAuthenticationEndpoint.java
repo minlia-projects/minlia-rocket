@@ -38,7 +38,6 @@ import org.springframework.web.bind.annotation.RestController;
     name = {"enabled"},
     havingValue = "true"
 )
-@ConditionalOnBean
 public class StandardAuthenticationEndpoint {
 
   @Autowired
