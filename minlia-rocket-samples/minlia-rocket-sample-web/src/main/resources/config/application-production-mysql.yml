@@ -109,6 +109,13 @@ system:
       name: will
       url: https://www.qq.com
       email: 111111@qq.com
+  cors:
+    allowed-origins: "*"
+    allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+    allowed-headers: "*"
+    exposed-headers: X-Auth-Token,token_header2
+    allow-credentials: true
+    max-age: 3600
 
 # 开始安全方面的配置
   security:
