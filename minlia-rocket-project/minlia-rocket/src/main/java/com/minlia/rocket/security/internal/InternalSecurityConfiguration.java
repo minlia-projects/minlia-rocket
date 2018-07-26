@@ -20,10 +20,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.util.StopWatch;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
 @Import(SecurityProblemSupport.class)
@@ -35,11 +33,11 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
   public static final String[] IGNORED_SWAGGER_PREFIX = {"/swagger-resources/**", "/api-docs",
       "/webjars/**", "/swagger-ui.html**"};
   @Autowired
-  private   AuthenticationManagerBuilder authenticationManagerBuilder;
-@Autowired
-  private   TokenProvider tokenProvider;
+  private AuthenticationManagerBuilder authenticationManagerBuilder;
   @Autowired
-  private   SecurityProblemSupport problemSupport;
+  private TokenProvider tokenProvider;
+  @Autowired
+  private SecurityProblemSupport problemSupport;
 
   @Autowired
   protected BCryptPasswordEncoder passwordEncoder;
@@ -80,10 +78,10 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
   public void configure(WebSecurity web) {
 
     //当启用swagger时才添加，不启用时无需添加
-    if(isSwaggerEnabled){
+    if (isSwaggerEnabled) {
       log.info("Swagger was enabled, adding resources to ignore list");
-      if(IGNORED_SWAGGER_PREFIX.length>0){
-        for(String ignoredSwaggerPrefix:IGNORED_SWAGGER_PREFIX){
+      if (IGNORED_SWAGGER_PREFIX.length > 0) {
+        for (String ignoredSwaggerPrefix : IGNORED_SWAGGER_PREFIX) {
           web.ignoring().antMatchers(ignoredSwaggerPrefix);
         }
       }
