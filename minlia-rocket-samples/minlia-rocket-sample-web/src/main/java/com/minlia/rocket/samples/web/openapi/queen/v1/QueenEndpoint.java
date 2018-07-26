@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value = "api/v1/open/queen")
+@RequestMapping(value = "api/v1/queen")
 public class QueenEndpoint implements AbstractEndpoint<Queen, Long, QueenQueryRequestBody> {
 
   @Autowired

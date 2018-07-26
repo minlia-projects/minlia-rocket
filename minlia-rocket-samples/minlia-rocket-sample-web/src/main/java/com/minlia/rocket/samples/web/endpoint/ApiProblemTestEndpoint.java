@@ -1,4 +1,4 @@
-package com.minlia.rocket.samples.web;
+package com.minlia.rocket.samples.web.endpoint;
 
 import com.minlia.rocket.context.ContextHolder;
 import com.minlia.rocket.i18n.system.SystemMessageSource;
@@ -8,18 +8,16 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.zalando.problem.Status;
-import org.zalando.problem.StatusType;
 
 @RestController
 @RequestMapping(value = "api/v1/open/test")
 @ApiOperation(value = "Test Endpoint",tags = "Test",notes = "Test Endpoint")
 @Slf4j
-public class TestEndpoint {
+public class ApiProblemTestEndpoint {
 
   @GetMapping
   @Loggable

@@ -9,7 +9,10 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component
+/**
+ * @author will
+ * 业务级安全认证提供者
+ */
 @Transactional
 public class SecurityAuthenticationProvider implements AuthenticationProvider {
 

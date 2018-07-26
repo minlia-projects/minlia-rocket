@@ -6,6 +6,7 @@ import com.minlia.rocket.security.security.jwt.TokenProvider;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
@@ -21,6 +22,7 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.util.StopWatch;
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
@@ -41,6 +43,7 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
   protected BCryptPasswordEncoder passwordEncoder;
   @Autowired
   private CorsFilter corsFilter;
+
   @Autowired
   private SystemIgnoredListProperties systemIgnoredListProperties;
 
@@ -128,6 +131,9 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+    log.debug("Starting security configuration");
+    StopWatch watch = new StopWatch();
+    watch.start();
 
     ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http
         .authorizeRequests();
@@ -172,6 +178,9 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
 
         .and()
         .apply(securityConfigurerAdapter());
+
+    watch.stop();
+    log.debug("Finishing security configuration in {} ms", watch.getTotalTimeMillis());
 
   }
 

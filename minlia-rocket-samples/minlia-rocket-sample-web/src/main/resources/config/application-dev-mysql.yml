@@ -108,6 +108,22 @@ system:
       url: https://www.qq.com
       email: 111111@qq.com
 
+# 开始安全方面的配置
+  security:
+    enabled: true
+    issuer: minlia.com
+    secret-key: bWlubGlhOEVWNkh5NVwNRks0RUVBQ0lEQXdRdXMK
+     #minlia8EV6Hy5RMFK4EEACIDAwQus
+    token-validity-in-seconds: 1800
+    token-validity-in-seconds-for-remember-me: 2592000
+#      refresh-token-exp-time: 2000000
+#      enabled: true
+#      tokenExpirationTime: 604800 # Number of minutes
+#      refreshTokenExpTime: 604800 # Minutes
+#      tokenIssuer: http://minlia.com
+#      tokenSigningKey: minlia8EV6Hy5RMFK4EEACIDAwQus
+
+
   problem:
     code-portal-prefix: http://code.qq.com/
   ignored:

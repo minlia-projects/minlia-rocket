@@ -45,6 +45,7 @@ public class ApiProblemAutoConfiguration {
     StopWatch watch = new StopWatch();
     watch.start();
     ApiExceptionHandler apiExceptionHandler= new ApiExceptionHandler();
+    watch.stop();
     log.debug("Finishing api problem configuration in {} ms", watch.getTotalTimeMillis());
     return apiExceptionHandler;
   }
