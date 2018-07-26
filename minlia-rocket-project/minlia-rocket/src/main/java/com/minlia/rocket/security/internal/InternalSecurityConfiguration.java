@@ -32,9 +32,6 @@ import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 @Slf4j
 public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  //TODO 添加CORS Filter
-
-
   public static final String[] IGNORED_SWAGGER_PREFIX = {"/swagger-resources/**", "/api-docs",
       "/webjars/**", "/swagger-ui.html**"};
 
@@ -46,8 +43,6 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
   @Autowired
   protected BCryptPasswordEncoder passwordEncoder;
 
-  @Autowired
-  private CorsFilter corsFilter;
 
   @Autowired
   private CorsConfigurationSource corsConfigurationSource;
@@ -112,7 +107,6 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
     }
 
   }
-
 
 
   @Override
