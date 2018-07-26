@@ -126,7 +126,7 @@ system:
 
 
   problem:
-    code-portal-prefix: http://code.qq.com/
+    code-portal-prefix: http://c.minlia.com/
   ignored:
     urls:
       - /api/v1/permission/getMenuList/**
