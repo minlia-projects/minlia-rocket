@@ -9,7 +9,7 @@ server:
   http2:
     enabled: true
 spring:
-  profile: dev-mysql
+  profile: production-mysql
   # 数据源
   datasource:
     # 始终初始化数据
@@ -150,8 +150,8 @@ security:
 
 logging:
   level:
-    ROOT: info
-    com.minlia: debug
+    ROOT: error
+    com.minlia: info
     hk.com.jetco.ekyc: trace
     jdbc.audit: error
     jdbc.sqltiming: error
@@ -160,4 +160,4 @@ logging:
     jdbc.sqlonly: info
     jdbc.resultsettable: info
     org.springframework.boot.autoconfigure: info
-    org.springframework.boot.web.servlet.context: debug
+    org.springframework.boot.web.servlet.context: info

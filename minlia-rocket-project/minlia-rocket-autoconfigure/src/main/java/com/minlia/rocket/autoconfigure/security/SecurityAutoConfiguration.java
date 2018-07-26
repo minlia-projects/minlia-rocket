@@ -1,5 +1,6 @@
 package com.minlia.rocket.autoconfigure.security;
 
+import com.minlia.rocket.property.SystemProperties;
 import com.minlia.rocket.security.JwtProperties;
 import com.minlia.rocket.security.authentication.provider.SecurityAuthenticationProvider;
 import com.minlia.rocket.security.authentication.service.AuthenticationService;
@@ -9,6 +10,7 @@ import com.minlia.rocket.security.internal.InternalSecurityConfiguration;
 import com.minlia.rocket.security.security.jwt.TokenProvider;
 import com.minlia.rocket.security.security.jwt.extractor.JwtHeaderTokenExtractor;
 import com.minlia.rocket.security.security.jwt.extractor.TokenExtractor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -21,6 +23,8 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
@@ -33,11 +37,13 @@ import org.springframework.web.filter.CorsFilter;
     name = {"enabled"},
     havingValue = "true"
 )
+@Slf4j
 @EnableConfigurationProperties({JwtProperties.class})
 public class SecurityAutoConfiguration {
 
   @Autowired
   private JwtProperties jwtProperties;
+
 
   public SecurityAutoConfiguration() {
   }
@@ -60,11 +66,7 @@ public class SecurityAutoConfiguration {
     return new DummyUserDetailsService();
   }
 
-  @Bean
-  public CorsFilter corsFilter() {
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    return new CorsFilter(source);
-  }
+
 
   @Bean
   @ConditionalOnMissingBean

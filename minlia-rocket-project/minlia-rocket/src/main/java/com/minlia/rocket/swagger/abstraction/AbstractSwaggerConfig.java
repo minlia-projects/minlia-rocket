@@ -3,6 +3,7 @@ package com.minlia.rocket.swagger.abstraction;
 import static com.google.common.collect.Lists.newArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -28,6 +29,7 @@ public class AbstractSwaggerConfig {
   @Autowired
   private ApiInfo apiInfo;
 
+//  @ConditionalOnProperty(prefix = "system.swagger",name = "enabled",havingValue = "true")
   protected Docket createNewDocket(String groupName, String path) {
     Docket docket = new Docket(DocumentationType.SWAGGER_2)
         .groupName(groupName)

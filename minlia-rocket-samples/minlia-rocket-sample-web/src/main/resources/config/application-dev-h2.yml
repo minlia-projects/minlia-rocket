@@ -8,20 +8,16 @@ server:
   http2:
     enabled: true
 spring:
-  # 数据源
   profile: dev-h2
   datasource:
-    # 始终初始化数据
     continue-on-error: true
     initialization-mode: always
 #    schema: classpath:/data/schema-mysql.sql
 #    data: classpath:/data/data-mysql.sql
-
     url: jdbc:log4jdbc:h2:mem:TEST;MVCC=true;DB_CLOSE_DELAY=-1;MODE=Oracle
     driver-class-name: net.sf.log4jdbc.DriverSpy
     username: root
     password:
-
 
 #    type: com.alibaba.druid.pool.DruidDataSource
 #    driver-class-name: com.mysql.jdbc.Driver
@@ -30,23 +26,14 @@ spring:
     platform: h2
 
 
-
   jpa:
     show-sql: false
     # 自动生成表结构
     generate-ddl: true
     hibernate:
       ddl-auto: none
-#  # Redis
-##  redis:
-##    host: 127.0.0.1
-##    password:
-##    # 数据库索引 默认0
-##    database: 0
-##    port: 6379
-##    timeout: 3000
-#  # Elasticsearch
-#
+
+
 ## Mybatis-plus
 mybatis-plus:
   # 放在resource目录 classpath:/mapper/*Mapper.xml
@@ -78,28 +65,9 @@ mybatis-plus:
 
 
 
-
-#application:
-#  # 全局限流
-#  rateLimit:
-#    enable: true
-#    # 每1秒内
-#    timeout: 3
-#    # 总限制100个请求
-#    limit: 100
-#  # 日志记录方式 true使用Elasticsearch记录 false记录至数据库中
-#  auditRecord:
-#    es: false
-#  # 日志记录方式 true使用Elasticsearch记录 false记录至数据库中
-#  accessRecord:
-#    es: false
-
-
-
-
 system:
-# Swagger界面内容配置
   swagger:
+    enabled: true
     title: Minlia接口文档
     description: Minlia Api Documentation
     version: 1.0.0
@@ -108,22 +76,21 @@ system:
       name: will
       url: http://minlia.com
       email: will@minlia.com
+  cors:
+    allowed-origins: "*"
+    allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+    allowed-headers: "*"
+    exposed-headers: X-Auth-Token,token_header2
+    allow-credentials: true
+    max-age: 3600
 
 # 开始安全方面的配置
   security:
     enabled: true
     issuer: minlia.com
     secret-key: bWlubGlhOEVWNkh5NVwNRks0RUVBQ0lEQXdRdXMK
-     #minlia8EV6Hy5RMFK4EEACIDAwQus
     token-validity-in-seconds: 1800
     token-validity-in-seconds-for-remember-me: 2592000
-#      refresh-token-exp-time: 2000000
-#      enabled: true
-#      tokenExpirationTime: 604800 # Number of minutes
-#      refreshTokenExpTime: 604800 # Minutes
-#      tokenIssuer: http://minlia.com
-#      tokenSigningKey: minlia8EV6Hy5RMFK4EEACIDAwQus
-
 
   problem:
     code-portal-prefix: http://c.minlia.com/
@@ -132,18 +99,16 @@ system:
       - /api/v1/permission/getMenuList/**
       - /api/v1/user/regist
       - /api/v1/common/**
-      - /swagger-ui.html
-      - /swagger-resources/**
-      - /swagger/**
+#      - /swagger-ui.html
+#      - /swagger-resources/**
+#      - /swagger/**
       - /api/v1/open/**
-      - /**/v2/api-docs
+#      - /**/v2/api-docs
       - /**/*.js
       - /**/*.css
       - /**/*.png
       - /**/*.ico
-security:
-  basic:
-    enabled: false
+
 
 logging:
   level:
@@ -158,3 +123,4 @@ logging:
     jdbc.resultsettable: info
     org.springframework.boot.autoconfigure: info
     org.springframework.boot.web.servlet.context: debug
+    org.springframework.web.cors: debug

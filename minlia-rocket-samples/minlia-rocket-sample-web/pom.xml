@@ -132,10 +132,40 @@
         </dependency>
       </dependencies>
     </profile>
+
     <profile>
       <id>dev-h2</id>
       <properties>
         <activatedProperties>dev-h2</activatedProperties>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+
+
+
+
+    <profile>
+      <id>production-mysql</id>
+      <properties>
+        <activatedProperties>production-mysql</activatedProperties>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>production-h2</id>
+      <properties>
+        <activatedProperties>production-h2</activatedProperties>
       </properties>
       <dependencies>
         <dependency>

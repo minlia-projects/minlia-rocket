@@ -80,8 +80,11 @@ public class Swagger2Config {
   @ConditionalOnMissingBean
   SecurityContext securityContext() {
     return SecurityContext.builder()
+
         .securityReferences(defaultAuth())
-        .forPaths(PathSelectors.any()).build();
+        .forPaths(PathSelectors.any())
+
+        .build();
   }
 
 

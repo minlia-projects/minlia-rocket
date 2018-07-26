@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.minlia.rocket.autoconfigure.webmvc.SystemWebmvcAutoConfiguration,\
 com.minlia.rocket.autoconfigure.ignored.SystemIgnoredListAutoConfiguration,\
 com.minlia.rocket.autoconfigure.context.ContextHolderAutoConfiguration,\
 com.minlia.rocket.autoconfigure.loggable.LoggableAutoConfiguration,\

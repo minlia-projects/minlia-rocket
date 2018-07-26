@@ -16,6 +16,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Inherited
 @EnableSwagger2
 @Import({Swagger2Config.class})
-public @interface EnableDevSwagger {
+public @interface EnableSwagger {
 
 }

@@ -11,6 +11,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @AllArgsConstructor
 public class SwaggerConfigurationProperties {
 
+  Boolean enabled=Boolean.TRUE;
+
   String title = "APPLICATION.NAME";
 
   String version = "APPLICATION.VERSION";
