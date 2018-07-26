@@ -34,11 +34,12 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
 
   public static final String[] IGNORED_SWAGGER_PREFIX = {"/swagger-resources/**", "/api-docs",
       "/webjars/**", "/swagger-ui.html**"};
-
-  private final AuthenticationManagerBuilder authenticationManagerBuilder;
-
-  private final TokenProvider tokenProvider;
-  private final SecurityProblemSupport problemSupport;
+  @Autowired
+  private   AuthenticationManagerBuilder authenticationManagerBuilder;
+@Autowired
+  private   TokenProvider tokenProvider;
+  @Autowired
+  private   SecurityProblemSupport problemSupport;
 
   @Autowired
   protected BCryptPasswordEncoder passwordEncoder;
@@ -53,32 +54,27 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
   @Autowired
   private AuthenticationProvider authenticationProvider;
 
-
   @Value(value = "${system.swagger.enabled:false}")
   private Boolean isSwaggerEnabled;
-
 
 
   private JwtConfigurer securityConfigurerAdapter() {
     return new JwtConfigurer(tokenProvider);
   }
 
-  public InternalSecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder,
-      TokenProvider tokenProvider,
-      SecurityProblemSupport problemSupport) {
-    this.authenticationManagerBuilder = authenticationManagerBuilder;
-    this.tokenProvider = tokenProvider;
-    this.problemSupport = problemSupport;
-  }
-
+//  public InternalSecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder,
+//      TokenProvider tokenProvider,
+//      SecurityProblemSupport problemSupport) {
+//    this.authenticationManagerBuilder = authenticationManagerBuilder;
+//    this.tokenProvider = tokenProvider;
+//    this.problemSupport = problemSupport;
+//  }
 
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) {
     auth.authenticationProvider(authenticationProvider);
   }
-
-
 
   @Override
   public void configure(WebSecurity web) {
@@ -116,7 +112,6 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
     watch.start();
 
     http
-//        .addFilterBefore(corsFilter, ChannelProcessingFilter.class)
         .cors().configurationSource(corsConfigurationSource)
         .and()
         .exceptionHandling()
