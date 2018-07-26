@@ -9,6 +9,7 @@ server:
     enabled: true
 spring:
   # 数据源
+  profile: dev-h2
   datasource:
     # 始终初始化数据
     continue-on-error: true
