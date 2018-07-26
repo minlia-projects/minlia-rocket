@@ -214,3 +214,18 @@ api.code.4015=认证失败，凭证已过期
     "success": true
 }
 ```
+
+
+```
+
+http://localhost:7001/api/v1/queen/count
+
+
+accept: application/json;charset=UTF-8
+origin: http://localhost:8080
+Content-Type: application/json
+X-Auth-Token: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImp0aSI6ImQ0MGNlZDAwLTk0ZjktNGE4ZC04MjlhLTJjM2FkNWJmNThlOSIsInNjb3BlcyI6ImEsYixjIiwiaXNzIjoibWlubGlhLmNvbSIsImlhdCI6MTUzMjYyMzE5NiwiZXhwIjoxNTM1MjE1MTk2fQ.wF4OLvzm1Pjzt3zbVxrCL_uwhDScp1ULfz3kSY7UbDLa__phoYGDHrs5-W8wZVi1gj09Y8HI5lGNQ1Zk6bPg2A
+
+
+{ "name": "string"}
+```
