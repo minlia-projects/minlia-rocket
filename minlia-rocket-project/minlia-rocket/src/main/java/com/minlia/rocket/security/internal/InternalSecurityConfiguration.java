@@ -27,7 +27,7 @@ import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
 @Import(SecurityProblemSupport.class)
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @Slf4j
 public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter {
