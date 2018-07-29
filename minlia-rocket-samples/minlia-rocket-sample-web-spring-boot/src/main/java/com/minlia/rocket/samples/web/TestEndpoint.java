@@ -25,7 +25,6 @@ public class TestEndpoint {
   public String ok() {
     ApplicationContext ac = ContextHolder.getContext();
     log.debug("ContextHolder with context: {}", ac);
-
     log.debug("LanguageProperties {}",languageProperties);
     return "OK";
   }

@@ -159,7 +159,6 @@ logging:
   level:
     ROOT: error
     com.minlia: info
-    hk.com.jetco.ekyc: trace
     jdbc.audit: error
     jdbc.sqltiming: error
     jdbc.resultset: error
