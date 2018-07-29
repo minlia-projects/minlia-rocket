@@ -1,7 +1,5 @@
 package com.minlia.rocket.autoconfigure.security;
 
-import com.minlia.rocket.property.SystemProperties;
-import com.minlia.rocket.security.JwtProperties;
 import com.minlia.rocket.security.authentication.provider.SecurityAuthenticationProvider;
 import com.minlia.rocket.security.authentication.service.AuthenticationService;
 import com.minlia.rocket.security.authentication.service.BuiltinStandardAuthenticationService;
@@ -11,11 +9,9 @@ import com.minlia.rocket.security.security.jwt.TokenProvider;
 import com.minlia.rocket.security.security.jwt.extractor.JwtHeaderTokenExtractor;
 import com.minlia.rocket.security.security.jwt.extractor.TokenExtractor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -23,10 +19,6 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 /**
  * @author will
@@ -38,11 +30,10 @@ import org.springframework.web.filter.CorsFilter;
     havingValue = "true"
 )
 @Slf4j
-@EnableConfigurationProperties({JwtProperties.class})
 public class SecurityAutoConfiguration {
 
-  @Autowired
-  private JwtProperties jwtProperties;
+//  @Autowired
+//  private SystemProperties systemProperties;
 
 
   public SecurityAutoConfiguration() {
@@ -83,7 +74,7 @@ public class SecurityAutoConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public TokenProvider tokenProvider() {
-    return new TokenProvider(this.jwtProperties);
+    return new TokenProvider();
   }
 
   @Bean

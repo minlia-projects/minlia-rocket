@@ -66,23 +66,6 @@ mybatis-plus:
 
 
 system:
-  swagger:
-    enabled: true
-    title: Minlia接口文档
-    description: Minlia Api Documentation
-    version: 1.0.0
-    termsOfServiceUrl: http://minlia.com
-    contact:
-      name: will
-      url: http://minlia.com
-      email: will@minlia.com
-  cors:
-    allowed-origins: "*"
-    allowed-methods: GET, PUT, POST, DELETE, OPTIONS
-    allowed-headers: "*"
-    exposed-headers: X-Auth-Token,token_header2
-    allow-credentials: true
-    max-age: 3600
 
 # 开始安全方面的配置
   security:
@@ -91,6 +74,31 @@ system:
     secret-key: bWlubGlhOEVWNkh5NVwNRks0RUVBQ0lEQXdRdXMK
     token-validity-in-seconds: 1800
     token-validity-in-seconds-for-remember-me: 2592000
+    authentication-header-name: X-Auth-Token
+
+
+  swagger:
+    enabled: true
+    description: Minlia Api Documentation
+    title: @activatedProperties@
+    version: @activatedProperties@
+    termsOfServiceUrl: http://minlia.com
+    contact:
+      name: will
+      url: http://minlia.com
+      email: will@minlia.com
+    key-name: ${system.security.authentication-header-name:X-Auth-Token}
+  cors:
+    allowed-origins: "*"
+    allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+    allowed-headers: "*"
+    exposed-headers: ${system.security.authentication-header-name:X-Auth-Token}
+    allow-credentials: true
+    max-age: 3600
+  i18n:
+    language-request-header-parameter-name: X-Request-Lang
+    basename: classpath*:i18n/messages
+
 
   problem:
     code-portal-prefix: http://c.minlia.com/
@@ -124,3 +132,4 @@ logging:
     org.springframework.boot.web.servlet.context: debug
     org.springframework.web.cors: debug
     io.swagger.models.parameters: error
+#    org.springframework.core.io.support: debug

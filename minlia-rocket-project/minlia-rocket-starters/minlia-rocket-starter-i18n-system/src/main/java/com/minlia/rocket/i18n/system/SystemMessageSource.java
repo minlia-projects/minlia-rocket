@@ -55,7 +55,6 @@ public class SystemMessageSource extends AbstractMessageSource {
 
   /**
    * 查找并返回系统中已存在的译文
-   * TODO to process arguments
    */
   private String getLocaleTranslation(String code, String language, String country) {
     String result = null;

@@ -1,6 +1,5 @@
 package com.minlia.rocket.samples.web.security.endpoint;
 
-import com.minlia.rocket.security.JwtProperties;
 import com.minlia.rocket.security.credential.LoginCredential;
 import com.minlia.rocket.security.security.jwt.JwtAccessToken;
 import com.minlia.rocket.security.security.jwt.JwtAuthenticationResponseBody;
@@ -13,7 +12,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;

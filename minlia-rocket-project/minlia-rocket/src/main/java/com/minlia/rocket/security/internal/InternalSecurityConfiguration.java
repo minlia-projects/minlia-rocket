@@ -1,6 +1,6 @@
 package com.minlia.rocket.security.internal;
 
-import com.minlia.rocket.ignored.SystemIgnoredListProperties;
+import com.minlia.rocket.property.SystemProperties;
 import com.minlia.rocket.security.security.jwt.JwtConfigurer;
 import com.minlia.rocket.security.security.jwt.TokenProvider;
 import java.util.List;
@@ -47,7 +47,7 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
   private CorsConfigurationSource corsConfigurationSource;
 
   @Autowired
-  private SystemIgnoredListProperties systemIgnoredListProperties;
+  private SystemProperties systemProperties;
 
   @Autowired
   private AuthenticationProvider authenticationProvider;
@@ -88,7 +88,7 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
     }
 
     //添加用户自定义的清单
-    List<String> ignoredUrls = systemIgnoredListProperties.getUrls();
+    List<String> ignoredUrls = systemProperties.getIgnored().getUrls();
     //TODO
     //自动添加系统的登录API到忽略列表
     //自动添加系统的登出API到忽略列表

@@ -2,7 +2,7 @@ package com.minlia.rocket.security.security.jwt;
 
 
 import com.minlia.rocket.problem.Intrinsics;
-import com.minlia.rocket.security.JwtProperties;
+import com.minlia.rocket.property.SystemProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
@@ -20,6 +20,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -44,10 +45,10 @@ public class TokenProvider {
   public static final String AUTHORIZATION_PARAMETER_NAME = "x_auth_token";
 
 
-  private final JwtProperties jwtProperties;
+  @Autowired
+  private SystemProperties systemProperties;
 
-  public TokenProvider(JwtProperties jwtProperties) {
-    this.jwtProperties = jwtProperties;
+  public TokenProvider() {
   }
 
 
@@ -76,18 +77,18 @@ public class TokenProvider {
     long now = (nowDate).getTime();
     Date validity;
     if (rememberMe) {
-      validity = new Date(now + this.jwtProperties.getTokenValidityInSecondsForRememberMe() * 1000);
+      validity = new Date(now + this.systemProperties.getSecurity().getTokenValidityInSecondsForRememberMe() * 1000);
     } else {
-      validity = new Date(now + this.jwtProperties.getTokenValidityInSeconds() * 1000);
+      validity = new Date(now + this.systemProperties.getSecurity().getTokenValidityInSeconds() * 1000);
     }
     // Jwts.builder().setClaims() will create a default subject which means if setClaims() is called after
     // Jwts.builder().setSubject(), the previous subject will be lost
     String token = Jwts.builder()
         .setClaims(claims)
-        .setIssuer(jwtProperties.getIssuer())
+        .setIssuer(systemProperties.getSecurity().getIssuer())
         .setIssuedAt(nowDate)
         .setExpiration(validity)
-        .signWith(SignatureAlgorithm.HS512, jwtProperties.getSecretKey())
+        .signWith(SignatureAlgorithm.HS512, systemProperties.getSecurity().getSecretKey())
         .compact();
 
     return JwtAccessToken.builder().value(token).expiration(validity.getTime()).issuedAt(now)
@@ -113,14 +114,14 @@ public class TokenProvider {
 
     Date nowDate = new Date();
     long now = (nowDate).getTime();
-    Date validity = new Date(now + this.jwtProperties.getTokenValidityInSeconds() * 1000);
+    Date validity = new Date(now + this.systemProperties.getSecurity().getTokenValidityInSeconds() * 1000);
 
     String token = Jwts.builder()
         .setClaims(claims)
-        .setIssuer(jwtProperties.getIssuer())
+        .setIssuer(systemProperties.getSecurity().getIssuer())
         .setIssuedAt(nowDate)
         .setExpiration(validity)
-        .signWith(SignatureAlgorithm.HS512, jwtProperties.getSecretKey())
+        .signWith(SignatureAlgorithm.HS512, systemProperties.getSecurity().getSecretKey())
         .compact();
     return JwtRefreshToken.builder().value(token).build();
   }
@@ -144,7 +145,7 @@ public class TokenProvider {
 
   public Authentication getAuthentication(String jwtAccessToken) {
     Claims claims = Jwts.parser()
-        .setSigningKey(jwtProperties.getSecretKey())
+        .setSigningKey(systemProperties.getSecurity().getSecretKey())
         .parseClaimsJws(jwtAccessToken)
         .getBody();
 
@@ -161,7 +162,7 @@ public class TokenProvider {
 
   public boolean validateToken(String jwtAccessToken) {
     try {
-      Jwts.parser().setSigningKey(jwtProperties.getSecretKey()).parseClaimsJws(jwtAccessToken);
+      Jwts.parser().setSigningKey(systemProperties.getSecurity().getSecretKey()).parseClaimsJws(jwtAccessToken);
       return true;
     } catch (SignatureException e) {
       log.info("Invalid JWT signature.");
@@ -190,7 +191,7 @@ public class TokenProvider {
 
   private Claims getAllClaimsFromToken(String jwtAccessToken) {
     return Jwts.parser()
-        .setSigningKey(jwtProperties.getSecretKey())
+        .setSigningKey(systemProperties.getSecurity().getSecretKey())
         .parseClaimsJws(jwtAccessToken)
         .getBody();
   }

@@ -2,14 +2,12 @@ package com.minlia.rocket.autoconfigure.i18n;
 
 import com.minlia.rocket.i18n.LanguageRequestInterceptor;
 import com.minlia.rocket.i18n.LanguageRequestLocaleResolver;
-import com.minlia.rocket.i18n.properties.LanguageProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -27,15 +25,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ConditionalOnWebApplication(type = Type.SERVLET)
 @ConditionalOnClass(WebMvcConfigurer.class)
 @ConditionalOnMissingBean({LanguageRequestInterceptor.class})
-@EnableConfigurationProperties(value = {LanguageProperties.class})
+//@EnableConfigurationProperties(value = {LanguageProperties.class})
 @Slf4j
 public class I18nAutoConfiguration {
 
-  @Bean
-  @ConditionalOnMissingBean
-  public LanguageProperties languageProperties(){
-    return new LanguageProperties();
-  }
+//  @Bean
+//  @ConditionalOnMissingBean
+//  public LanguageProperties languageProperties(){
+//    return new LanguageProperties();
+//  }
 
   /**
    * WARNING: Never config interceptors out of WebMvcConfigurer, it will cause stack overflow

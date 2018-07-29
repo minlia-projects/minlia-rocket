@@ -1,16 +1,27 @@
 package com.minlia.rocket.samples.web.endpoint;
 
 import com.minlia.rocket.context.ContextHolder;
-import com.minlia.rocket.i18n.properties.LanguageProperties;
 import com.minlia.rocket.i18n.system.SystemMessageSource;
 import com.minlia.rocket.loggable.annotation.Loggable;
 import com.minlia.rocket.problem.ApiPreconditions;
+import com.minlia.rocket.property.SystemProperties;
+import com.minlia.rocket.security.rebecca.body.UserQueryRequestBody;
+import com.minlia.rocket.stateful.Responses;
+import com.minlia.rocket.stateful.body.StatefulBody;
+import com.minlia.rocket.stateful.body.impl.SuccessResponseBody;
+import com.minlia.rocket.swagger.annotation.ApiOperationSince;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.zalando.problem.Status;
@@ -20,17 +31,23 @@ import org.zalando.problem.Status;
 @ApiOperation(value = "Test Endpoint",tags = "Test",notes = "Test Endpoint")
 @Slf4j
 public class ApiProblemTestEndpoint {
-  @Autowired
-  private LanguageProperties languageProperties;
 
-  @GetMapping
+  @Autowired
+  private SystemProperties systemProperties;
+
+  @PostMapping
   @Loggable
-  public String ok() {
+  @ApiOperationSince(value = "1.0.3")
+  @ApiOperation(value = "Test",httpMethod = "POST",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  @ApiParam(value = "body",required = false)
+//  @Deprecated
+  public ResponseEntity<StatefulBody<UserQueryRequestBody>> ok(@Valid @RequestBody UserQueryRequestBody body) {
+    log.debug("BODY {}",body);
     ApplicationContext ac = ContextHolder.getContext();
     log.debug("ContextHolder with context: {}", ac);
-    log.info("LanguageProperties {}",languageProperties);
-    System.out.println(languageProperties);
-    return "OK";
+    log.info("LanguageProperties {}",systemProperties);
+    System.out.println(systemProperties);
+    return Responses.ok(SuccessResponseBody.builder().payload(body).build());
   }
 
   @GetMapping(value = "translationRefresh")
