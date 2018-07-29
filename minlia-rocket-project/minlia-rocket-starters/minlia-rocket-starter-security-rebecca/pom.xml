@@ -8,9 +8,11 @@
     <version>${revision}</version>
   </parent>
 
-  <artifactId>minlia-rocket-starter-security</artifactId>
-  <name>Minlia Rocket Starter Security</name>
-  <description>Minlia Rocket Starter Security</description>
+
+  <artifactId>minlia-rocket-starter-security-rebecca</artifactId>
+  <name>Minlia Rocket Starter Security Rebecca</name>
+  <description>Minlia Rocket Starter Security Rebecca</description>
+
   <properties>
     <main.basedir>${basedir}/../..</main.basedir>
   </properties>
@@ -22,23 +24,27 @@
       <artifactId>minlia-rocket-starter</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>com.minlia.rocket</groupId>
+      <artifactId>minlia-rocket-starter-data-jpa</artifactId>
+    </dependency>
 
     <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt</artifactId>
+      <groupId>com.minlia.rocket</groupId>
+      <artifactId>minlia-rocket-starter-swagger</artifactId>
     </dependency>
 
 
     <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-core</artifactId>
+      <groupId>com.minlia.rocket</groupId>
+      <artifactId>minlia-rocket-starter-data-mybatis</artifactId>
     </dependency>
-
 
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
+      <groupId>com.minlia.rocket</groupId>
+      <artifactId>minlia-rocket-starter-security</artifactId>
     </dependency>
+
   </dependencies>
 
 </project>

@@ -35,6 +35,7 @@
     <!--<module>minlia-rocket-starter-stateful</module>-->
     <module>minlia-rocket-starter-swagger</module>
     <module>minlia-rocket-starter-security</module>
+    <module>minlia-rocket-starter-security-rebecca</module>
 
   </modules>
 

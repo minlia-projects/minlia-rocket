@@ -1,5 +1,6 @@
 package com.minlia.rocket.data.entity;
 
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -57,6 +58,7 @@ public abstract class AbstractEntity<ID extends Serializable> extends WithIdEnti
   private Date lastModifiedDate;
 
 
+  @TableLogic
   @ApiModelProperty(value = "Data status")
   @Enumerated(value = EnumType.STRING)
   private DataStatusEnumeration dataStatus;

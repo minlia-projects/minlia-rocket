@@ -43,6 +43,8 @@ public class BuiltinStandardAuthenticationService implements AuthenticationServi
     UserDetails userDetails = userDetailsService
         .loadUserByUsername(authentication.getPrincipal().toString());
 
+    //TODO 可能会抛出UsernameNotFoundException, 需要进行处理
+
     //插入AfterPrincipalLoadedEvent
     ContextHolder.getContext().publishEvent(new AfterPrincipalLoadedEvent(authentication));
 
