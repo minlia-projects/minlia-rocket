@@ -34,7 +34,7 @@ public class SystemWebmvcAutoConfiguration {
   public CorsConfigurationSource corsConfigurationSource() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = systemProperties.getCors();
-    if (config.getAllowedOrigins() != null && !config.getAllowedOrigins().isEmpty()) {
+    if (null!=config&& config.getAllowedOrigins() != null && !config.getAllowedOrigins().isEmpty()) {
       log.debug("Registering cors filter");
       source.registerCorsConfiguration("/**", config);
     }
