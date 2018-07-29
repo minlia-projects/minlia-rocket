@@ -5,7 +5,7 @@ import com.minlia.rocket.i18n.system.SystemMessageSource;
 import com.minlia.rocket.loggable.annotation.Loggable;
 import com.minlia.rocket.problem.ApiPreconditions;
 import com.minlia.rocket.property.SystemProperties;
-import com.minlia.rocket.security.rebecca.body.UserQueryRequestBody;
+//import com.minlia.rocket.security.rebecca.body.UserQueryRequestBody;
 import com.minlia.rocket.stateful.Responses;
 import com.minlia.rocket.stateful.body.StatefulBody;
 import com.minlia.rocket.stateful.body.impl.SuccessResponseBody;

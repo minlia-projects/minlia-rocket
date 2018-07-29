@@ -81,8 +81,8 @@ system:
   swagger:
     enabled: true
     description: Minlia Api Documentation
-    title: @activatedProperties@
-    version: @activatedProperties@
+    title: @project.name@
+    version: @project.version@
     termsOfServiceUrl: http://minlia.com
     contact:
       name: will
