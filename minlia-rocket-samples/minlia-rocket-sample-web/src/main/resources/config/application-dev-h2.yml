@@ -97,7 +97,7 @@ system:
     max-age: 3600
   i18n:
     language-request-header-parameter-name: X-Request-Lang
-    basename: classpath*:i18n/messages
+    basename: i18n/messages
 
 
   problem:

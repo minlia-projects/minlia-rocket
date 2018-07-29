@@ -115,8 +115,9 @@ public class SystemMessageSourceAutoConfiguration {
     LanguageProperties properties = systemProperties.getI18n();
     MergedMessageSource messageSource = new MergedMessageSource();
     if (StringUtils.hasText(properties.getBasename())) {
-      messageSource.setBasenames(StringUtils.commaDelimitedListToStringArray(
-          StringUtils.trimAllWhitespace(properties.getBasename())));
+      String [] basename=StringUtils.commaDelimitedListToStringArray(
+          StringUtils.trimAllWhitespace(properties.getBasename().startsWith("classpath*")?properties.getBasename():"classpath*"+properties.getBasename()));
+      messageSource.setBasenames(basename);
     }
     if (properties.getEncoding() != null) {
       messageSource.setDefaultEncoding(properties.getEncoding().name());
