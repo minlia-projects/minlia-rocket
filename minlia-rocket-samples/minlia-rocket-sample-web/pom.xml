@@ -9,8 +9,8 @@
   <version>2.0.5-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Minlia Rocket Sample Web</name>
-  <description>Minlia Rocket Sample Web</description>
+  <name>敏利雅-火箭示例项目</name>
+  <description>Minlia rocket is a set of libraries that makes it easy to development enterprise platform.</description>
   <url>http://rocket.minlia.com/</url>
   <parent>
     <groupId>com.minlia.rocket</groupId>
