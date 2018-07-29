@@ -2,7 +2,6 @@ package com.minlia.rocket.abstraction.endpoint;
 
 import com.minlia.rocket.abstraction.service.ConditionalService;
 import com.minlia.rocket.data.body.AbstractQueryRequestBody;
-import com.minlia.rocket.data.body.PageRequestBody;
 import com.minlia.rocket.data.body.PageResponseBody;
 import com.minlia.rocket.loggable.annotation.Loggable;
 import com.minlia.rocket.stateful.Responses;
