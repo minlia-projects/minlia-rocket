@@ -9,7 +9,7 @@ import com.minlia.rocket.data.body.ToggleRequestBody;
 import com.minlia.rocket.data.interfaces.AbstractRawService;
 import java.io.Serializable;
 import java.util.List;
-import org.apache.commons.collections.IteratorUtils;
+import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;

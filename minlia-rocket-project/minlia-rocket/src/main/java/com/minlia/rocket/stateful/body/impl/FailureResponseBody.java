@@ -131,4 +131,10 @@ public class FailureResponseBody<T> extends ApiResponseBody {
       return this;
     }
   }
+
+  @Override
+  public boolean isSuccess() {
+    return Boolean.FALSE;
+  }
+
 }

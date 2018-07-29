@@ -117,6 +117,12 @@ public class SuccessResponseBody<T> extends ApiResponseBody {
       return ToStringBuilder.reflectionToString(this);
     }
 
-
   }
+
+  @Override
+  public boolean isSuccess() {
+    return Boolean.TRUE;
+  }
+
+
 }

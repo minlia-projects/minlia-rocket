@@ -31,7 +31,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "statefulBody", description = "状态化的返回体")
+@ApiModel(value = "statefulBody", description = "StatefulBody")
 public class StatefulBody<T> implements Body {
 
   public static final String SUCCESS_MESSAGE = "OK";

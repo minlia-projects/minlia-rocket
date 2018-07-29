@@ -2,6 +2,9 @@ package com.minlia.rocket.swagger.abstraction;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+import com.fasterxml.classmate.TypeResolver;
+import com.minlia.rocket.swagger.plugins.LanguageRequestParameterOperationBuilderPlugin;
+import com.minlia.rocket.swagger.plugins.PageableParameterOperationBuilderPlugin;
 import com.minlia.rocket.swagger.properties.SwaggerConfigurationProperties;
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +17,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.schema.TypeNameExtractor;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
@@ -103,6 +107,25 @@ public class Swagger2Config {
         .description(swaggerConfigurationProperties.getDescription()).version(
             swaggerConfigurationProperties.getVersion())
         .contact(swaggerConfigurationProperties.getContact()).build();
+  }
+
+
+  @Autowired
+  private TypeNameExtractor nameExtractor;
+
+  @Autowired
+  private TypeResolver resolver;
+
+  @Bean
+  @ConditionalOnMissingBean
+  public PageableParameterOperationBuilderPlugin pageableParameterBuilder() {
+    return new PageableParameterOperationBuilderPlugin(nameExtractor, resolver);
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  public LanguageRequestParameterOperationBuilderPlugin languageParameterBuilder() {
+    return new LanguageRequestParameterOperationBuilderPlugin();
   }
 
 
