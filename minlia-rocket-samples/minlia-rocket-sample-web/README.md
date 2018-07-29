@@ -1,7 +1,7 @@
 ### Environment Setup
 
 #### Windows
-Create bat file under system %PATH%
+Create bat files under system `%PATH%`
 
 ##### mi.bat
 ```
