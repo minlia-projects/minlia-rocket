@@ -15,18 +15,18 @@ ms
 
 ##### mi.bat
 ```
-mvn install -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false %*
+mvnw install -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false %*
 ```
 
 ##### mc.bat
 ```
-mvn clean -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false %*
+mvnw clean -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false %*
 ```
 
 ##### ms.bat
 
 ```
-mvn spring-boot:run -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false %*
+mvnw spring-boot:run -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false %*
 ```
 
 
@@ -40,9 +40,9 @@ Create alias in bash_profile, then we can execute these commands everywhere.
 ```
 cat ~/.bash_profile
 
-alias mc="mvn clean -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false $*"
-alias mi="mvn install -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false $*"
-alias ms="mvn spring-boot:run -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false $*"
+alias mc="mvnw clean -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false $*"
+alias mi="mvnw install -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false $*"
+alias ms="mvnw spring-boot:run -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false $*"
 
 source ~/.bash_profile
 ```
