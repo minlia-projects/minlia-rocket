@@ -80,14 +80,14 @@ system:
 
   swagger:
     enabled: true
-    description: Minlia Api Documentation
+    description: @project.description@
     title: @project.name@
     version: @project.version@
-    termsOfServiceUrl: http://minlia.com
+    termsOfServiceUrl: @project.url@
     contact:
       name: will
-      url: http://minlia.com
-      email: will@minlia.com
+      url: @project.url@
+      email: @project.url@
     ### key-name 优先使用变量的方式， 如找不到则使用冒号后面的默认值，也可以直接写为指定的值，如：X-Auth-Token
     key-name: ${system.security.authentication-header-name:X-Auth-Token}
   cors:

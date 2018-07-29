@@ -11,7 +11,7 @@
 
   <name>Minlia Rocket Sample Web</name>
   <description>Minlia Rocket Sample Web</description>
-
+  <url>http://rocket.minlia.com/</url>
   <parent>
     <groupId>com.minlia.rocket</groupId>
     <artifactId>minlia-rocket-starter-parent</artifactId>
