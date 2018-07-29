@@ -1,7 +1,17 @@
 ### Environment Setup
 
-#### Windows
-Create bat files under system `%PATH%`
+#### Setup JDK 8
+
+#### Setup Maven
+
+#### On Windows Like OS
+Create these batch files under the system environment variable `%PATH%`, then we can execute the following commands everywhere
+
+```
+mc
+mi
+ms
+```
 
 ##### mi.bat
 ```
@@ -20,13 +30,21 @@ mvn spring-boot:run -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -Ddow
 ```
 
 
-#### MacOS/Linux
+#### On MacOS or Linux OS 
+```
+~/.bashrc and ~/.bash_profile are scripts that might be executed when bash is invoked. The ~/.bashrc file gets executed when you run bash using an interactive shell that is not a login shell. The ~/.bash_profile only gets executed during a login shell. What does this all mean? The paragraphs below explains interactive shells, login shells, .bashrc, .bash_profile and other bash scripts that are executed during login.
+```
+
+Create alias in bash_profile, then we can execute these command everywhere.
+
 ```
 cat ~/.bash_profile
 
 alias mc="mvn clean -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false $*"
 alias mi="mvn install -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false $*"
 alias ms="mvn spring-boot:run -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -DdownloadSources=false -DdownloadJavadocs=false $*"
+
+source ~/.bash_profile
 ```
 
 ### Running
