@@ -158,7 +158,7 @@ security:
 logging:
   level:
     ROOT: info
-    com.minlia: info
+    com.minlia: debug
     jdbc.audit: error
     jdbc.sqltiming: error
     jdbc.resultset: error
