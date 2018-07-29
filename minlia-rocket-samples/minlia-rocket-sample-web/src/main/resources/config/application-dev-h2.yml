@@ -124,3 +124,4 @@ logging:
     org.springframework.boot.autoconfigure: info
     org.springframework.boot.web.servlet.context: debug
     org.springframework.web.cors: debug
+    io.swagger.models.parameters: error

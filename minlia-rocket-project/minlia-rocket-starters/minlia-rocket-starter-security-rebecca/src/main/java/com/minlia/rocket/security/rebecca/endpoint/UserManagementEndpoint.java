@@ -8,9 +8,12 @@ import com.minlia.rocket.security.rebecca.service.jpa.UserRoleJpaService;
 import com.minlia.rocket.stateful.Responses;
 import com.minlia.rocket.stateful.body.StatefulBody;
 import com.minlia.rocket.stateful.body.WithResultBody;
+import com.minlia.rocket.stateful.body.impl.FailureResponseBody;
 import com.minlia.rocket.stateful.body.impl.SuccessResponseBody;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +29,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @Api(description = "用户接口")
+@ApiResponses(value = {
+    @ApiResponse(code = 200, message = "Success", response = StatefulBody.class),
+    @ApiResponse(code = 400, message = "Bad Request", response = StatefulBody.class),
+    @ApiResponse(code = 401, message = "Not Authorized", response = StatefulBody.class),
+    @ApiResponse(code = 403, message = "Forbidden", response = StatefulBody.class),
+    @ApiResponse(code = 417, message = "Expectation Failure", response = StatefulBody.class),
+})
 @RequestMapping("/api/v1/security/rebecca/user-management")
 
 public class UserManagementEndpoint {

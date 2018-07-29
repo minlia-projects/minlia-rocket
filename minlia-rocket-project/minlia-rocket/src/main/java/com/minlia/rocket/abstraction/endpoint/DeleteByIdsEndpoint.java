@@ -8,13 +8,23 @@ import com.minlia.rocket.stateful.body.WithIdBody;
 import com.minlia.rocket.stateful.body.WithIdItemBody;
 import com.minlia.rocket.stateful.body.impl.SuccessResponseBody;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+@ApiResponses(value = {
+    @ApiResponse(code = 200, message = "Success", response = StatefulBody.class),
+    @ApiResponse(code = 201, message = "Created", response = StatefulBody.class),
+    @ApiResponse(code = 400, message = "Bad Request", response = StatefulBody.class),
+    @ApiResponse(code = 401, message = "Unauthorized", response = StatefulBody.class),
+    @ApiResponse(code = 403, message = "Forbidden", response = StatefulBody.class),
+    @ApiResponse(code = 404, message = "Not Found", response = StatefulBody.class),
+    @ApiResponse(code = 417, message = "Expectation Failure", response = StatefulBody.class),
+})
 @FunctionalInterface
 public interface DeleteByIdsEndpoint<ENTITY extends Serializable, ID extends Serializable> {
 

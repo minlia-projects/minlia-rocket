@@ -4,6 +4,9 @@ import com.minlia.rocket.abstraction.service.ConditionalService;
 import com.minlia.rocket.data.body.AbstractQueryRequestBody;
 import com.minlia.rocket.data.interfaces.IRawService;
 import com.minlia.rocket.loggable.annotation.Loggable;
+import com.minlia.rocket.stateful.body.StatefulBody;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author will
  * @since 2.0.3
  */
+@ApiResponses(value = {
+    @ApiResponse(code = 200, message = "Success", response = StatefulBody.class),
+    @ApiResponse(code = 201, message = "Created", response = StatefulBody.class),
+    @ApiResponse(code = 400, message = "Bad Request", response = StatefulBody.class),
+    @ApiResponse(code = 401, message = "Unauthorized", response = StatefulBody.class),
+    @ApiResponse(code = 403, message = "Forbidden", response = StatefulBody.class),
+    @ApiResponse(code = 404, message = "Not Found", response = StatefulBody.class),
+    @ApiResponse(code = 417, message = "Expectation Failure", response = StatefulBody.class),
+})
 @Loggable
 public interface AbstractEndpoint<ENTITY extends Serializable, ID extends Serializable, QUERY extends AbstractQueryRequestBody> extends
     CreationEndpoint<ENTITY, ID>
