@@ -1,11 +1,13 @@
 package com.minlia.rocket.samples.web.endpoint;
 
 import com.minlia.rocket.context.ContextHolder;
+import com.minlia.rocket.i18n.properties.LanguageProperties;
 import com.minlia.rocket.i18n.system.SystemMessageSource;
 import com.minlia.rocket.loggable.annotation.Loggable;
 import com.minlia.rocket.problem.ApiPreconditions;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +20,16 @@ import org.zalando.problem.Status;
 @ApiOperation(value = "Test Endpoint",tags = "Test",notes = "Test Endpoint")
 @Slf4j
 public class ApiProblemTestEndpoint {
+  @Autowired
+  private LanguageProperties languageProperties;
 
   @GetMapping
   @Loggable
   public String ok() {
     ApplicationContext ac = ContextHolder.getContext();
     log.debug("ContextHolder with context: {}", ac);
+    log.info("LanguageProperties {}",languageProperties);
+    System.out.println(languageProperties);
     return "OK";
   }
 
