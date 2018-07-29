@@ -1,5 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.minlia.rocket.autoconfigure.webmvc.SystemWebmvcAutoConfiguration,\
+com.minlia.rocket.autoconfigure.listener.SystemListenerAutoConfiguration,\
 com.minlia.rocket.autoconfigure.context.ContextHolderAutoConfiguration,\
 com.minlia.rocket.autoconfigure.i18n.I18nAutoConfiguration,\
 com.minlia.rocket.autoconfigure.swagger.SwaggerAutoConfiguration,\

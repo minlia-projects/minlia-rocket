@@ -40,7 +40,7 @@ public class ApiProblemTestEndpoint {
   @ApiOperationSince(value = "1.0.3")
   @ApiOperation(value = "Test",httpMethod = "POST",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @ApiParam(value = "body",required = false)
-//  @Deprecated
+  @Deprecated
   public ResponseEntity<StatefulBody<UserQueryRequestBody>> ok(@Valid @RequestBody UserQueryRequestBody body) {
     log.debug("BODY {}",body);
     ApplicationContext ac = ContextHolder.getContext();

@@ -8,6 +8,8 @@ server:
   http2:
     enabled: true
 spring:
+  application:
+    name: @project.name@
   profile: dev-h2
   datasource:
     continue-on-error: true
