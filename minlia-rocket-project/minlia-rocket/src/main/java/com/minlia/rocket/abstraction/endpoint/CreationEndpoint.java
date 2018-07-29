@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 @ApiResponses(value = {
-    @ApiResponse(code = 200, message = "Success", response = StatefulBody.class),
+    @ApiResponse(code = 200, message = "OK", response = StatefulBody.class),
     @ApiResponse(code = 201, message = "Created", response = StatefulBody.class),
     @ApiResponse(code = 400, message = "Bad Request", response = StatefulBody.class),
     @ApiResponse(code = 401, message = "Unauthorized", response = StatefulBody.class),
