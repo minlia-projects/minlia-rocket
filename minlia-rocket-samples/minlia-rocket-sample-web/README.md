@@ -35,7 +35,7 @@ mvn spring-boot:run -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -Ddow
 ~/.bashrc and ~/.bash_profile are scripts that might be executed when bash is invoked. The ~/.bashrc file gets executed when you run bash using an interactive shell that is not a login shell. The ~/.bash_profile only gets executed during a login shell. What does this all mean? The paragraphs below explains interactive shells, login shells, .bashrc, .bash_profile and other bash scripts that are executed during login.
 ```
 
-Create alias in bash_profile, then we can execute these command everywhere.
+Create alias in bash_profile, then we can execute these commands everywhere.
 
 ```
 cat ~/.bash_profile
