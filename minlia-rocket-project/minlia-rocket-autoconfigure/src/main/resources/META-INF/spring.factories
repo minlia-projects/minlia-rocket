@@ -2,10 +2,10 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.minlia.rocket.autoconfigure.webmvc.SystemWebmvcAutoConfiguration,\
 com.minlia.rocket.autoconfigure.ignored.SystemIgnoredListAutoConfiguration,\
 com.minlia.rocket.autoconfigure.context.ContextHolderAutoConfiguration,\
-com.minlia.rocket.autoconfigure.loggable.LoggableAutoConfiguration,\
+com.minlia.rocket.autoconfigure.i18n.I18nAutoConfiguration,\
 com.minlia.rocket.autoconfigure.swagger.SwaggerAutoConfiguration,\
+com.minlia.rocket.autoconfigure.loggable.LoggableAutoConfiguration,\
 com.minlia.rocket.autoconfigure.data.jpa.DataJpaAutoConfiguration,\
 com.minlia.rocket.autoconfigure.data.batis.DataBatisAutoConfiguration,\
 com.minlia.rocket.autoconfigure.problem.ApiProblemAutoConfiguration,\
-com.minlia.rocket.autoconfigure.i18n.I18nAutoConfiguration,\
 com.minlia.rocket.autoconfigure.security.SecurityAutoConfiguration

@@ -27,20 +27,20 @@ public class LanguageRequestParameterOperationBuilderPlugin implements Operation
 
   @Override
   public void apply(final OperationContext operationContext) {
-      final String description = "Request Language";
-      final List<Parameter> parameters = Lists.newArrayList(
-          this.parameterBuilder
-              .parameterType("header")
-              .name(languageRequestHeaderParameterName)
-              .modelRef(new ModelRef("string"))
-              .defaultValue("zh_CN")
-              .description(description)
-              .allowMultiple(false)
-              .required(false)
-              .build()
-      );
+    final String description = "Request Language";
+    final List<Parameter> parameters = Lists.newArrayList(
+        this.parameterBuilder
+            .parameterType("header")
+            .name(languageRequestHeaderParameterName)
+            .modelRef(new ModelRef("string"))
+            .defaultValue("zh_CN")
+            .description(description)
+            .allowMultiple(false)
+            .required(false)
+            .build()
+    );
 
-      operationContext.operationBuilder().parameters(parameters);
+    operationContext.operationBuilder().parameters(parameters);
   }
 
   @Override

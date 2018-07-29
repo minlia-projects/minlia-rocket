@@ -1,5 +1,6 @@
 package com.minlia.rocket.property;
 
+import com.minlia.rocket.i18n.properties.LanguageProperties;
 import com.minlia.rocket.ignored.SystemIgnoredListProperties;
 import com.minlia.rocket.problem.ProblemProperties;
 import com.minlia.rocket.security.JwtProperties;
@@ -26,5 +27,6 @@ public class SystemProperties {
 
   private SwaggerConfigurationProperties swagger;
 
+  private LanguageProperties i18n;
 
 }
