@@ -35,20 +35,20 @@ public class ApiProblemTestEndpoint {
   @Autowired
   private SystemProperties systemProperties;
 
-  @PostMapping
-  @Loggable
-  @ApiOperationSince(value = "1.0.3")
-  @ApiOperation(value = "Test",httpMethod = "POST",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  @ApiParam(value = "body",required = false)
-  @Deprecated
-  public ResponseEntity<StatefulBody<UserQueryRequestBody>> ok(@Valid @RequestBody UserQueryRequestBody body) {
-    log.debug("BODY {}",body);
-    ApplicationContext ac = ContextHolder.getContext();
-    log.debug("ContextHolder with context: {}", ac);
-    log.info("LanguageProperties {}",systemProperties);
-    System.out.println(systemProperties);
-    return Responses.ok(SuccessResponseBody.builder().payload(body).build());
-  }
+//  @PostMapping
+//  @Loggable
+//  @ApiOperationSince(value = "1.0.3")
+//  @ApiOperation(value = "Test",httpMethod = "POST",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//  @ApiParam(value = "body",required = false)
+//  @Deprecated
+//  public ResponseEntity<StatefulBody<UserQueryRequestBody>> ok(@Valid @RequestBody UserQueryRequestBody body) {
+//    log.debug("BODY {}",body);
+//    ApplicationContext ac = ContextHolder.getContext();
+//    log.debug("ContextHolder with context: {}", ac);
+//    log.info("LanguageProperties {}",systemProperties);
+//    System.out.println(systemProperties);
+//    return Responses.ok(SuccessResponseBody.builder().payload(body).build());
+//  }
 
   @GetMapping(value = "translationRefresh")
   @Loggable
