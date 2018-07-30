@@ -80,6 +80,7 @@ system:
 
   swagger:
     enabled: true
+    ### 使用MAVNE里定义的变量，打包时会将此内容替换为真正的内容
     description: @project.description@
     title: @project.name@
     version: @project.version@
