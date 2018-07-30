@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,6 +21,7 @@ import org.springframework.util.CollectionUtils;
  *
  * 目前还没有标准的用户，所以需要在项目里实现一个用户详情服务类<br />
  */
+@Slf4j
 public class DummyUserDetailsService implements UserDetailsService {
 
   public DummyUserDetailsService() {
@@ -31,6 +33,7 @@ public class DummyUserDetailsService implements UserDetailsService {
   @Override
   @Transactional
   public UserDetails loadUserByUsername(String login) {
+    log.info("Loading user by DummyUserDetailsService {}",login);
 
     //模拟从数据库里取出的用户信息
     DummyUserDetails dummyUserDetails = new DummyUserDetails();

@@ -29,6 +29,7 @@ public class RebeccaUserDetailsServiceImpl implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    log.info("Loading user by RebeccaUserDetailsService {}",username);
 
 //        String flagKey = "loginFailFlag:"+username;
 //        String value = redisTemplate.opsForValue().get(flagKey);
