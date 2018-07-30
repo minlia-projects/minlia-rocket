@@ -99,8 +99,12 @@ system:
     exposed-headers: ${system.security.authentication-header-name:X-Auth-Token}
     allow-credentials: true
     max-age: 3600
+
+
   i18n:
+    ### 语言切换头部参数名 值为语言加国家的形式。如：zh_CN en_US
     language-request-header-parameter-name: X-Request-Lang
+    ### 使用可合并的国际化译文，不同类路径下的同名文件将被合并
     basename: i18n/messages
 
   problem:
