@@ -67,20 +67,28 @@ mybatis-plus:
 
 
 
+## 基础系统配置
 system:
-
-# 开始安全方面的配置
+  ### 安全相关配置
   security:
+    #### 是否启用安全功能
     enabled: true
+    ### 发行人
     issuer: minlia.com
+    #### 当前系统的JWT密钥，用于生成Access Token
     secret-key: bWlubGlhOEVWNkh5NVwNRks0RUVBQ0lEQXdRdXMK
+    #### 有效时限秒
     token-validity-in-seconds: 1800
+    #### 记住当前登录用户的有效时限秒
     token-validity-in-seconds-for-remember-me: 2592000
+    #### 接收Access Token的Header参数名称
     authentication-header-name: X-Auth-Token
 
+  ### 接口文档SWAGGER相关配置
   swagger:
+    #### 是否启用接口文档功能，一般生产环境需要将此关闭
     enabled: true
-    ### 使用MAVNE里定义的变量，打包时会将此内容替换为真正的内容
+    ### 使用MAVNE里定义的变量，@MAVEN_VARIABLE_STRING@打包时会将此内容替换为真正的内容
     description: @project.description@
     title: @project.name@
     version: @project.version@
@@ -91,24 +99,32 @@ system:
       email: @project.url@
     ### key-name 优先使用变量的方式， 如找不到则使用冒号后面的默认值，也可以直接写为指定的值，如：X-Auth-Token
     key-name: ${system.security.authentication-header-name:X-Auth-Token}
+  ### 跨域请求配置
   cors:
+    ### 允许访问的域名
     allowed-origins: "*"
-    allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+    ### 允许的方法集
+    allowed-methods: GET, PUT, POST, DELETE, OPTIONS, PATCH
+    ### 允许的头部
     allowed-headers: "*"
     ### exposed-headers 优先使用变量的方式， 如找不到则使用冒号后面的默认值，也可以直接写为指定的值，如：X-Auth-Token
     exposed-headers: ${system.security.authentication-header-name:X-Auth-Token}
+    ### 充许传递Cookies
     allow-credentials: true
     max-age: 3600
 
-
+  ### 国际化相关配置
   i18n:
     ### 语言切换头部参数名 值为语言加国家的形式。如：zh_CN en_US
     language-request-header-parameter-name: X-Request-Lang
     ### 使用可合并的国际化译文，不同类路径下的同名文件将被合并
     basename: i18n/messages
 
+
+  ### 错误码展示PORTAL
   problem:
     code-portal-prefix: http://c.minlia.com/
+  ### 系统忽略列表，此清单中的值将不进行鉴权
   ignored:
     urls:
       - /api/v1/permission/getMenuList/**
@@ -123,6 +139,9 @@ system:
       - /**/*.css
       - /**/*.png
       - /**/*.ico
+
+
+
 
 
 logging:
