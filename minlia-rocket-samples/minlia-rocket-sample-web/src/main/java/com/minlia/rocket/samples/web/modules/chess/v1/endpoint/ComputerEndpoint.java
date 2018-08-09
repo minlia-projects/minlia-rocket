@@ -8,6 +8,7 @@ import com.minlia.rocket.samples.web.modules.chess.v1.body.ComputerPageableQuery
 import com.minlia.rocket.samples.web.modules.chess.v1.body.ComputerQueryRequestBody;
 import com.minlia.rocket.samples.web.modules.chess.v1.entity.Computer;
 import com.minlia.rocket.samples.web.modules.chess.v1.service.ComputerBatisService;
+import com.minlia.rocket.samples.web.modules.chess.v1.service.ComputerJpaService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,22 +30,22 @@ public class ComputerEndpoint implements
 
 
   @Autowired
-  private ComputerBatisService batisService;
+  private ComputerJpaService jpaService;
 
 
   @Override
   public IRawService<Computer, Long> getRawService() {
-    return batisService;
+    return jpaService;
   }
 
   @Override
   public ConditionalService<Computer, ComputerQueryRequestBody> getConditionalService() {
-    return batisService;
+    return jpaService;
   }
 
   @Override
   public PageableConditionalService<Computer, ComputerPageableQueryRequestBody> getPageableConditionalService() {
-    return batisService;
+    return jpaService;
   }
 
 }
