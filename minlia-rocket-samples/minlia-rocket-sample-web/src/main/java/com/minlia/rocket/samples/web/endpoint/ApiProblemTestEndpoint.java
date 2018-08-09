@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.zalando.problem.Status;
 
@@ -41,7 +42,7 @@ public class ApiProblemTestEndpoint {
 //  @ApiOperation(value = "Test",httpMethod = "POST",consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 //  @ApiParam(value = "body",required = false)
 //  @Deprecated
-//  public ResponseEntity<StatefulBody<UserQueryRequestBody>> ok(@Valid @RequestBody UserQueryRequestBody body) {
+//  public @ResponseBody ResponseEntity<StatefulBody<UserQueryRequestBody>> ok(@Valid @RequestBody UserQueryRequestBody body) {
 //    log.debug("BODY {}",body);
 //    ApplicationContext ac = ContextHolder.getContext();
 //    log.debug("ContextHolder with context: {}", ac);

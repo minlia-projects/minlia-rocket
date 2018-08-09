@@ -1,9 +1,12 @@
 package com.minlia.rocket.security.internal;
 
+import com.google.common.collect.ImmutableList;
 import com.minlia.rocket.property.SystemProperties;
 import com.minlia.rocket.security.security.jwt.JwtConfigurer;
 import com.minlia.rocket.security.security.jwt.TokenProvider;
 import java.util.List;
+import java.util.regex.Pattern;
+import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +23,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.StopWatch;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
@@ -30,7 +34,7 @@ import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 @Slf4j
 public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  public static final String[] IGNORED_SWAGGER_PREFIX = {"/swagger-resources/**", "/api-docs",
+  public static final String[] IGNORED_SWAGGER_PREFIX = {"/swagger-resources/**", "/api-docs**",
       "/webjars/**", "/swagger-ui.html**"};
   @Autowired
   private AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -55,6 +59,35 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
   @Value(value = "${system.swagger.enabled:false}")
   private Boolean isSwaggerEnabled;
 
+
+
+  public static class CsrfRequireMatcher implements RequestMatcher {
+    private static final Pattern ALLOWED_METHODS =
+        Pattern.compile("^(GET|HEAD|TRACE|OPTIONS)$");
+    private static final List<String> LOCALHOST_PATTERNS =
+        ImmutableList.of("127.0.0.1", "0:0:0:0:0:0:0:1");
+
+    @Override
+    public boolean matches(HttpServletRequest request) {
+//      // CSRF disabled on GET, HEAD, TRACE, OPTIONS (i.e. enabled for POST, PUT, DELETE)
+//      if (ALLOWED_METHODS.matcher(request.getMethod()).matches()) {
+//        return false;
+//      }
+//
+//      // CSRF not required on localhost when swagger-ui is referer
+//      final String remoteHost = request.getRemoteHost();
+//      final String referer = request.getHeader("Referer");
+//      if (remoteHost != null && referer != null
+//          && LOCALHOST_PATTERNS.contains(remoteHost)
+//          && "http://localhost:8080/swagger-ui.html".equals(referer)) {
+//        return false;
+//      }
+//      // otherwise, CSRF is required
+//      return true;
+
+      return false;
+    }
+  }
 
   private JwtConfigurer securityConfigurerAdapter() {
     return new JwtConfigurer(tokenProvider);
@@ -108,7 +141,8 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
     log.debug("Starting security configuration");
     StopWatch watch = new StopWatch();
     watch.start();
-
+    http.headers()
+        .cacheControl().disable();
     http
         .cors().configurationSource(corsConfigurationSource)
         .and()
@@ -116,12 +150,12 @@ public class InternalSecurityConfiguration extends WebSecurityConfigurerAdapter 
         .authenticationEntryPoint(problemSupport)
         .accessDeniedHandler(problemSupport)
         .and()
-        .csrf()
+        .csrf()//.ignoringAntMatchers("/**")
         .disable()
-        .headers()
-        .frameOptions()
-        .disable()
-        .and()
+//        .headers()
+//        .frameOptions()
+//        .disable()
+//        .and()
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()

@@ -3,6 +3,7 @@ package com.minlia.rocket.security.rebecca.service.batis.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.minlia.rocket.data.batis.abstraction.AbstractMapper;
 import com.minlia.rocket.data.batis.abstraction.service.AbstractBatisServiceImpl;
+import com.minlia.rocket.security.rebecca.body.UserRolePageableQueryRequestBody;
 import com.minlia.rocket.security.rebecca.body.UserRoleQueryRequestBody;
 import com.minlia.rocket.security.rebecca.dao.UserRoleDao;
 import com.minlia.rocket.security.rebecca.entity.Role;
@@ -19,12 +20,11 @@ import org.springframework.util.StringUtils;
  */
 @Transactional
 public class UserRoleBatisServiceImpl extends
-    AbstractBatisServiceImpl<UserRole, Long, UserRoleQueryRequestBody> implements
+    AbstractBatisServiceImpl<UserRole, Long, UserRoleQueryRequestBody,UserRolePageableQueryRequestBody> implements
     UserRoleBatisService {
 
   @Autowired
   private UserRoleDao userRoleDao;
-  ;
 
   @Override
   public List<Role> findByUserId(Long userId) {
@@ -35,6 +35,12 @@ public class UserRoleBatisServiceImpl extends
   @Override
   public AbstractMapper<UserRole> getBatisDao() {
     return userRoleDao;
+  }
+
+  @Override
+  public EntityWrapper<UserRole> getFindAllPageableSpecification(
+      UserRolePageableQueryRequestBody queryRequestBody) {
+    return this.getConditions(queryRequestBody);
   }
 
   @Override

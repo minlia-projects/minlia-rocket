@@ -3,6 +3,7 @@ package com.minlia.rocket.security.rebecca.service.jpa;
 
 import com.minlia.rocket.data.jpa.abstraction.service.AbstractJpaService;
 import com.minlia.rocket.enumeration.Status;
+import com.minlia.rocket.security.rebecca.body.UserPageableQueryRequestBody;
 import com.minlia.rocket.security.rebecca.body.UserQueryRequestBody;
 import com.minlia.rocket.security.rebecca.entity.User;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author rdteam
  */
-public interface UserJpaService extends AbstractJpaService<User, Long, UserQueryRequestBody> {
+public interface UserJpaService extends AbstractJpaService<User, Long, UserQueryRequestBody,UserPageableQueryRequestBody> {
 
   /**
    * 通过用户名获取用户

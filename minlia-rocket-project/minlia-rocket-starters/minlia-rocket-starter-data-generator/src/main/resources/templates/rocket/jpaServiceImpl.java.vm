@@ -1,0 +1,25 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import com.minlia.rocket.data.jpa.abstraction.AbstractRepository;
+import ${cfg.repositoryPackage}.${entity}Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * @description: $!{table.comment}Jpa服务实现类
+ * @copyright: ${cfg.copyright} ${cfg.year}
+ * @createTime: ${cfg.createTime}
+ * @author: ${author}
+ * @version: ${cfg.version}
+ */
+@Service
+public class ${entity}JpaServiceImpl implements ${entity}JpaService {
+  @Autowired
+  private ${entity}Repository jpaRepository;
+
+  @Override
+  public AbstractRepository<${entity}, Long> getJpaRepository() {
+    return jpaRepository;
+  }
+}

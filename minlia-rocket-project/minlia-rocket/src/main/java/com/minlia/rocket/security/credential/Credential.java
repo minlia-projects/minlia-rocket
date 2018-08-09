@@ -6,8 +6,8 @@ package com.minlia.rocket.security.credential;
 public interface Credential {
 
   /**
-   * 密码
+   * 登录凭证，通常为密码
    */
-  public String getPassword();
+  public String getCredential();
 
 }

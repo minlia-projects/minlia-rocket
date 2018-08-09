@@ -44,7 +44,10 @@
       <groupId>com.minlia.rocket</groupId>
       <artifactId>minlia-rocket-starter-security</artifactId>
     </dependency>
-
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+    </dependency>
   </dependencies>
 
 </project>

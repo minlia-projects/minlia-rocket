@@ -1,6 +1,7 @@
 package com.minlia.rocket.security.rebecca.service.jpa.impl;
 
 import com.minlia.rocket.data.jpa.abstraction.AbstractRepository;
+import com.minlia.rocket.security.rebecca.body.PermissionPageableQueryRequestBody;
 import com.minlia.rocket.security.rebecca.body.PermissionQueryRequestBody;
 import com.minlia.rocket.security.rebecca.entity.Permission;
 import com.minlia.rocket.security.rebecca.repository.PermissionRepository;
@@ -60,6 +61,12 @@ public class PermissionJpaServiceImpl implements PermissionJpaService {
     return permissionRepository.findByTypeAndParentIdOrderBySortOrder(type, parentId);
   }
 
+
+  @Override
+  public Specification<Permission> getFindAllPageableSpecification(
+      PermissionPageableQueryRequestBody queryRequestBody) {
+    return this.getConditions(queryRequestBody);
+  }
 
   @Override
   public Specification<Permission> getFindAllSpecification(

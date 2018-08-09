@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import com.minlia.rocket.data.jpa.abstraction.AbstractRepository;
 import com.minlia.rocket.enumeration.Gender;
 import com.minlia.rocket.enumeration.Status;
+import com.minlia.rocket.security.rebecca.body.UserPageableQueryRequestBody;
 import com.minlia.rocket.security.rebecca.body.UserQueryRequestBody;
 import com.minlia.rocket.security.rebecca.dao.PermissionDao;
 import com.minlia.rocket.security.rebecca.entity.Permission;
@@ -88,6 +89,11 @@ public class UserJpaServiceImpl implements UserJpaService {
     }
   }
 
+
+  @Override
+  public Specification<User> getFindAllPageableSpecification(UserPageableQueryRequestBody queryRequestBody) {
+    return this.getConditions(queryRequestBody);
+  }
 
   @Override
   public Specification<User> getFindAllSpecification(UserQueryRequestBody queryRequestBody) {

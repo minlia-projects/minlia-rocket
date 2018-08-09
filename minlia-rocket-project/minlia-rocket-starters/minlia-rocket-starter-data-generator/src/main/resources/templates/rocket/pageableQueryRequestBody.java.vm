@@ -1,0 +1,30 @@
+package ${cfg.bodyPackage};
+
+import ${package.Entity}.${entity};
+import com.minlia.rocket.data.body.PageRequestBody;
+import com.minlia.rocket.data.body.PageableQueryRequestBody;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+/**
+ * @description: $!{table.comment}PageableQueryRequestBody
+ * @copyright: ${cfg.copyright} ${cfg.year}
+ * @createTime: ${cfg.createTime}
+ * @author: ${author}
+ * @version: ${cfg.version}
+ */
+@Data
+@Accessors(chain = true)
+@ApiModel(value = "${entity}PageableQueryRequestBody")
+public class ${entity}PageableQueryRequestBody extends ${entity}QueryRequestBody implements
+    PageableQueryRequestBody<${entity}> {
+
+  @JsonProperty
+  @ApiModelProperty(value = "pageable")
+  private PageRequestBody pageable;
+
+}

@@ -4,10 +4,8 @@ import static com.google.common.collect.Lists.newArrayList;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.minlia.rocket.property.SystemProperties;
-import com.minlia.rocket.swagger.plugins.AuthenticationTokenHeaderOperationBuilderPlugin;
 import com.minlia.rocket.swagger.plugins.LanguageRequestParameterOperationBuilderPlugin;
-import com.minlia.rocket.swagger.plugins.PageableParameterOperationBuilderPlugin;
-import com.minlia.rocket.swagger.plugins.SinceOperationBuilderPlugin;
+//import com.minlia.rocket.swagger.plugins.PageableParameterOperationBuilderPlugin;
 import com.minlia.rocket.swagger.plugins.UuidAndDateParameterOperationBuilderPlugin;
 import io.swagger.annotations.ApiOperation;
 import java.util.Arrays;
@@ -66,6 +64,8 @@ public class SwaggerAutoConfiguration {
         .securitySchemes(newArrayList(apiKey()))
         .securityContexts(newArrayList(securityContext()))
         .apiInfo(apiInfo())
+
+        .useDefaultResponseMessages(false)
         .ignoredParameterTypes(ApiIgnore.class);
     watch.stop();
     log.debug("Finishing swagger configuration in {} ms", watch.getTotalTimeMillis());
@@ -125,17 +125,24 @@ public class SwaggerAutoConfiguration {
   @Autowired
   private TypeResolver resolver;
 
-  @Bean
-  @ConditionalOnMissingBean
-  public PageableParameterOperationBuilderPlugin pageableParameterBuilder() {
-    return new PageableParameterOperationBuilderPlugin(nameExtractor, resolver);
-  }
+//  @Bean
+//  @ConditionalOnMissingBean
+//  public PageableParameterOperationBuilderPlugin pageableParameterBuilder() {
+//    return new PageableParameterOperationBuilderPlugin(nameExtractor, resolver);
+//  }
 
   @Bean
   @ConditionalOnMissingBean
+  //开发环境不需要，否则会导致生成SWAGGER有多余参数
   public LanguageRequestParameterOperationBuilderPlugin languageParameterBuilder() {
     return new LanguageRequestParameterOperationBuilderPlugin();
   }
+
+//  @Bean
+//  @ConditionalOnMissingBean
+//  public OperationNicknameIntoUniqueIdReader operationNicknameIntoUniqueIdReader() {
+//    return new OperationNicknameIntoUniqueIdReader();
+//  }
 //
 //  @Bean
 //  @ConditionalOnMissingBean
@@ -146,14 +153,14 @@ public class SwaggerAutoConfiguration {
 //  @Bean
 //  @ConditionalOnMissingBean
 //  public UniqueIdOperationBuilderPlugin uniqueIdSetterPlugin() {
-//    return new UniqueIdOperationBuilderPlugin("OpId");
+//    return new UniqueIdOperationBuilderPlugin("");
 //  }
 
-  @Bean
-  @ConditionalOnMissingBean
-  public SinceOperationBuilderPlugin sinceOperationBuilderPlugin() {
-    return new SinceOperationBuilderPlugin();
-  }
+//  @Bean
+//  @ConditionalOnMissingBean
+//  public SinceOperationBuilderPlugin sinceOperationBuilderPlugin() {
+//    return new SinceOperationBuilderPlugin();
+//  }
 
   @Bean
   @ConditionalOnMissingBean

@@ -2,6 +2,7 @@ package com.minlia.rocket.security.rebecca.service.jpa;
 
 
 import com.minlia.rocket.data.jpa.abstraction.service.AbstractJpaService;
+import com.minlia.rocket.security.rebecca.body.RolePageableQueryRequestBody;
 import com.minlia.rocket.security.rebecca.body.RoleQueryRequestBody;
 import com.minlia.rocket.security.rebecca.entity.Role;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * 角色接口
  * @author rdteam
  */
-public interface RoleJpaService extends AbstractJpaService<Role,Long,RoleQueryRequestBody> {
+public interface RoleJpaService extends AbstractJpaService<Role,Long,RoleQueryRequestBody,RolePageableQueryRequestBody> {
 
     /**
      * 获取默认角色

@@ -1,7 +1,9 @@
 package com.minlia.rocket.security.authentication.service;
 
 import com.minlia.rocket.context.ContextHolder;
+import com.minlia.rocket.problem.Intrinsics;
 import com.minlia.rocket.security.body.ValidationArgumentBody;
+import com.minlia.rocket.security.code.SecurityApiCode;
 import com.minlia.rocket.security.event.AfterPrincipalLoadedEvent;
 import com.minlia.rocket.security.event.AfterValidationEvent;
 import com.minlia.rocket.security.event.BeforePrincipalLoadEvent;
@@ -13,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Service;
 
 /**
  * 内置标准的用户认证服务 <br />
@@ -35,6 +36,12 @@ public class BuiltinStandardAuthenticationService implements AuthenticationServi
    */
   @Override
   public Authentication authentication(Authentication authentication) {
+
+
+    //当传入参数都不存在时会报出异常
+    Intrinsics.isNull(authentication.getPrincipal(),SecurityApiCode.PRINCIPAL_NOT_NULL);
+    Intrinsics.isNull(authentication.getCredentials(),SecurityApiCode.CREDENTIAL_NOT_NULL);
+
 
     //插入BeforePrincipalLoadEvent
     ContextHolder.getContext().publishEvent(new BeforePrincipalLoadEvent(authentication));

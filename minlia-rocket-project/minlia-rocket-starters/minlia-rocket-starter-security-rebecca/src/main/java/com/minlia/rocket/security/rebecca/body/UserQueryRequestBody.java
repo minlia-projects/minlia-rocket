@@ -1,17 +1,16 @@
 package com.minlia.rocket.security.rebecca.body;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.minlia.rocket.data.body.AbstractQueryRequestBody;
+import com.minlia.rocket.data.body.QueryRequestBody;
 import com.minlia.rocket.enumeration.Gender;
 import com.minlia.rocket.enumeration.Status;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 
 @Data
 @ApiModel(value = "userQueryRequestBody")
-public class UserQueryRequestBody extends AbstractQueryRequestBody {
+public class UserQueryRequestBody implements QueryRequestBody {
 
   @JsonProperty
   @ApiModelProperty(value = "username",example = "will")

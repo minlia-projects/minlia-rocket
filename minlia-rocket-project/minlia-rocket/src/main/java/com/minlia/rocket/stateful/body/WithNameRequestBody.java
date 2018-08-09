@@ -8,7 +8,7 @@ import lombok.Data;
 /**
  * @author will
  */
-@ApiModel(value = "withNameRequestBody", description = "带ID的请求体")
+@ApiModel(value = "WithNameRequestBody", description = "WithNameRequestBody")
 @Data
 public class WithNameRequestBody implements Body {
 

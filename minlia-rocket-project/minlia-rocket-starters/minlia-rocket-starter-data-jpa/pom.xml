@@ -28,6 +28,16 @@
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
 
+
+    <!-- MapStruct -->
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-jdk8</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-processor</artifactId>
+    </dependency>
   </dependencies>
 
 </project>

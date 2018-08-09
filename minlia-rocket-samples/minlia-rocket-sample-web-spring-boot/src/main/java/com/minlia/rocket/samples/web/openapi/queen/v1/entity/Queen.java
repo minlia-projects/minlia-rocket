@@ -13,7 +13,6 @@ import lombok.Data;
 @Table(name = "queen")
 @TableName(value = "queen")
 @Data
-
 public class Queen extends AbstractEntity<Long> {
 
   @Id

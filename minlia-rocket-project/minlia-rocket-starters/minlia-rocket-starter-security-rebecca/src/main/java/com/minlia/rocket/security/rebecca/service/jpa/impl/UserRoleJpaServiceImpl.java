@@ -1,6 +1,7 @@
 package com.minlia.rocket.security.rebecca.service.jpa.impl;
 
 import com.minlia.rocket.data.jpa.abstraction.AbstractRepository;
+import com.minlia.rocket.security.rebecca.body.UserRolePageableQueryRequestBody;
 import com.minlia.rocket.security.rebecca.body.UserRoleQueryRequestBody;
 import com.minlia.rocket.security.rebecca.entity.UserRole;
 import com.minlia.rocket.security.rebecca.repository.UserRoleRepository;
@@ -53,6 +54,12 @@ public class UserRoleJpaServiceImpl implements UserRoleJpaService {
 
 
 
+
+  @Override
+  public Specification<UserRole> getFindAllPageableSpecification(
+      UserRolePageableQueryRequestBody queryRequestBody) {
+    return this.getConditions(queryRequestBody);
+  }
 
   @Override
   public Specification<UserRole> getFindAllSpecification(

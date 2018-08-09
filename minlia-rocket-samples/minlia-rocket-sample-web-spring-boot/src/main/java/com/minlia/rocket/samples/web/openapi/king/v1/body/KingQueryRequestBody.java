@@ -7,4 +7,5 @@ import lombok.Data;
 public class KingQueryRequestBody extends AbstractQueryRequestBody {
 
   private String name;
+
 }

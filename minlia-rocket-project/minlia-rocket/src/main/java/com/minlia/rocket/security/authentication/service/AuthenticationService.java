@@ -36,7 +36,7 @@ public interface AuthenticationService {
     Boolean isPasswordEmpty = StringUtils.isEmpty(authentication.getCredentials().toString());
 
     //密码是否为空
-    Intrinsics.is(isPasswordEmpty, SecurityApiCode.PASSWORD_SHOWLD_NO_BE_EMPTY);
+    Intrinsics.is(isPasswordEmpty, SecurityApiCode.CREDENTIAL_NOT_NULL);
 
     Boolean passwordMatches = passwordEncoder
         .matches(authentication.getCredentials().toString(), userDetails.getPassword());

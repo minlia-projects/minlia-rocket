@@ -2,8 +2,10 @@ package com.minlia.rocket.data.jpa.abstraction.service;
 
 
 import com.minlia.rocket.abstraction.service.ConditionalService;
+import com.minlia.rocket.abstraction.service.PageableConditionalService;
 import com.minlia.rocket.data.adapter.PageResponseBodyAdapter;
-import com.minlia.rocket.data.body.AbstractQueryRequestBody;
+import com.minlia.rocket.data.body.PageableQueryRequestBody;
+import com.minlia.rocket.data.body.QueryRequestBody;
 import com.minlia.rocket.data.body.PageResponseBody;
 import com.minlia.rocket.data.body.ToggleRequestBody;
 import com.minlia.rocket.data.interfaces.IRawService;
@@ -21,9 +23,13 @@ import org.springframework.data.jpa.domain.Specification;
  */
 //JDK8函数式接口注解 仅能包含一个抽象方法
 //@FunctionalInterface
-public interface AbstractJpaService<ENTITY extends Serializable, ID extends Serializable, QUERY extends AbstractQueryRequestBody> extends
+public interface AbstractJpaService<ENTITY extends Serializable, ID extends Serializable, QUERY extends QueryRequestBody,PAGEABLE_QUERY extends PageableQueryRequestBody> extends
     //with find service support
-    ConditionalService<ENTITY, QUERY>, IRawService<ENTITY, ID> {
+    IRawService<ENTITY, ID>,
+    ConditionalService<ENTITY, QUERY>,
+    PageableConditionalService<ENTITY, PAGEABLE_QUERY>
+
+{
 
   public AbstractRepository<ENTITY, ID> getJpaRepository();
 
@@ -124,10 +130,12 @@ public interface AbstractJpaService<ENTITY extends Serializable, ID extends Seri
    * 搜索条件应该由后台服务控制，所以都在实现类里面进行条件组装
    */
   @Override
-  public default PageResponseBody<ENTITY> findAllByCondition(QUERY queryRequestBody,
+  public default PageResponseBody<ENTITY> findAllByCondition(PAGEABLE_QUERY queryRequestBody,
       Pageable pageable) {
+
+    //此处传入的必须是一个PageableQueryRequestBody
     return PageResponseBodyAdapter.adapt(
-        getJpaRepository().findAll(getFindAllSpecification(queryRequestBody), pageable));
+        getJpaRepository().findAll(getFindAllPageableSpecification(queryRequestBody), pageable));
   }
 
   @Override
@@ -179,6 +187,12 @@ public interface AbstractJpaService<ENTITY extends Serializable, ID extends Seri
    */
   public default Specification<ENTITY> getFindAllSpecification(
       QUERY queryRequestBody) {
+    return null;
+  }
+
+
+  public default Specification<ENTITY> getFindAllPageableSpecification(
+      PAGEABLE_QUERY pageableQueryRequestBody) {
     return null;
   }
 

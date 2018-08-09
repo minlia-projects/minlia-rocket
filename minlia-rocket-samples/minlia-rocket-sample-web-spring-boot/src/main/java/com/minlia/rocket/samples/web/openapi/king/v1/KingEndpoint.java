@@ -5,6 +5,7 @@ import com.minlia.rocket.abstraction.service.ConditionalService;
 import com.minlia.rocket.data.interfaces.IRawService;
 import com.minlia.rocket.samples.web.openapi.king.v1.body.KingQueryRequestBody;
 import com.minlia.rocket.samples.web.openapi.king.v1.entity.King;
+import com.minlia.rocket.samples.web.openapi.queen.v1.QueenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,10 @@ public class KingEndpoint implements AbstractEndpoint<King, Long, KingQueryReque
   @Autowired
   private KingService kingService;
 
+  @Autowired
+  private QueenService queenService;
+
+
   @Override
   public IRawService<King, Long> getRawService() {
     return kingService;
@@ -26,5 +31,6 @@ public class KingEndpoint implements AbstractEndpoint<King, Long, KingQueryReque
   public ConditionalService<King, KingQueryRequestBody> getConditionalService() {
     return kingService;
   }
+
 }
 

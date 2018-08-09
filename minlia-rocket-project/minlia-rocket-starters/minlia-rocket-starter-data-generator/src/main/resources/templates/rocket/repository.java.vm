@@ -1,0 +1,14 @@
+package ${cfg.repositoryPackage};
+
+import ${package.Entity}.${entity};
+import com.minlia.rocket.data.jpa.abstraction.AbstractRepository;
+/**
+ * @description: $!{table.comment}Repository
+ * @copyright: ${cfg.copyright} ${cfg.year}
+ * @createTime: ${cfg.createTime}
+ * @author: ${author}
+ * @version: ${cfg.version}
+ */
+public interface ${entity}Repository extends AbstractRepository<${entity},Long> {
+
+}

@@ -13,19 +13,22 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-@ApiResponses(value = {
-    @ApiResponse(code = 200, message = "OK", response = StatefulBody.class),
-    @ApiResponse(code = 201, message = "Created", response = StatefulBody.class),
-    @ApiResponse(code = 400, message = "Bad Request", response = FailureResponseBody.class),
-    @ApiResponse(code = 401, message = "Unauthorized", response = FailureResponseBody.class),
-    @ApiResponse(code = 403, message = "Forbidden", response = FailureResponseBody.class),
-    @ApiResponse(code = 404, message = "Not Found", response = FailureResponseBody.class),
-    @ApiResponse(code = 417, message = "Expectation Failure", response = FailureResponseBody.class),
-})
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+//@ApiResponses(value = {
+//    @ApiResponse(code = 200, message = "OK", response = StatefulBody.class),
+//    @ApiResponse(code = 201, message = "Created", response = StatefulBody.class),
+//    @ApiResponse(code = 400, message = "Bad Request", response = FailureResponseBody.class),
+//    @ApiResponse(code = 401, message = "Unauthorized", response = FailureResponseBody.class),
+//    @ApiResponse(code = 403, message = "Forbidden", response = FailureResponseBody.class),
+//    @ApiResponse(code = 404, message = "Not Found", response = FailureResponseBody.class),
+//    @ApiResponse(code = 417, message = "Expectation Failure", response = FailureResponseBody.class),
+//})
 @FunctionalInterface
 public interface UpdateableEndpoint<ENTITY extends Serializable, ID extends Serializable> {
 
@@ -47,7 +50,8 @@ public interface UpdateableEndpoint<ENTITY extends Serializable, ID extends Seri
   //TODO 添加权限点控制
   @Loggable
   @PutMapping(value = "/update", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-  @ApiOperation(value = "Update")
+  @ApiOperation(nickname = "update",value = "Update",httpMethod = "PUT")//,produces =MediaType.APPLICATION_JSON_UTF8_VALUE
+  @ResponseStatus(value = HttpStatus.OK)
   public default ResponseEntity<StatefulBody<ENTITY>> update(@RequestBody ENTITY entity) {
     beforeUpdate(entity);
     ENTITY updated = getRawService().update(entity);

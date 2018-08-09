@@ -10,7 +10,7 @@ import lombok.Data;
  * @author will
  */
 @Data
-@ApiModel(value = "withIdItemBody", description = "带多个Id项的主体")
+@ApiModel(value = "WithIdItemBody", description = "WithIdItemBody")
 public class WithIdItemBody<ID extends Serializable> implements Body {
 
   @ApiModelProperty(value = "items", notes = "Items")

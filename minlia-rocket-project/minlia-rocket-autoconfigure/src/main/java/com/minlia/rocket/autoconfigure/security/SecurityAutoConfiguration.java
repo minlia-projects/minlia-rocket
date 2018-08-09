@@ -4,15 +4,19 @@ import com.minlia.rocket.security.authentication.provider.SecurityAuthentication
 import com.minlia.rocket.security.authentication.service.AuthenticationService;
 import com.minlia.rocket.security.authentication.service.BuiltinStandardAuthenticationService;
 import com.minlia.rocket.security.authentication.service.DummyUserDetailsService;
+import com.minlia.rocket.security.endpoint.BuiltinAuthenticationEndpoint;
+import com.minlia.rocket.security.endpoint.BuiltinMeEndpoint;
 import com.minlia.rocket.security.internal.InternalSecurityConfiguration;
 import com.minlia.rocket.security.security.jwt.TokenProvider;
 import com.minlia.rocket.security.security.jwt.extractor.JwtHeaderTokenExtractor;
 import com.minlia.rocket.security.security.jwt.extractor.TokenExtractor;
+import com.minlia.rocket.security.user.BuiltinUserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -37,6 +41,18 @@ public class SecurityAutoConfiguration {
 
 
   public SecurityAutoConfiguration() {
+  }
+
+  @ConditionalOnMissingBean
+  @Bean
+  public BuiltinAuthenticationEndpoint builtinAuthenticationEndpoint() {
+    return new BuiltinAuthenticationEndpoint();
+  }
+
+  @ConditionalOnMissingBean
+  @Bean
+  public BuiltinMeEndpoint builtinMeEndpoint() {
+    return new BuiltinMeEndpoint();
   }
 
   @ConditionalOnMissingBean
@@ -88,6 +104,7 @@ public class SecurityAutoConfiguration {
 
   @Configuration
   @Import({InternalSecurityConfiguration.class})
+  @ComponentScan(basePackageClasses = {BuiltinUserMapper.class})
   public static class TheInternalSecurityConfiguration {
 
     public TheInternalSecurityConfiguration() {

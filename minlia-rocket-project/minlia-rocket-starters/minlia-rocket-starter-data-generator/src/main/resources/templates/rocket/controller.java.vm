@@ -1,0 +1,56 @@
+package ${package.Controller};
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+import com.minlia.rocket.data.interfaces.IRawService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import com.minlia.rocket.abstraction.service.ConditionalService;
+import com.minlia.rocket.abstraction.service.PageableConditionalService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.annotation.Resource;
+import ${package.Entity}.${entity};
+import ${package.Service}.${table.serviceName};
+import ${cfg.bodyPackage}.${entity}QueryRequestBody;
+import ${cfg.bodyPackage}.${entity}PageableQueryRequestBody;
+
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+
+/**
+ * @description: $!{table.comment}管理接口
+ * @since: ${cfg.copyright} ${cfg.year}
+ * @createTime: ${cfg.createTime}
+ * @author: ${author}
+ * @version: ${cfg.version}
+ */
+@RestController
+@RequestMapping("/${cfg.apiPrefix}/v1/${cfg.resPrefix}#if(${package.ModuleName})/${package.ModuleName}#end/${table.entityPath}")
+#if(${superControllerClass})
+public class ${table.controllerName} implements ${superControllerClass}<${entity},Long,${entity}QueryRequestBody,${entity}PageableQueryRequestBody> {
+
+
+@Autowired
+private ${table.serviceName} batisService;
+
+
+@Override
+public IRawService<${entity}, Long> getRawService() {
+    return batisService;
+    }
+
+@Override
+public ConditionalService<${entity}, ${entity}QueryRequestBody> getConditionalService() {
+    return batisService;
+}
+
+    @Override
+    public PageableConditionalService<${entity}, ${entity}PageableQueryRequestBody> getPageableConditionalService() {
+        return batisService;
+    }
+#else
+public class ${table.controllerName} {
+#end
+	
+}

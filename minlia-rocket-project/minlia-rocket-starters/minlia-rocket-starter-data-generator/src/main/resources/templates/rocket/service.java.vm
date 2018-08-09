@@ -1,0 +1,16 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+import ${cfg.bodyPackage}.${entity}QueryRequestBody;
+import ${cfg.bodyPackage}.${entity}PageableQueryRequestBody;
+/**
+ * @description: $!{table.comment}服务类
+ * @copyright: ${cfg.copyright} ${cfg.year}
+ * @createTime: ${cfg.createTime}
+ * @author: ${author}
+ * @version: ${cfg.version}
+ */
+public interface ${table.serviceName} extends ${superServiceClass}<${entity},Long,${entity}QueryRequestBody,${entity}PageableQueryRequestBody> {
+	
+}

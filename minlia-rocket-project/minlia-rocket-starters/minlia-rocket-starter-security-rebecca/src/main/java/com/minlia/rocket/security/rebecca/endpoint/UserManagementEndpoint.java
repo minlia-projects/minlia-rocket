@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,8 +37,12 @@ import org.springframework.web.bind.annotation.RestController;
     @ApiResponse(code = 403, message = "Forbidden", response = StatefulBody.class),
     @ApiResponse(code = 417, message = "Expectation Failure", response = StatefulBody.class),
 })
+@ConditionalOnProperty(
+    prefix = "system.security",
+    name = {"enabled"},
+    havingValue = "true"
+)
 @RequestMapping("/api/v1/security/rebecca/user-management")
-
 public class UserManagementEndpoint {
 
   @Autowired
@@ -63,7 +68,7 @@ public class UserManagementEndpoint {
 //    UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
 //        .getPrincipal();
 //    User u = userJpaService.findByUsername(user.getUsername());
-////    if (!new BCryptPasswordEncoder().matches(password, u.getPassword())) {
+////    if (!new BCryptPasswordEncoder().matches(password, u.getCredential())) {
 ////      return new ResultUtil<Object>().setErrorMsg("Invalid password");
 ////    }
 ////    return new ResultUtil<Object>().setData(null);
@@ -132,7 +137,7 @@ public class UserManagementEndpoint {
 ////      redisTemplate.delete("user::" + u.getUsername());
 //    }
 //
-//    u.setPassword(old.getPassword());
+//    u.setCredential(old.getCredential());
 //    User user = userJpaService.update(u);
 //    if (user == null) {
 //      return new ResultUtil<Object>().setErrorMsg("修改失败");
@@ -165,7 +170,7 @@ public class UserManagementEndpoint {
 //
 //    User old = userJpaService.get(id);
 //
-//    if (!new BCryptPasswordEncoder().matches(password, old.getPassword())) {
+//    if (!new BCryptPasswordEncoder().matches(password, old.getCredential())) {
 //      return new ResultUtil<Object>().setErrorMsg("旧密码不正确");
 //    }
 //
@@ -175,7 +180,7 @@ public class UserManagementEndpoint {
 //    }
 //
 //    String newEncryptPass = new BCryptPasswordEncoder().encode(newPass);
-//    old.setPassword(newEncryptPass);
+//    old.setCredential(newEncryptPass);
 //    User user = userJpaService.update(old);
 //    if (user == null) {
 //      return new ResultUtil<Object>().setErrorMsg("修改失败");
@@ -198,7 +203,7 @@ public class UserManagementEndpoint {
 //    for (User u : page.getContent()) {
 //      List<Role> list = userRoleBatisService.findByUserId(u.getId());
 //      u.setRoles(list);
-//      u.setPassword(null);
+//      u.setCredential(null);
 //    }
 //    return new ResultUtil<Page<User>>().setData(page);
 //  }
@@ -209,7 +214,7 @@ public class UserManagementEndpoint {
 //  public Result<Object> regist(@ModelAttribute User u,
 //      @RequestParam(required = false) String[] roles) {
 //
-//    if (StrUtil.isBlank(u.getUsername()) || StrUtil.isBlank(u.getPassword())) {
+//    if (StrUtil.isBlank(u.getUsername()) || StrUtil.isBlank(u.getCredential())) {
 //      return new ResultUtil<Object>().setErrorMsg("Required field empty");
 //    }
 //
@@ -219,8 +224,8 @@ public class UserManagementEndpoint {
 //    //删除缓存
 ////    redisTemplate.delete("user::" + u.getUsername());
 //
-//    String encryptPass = new BCryptPasswordEncoder().encode(u.getPassword());
-//    u.setPassword(encryptPass);
+//    String encryptPass = new BCryptPasswordEncoder().encode(u.getCredential());
+//    u.setCredential(encryptPass);
 //    User user = userJpaService.save(u);
 //    if (user == null) {
 //      return new ResultUtil<Object>().setErrorMsg("Failed to create user");

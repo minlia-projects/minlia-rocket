@@ -1,11 +1,12 @@
 package com.minlia.rocket.security.rebecca.service.jpa;
 
 import com.minlia.rocket.data.jpa.abstraction.service.AbstractJpaService;
+import com.minlia.rocket.security.rebecca.body.PermissionPageableQueryRequestBody;
 import com.minlia.rocket.security.rebecca.body.PermissionQueryRequestBody;
 import com.minlia.rocket.security.rebecca.entity.Permission;
 import java.util.List;
 
-public interface PermissionJpaService extends AbstractJpaService<Permission,Long,PermissionQueryRequestBody> {
+public interface PermissionJpaService extends AbstractJpaService<Permission,Long,PermissionQueryRequestBody,PermissionPageableQueryRequestBody> {
 
     /**
      * 通过层级查找

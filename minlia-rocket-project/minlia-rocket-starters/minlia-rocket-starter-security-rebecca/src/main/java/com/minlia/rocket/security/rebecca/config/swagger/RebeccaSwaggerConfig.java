@@ -5,14 +5,19 @@ import org.springframework.context.annotation.Bean;
 import springfox.documentation.spring.web.plugins.Docket;
 
 /**
- *
  * @author will
  */
 public class RebeccaSwaggerConfig extends AbstractSwaggerConfig {
 
   @Bean
-  public Docket rebeccaV1SwaggerDocket(){
-    return createNewDocket("Rebecca","/api/v1/security/rebecca/.*");
+  public Docket rebeccaManageSwaggerDocket() {
+    return createNewDocket("-Rebecca-Api-", "/api/v1/security/rebecca/.*");
   }
+
+  @Bean
+  public Docket rebeccaOpenSwaggerDocket() {
+    return createNewDocket("-Rebecca-Open-Api-", "/api/v1/open/auth/builtin/.*");
+  }
+
 
 }

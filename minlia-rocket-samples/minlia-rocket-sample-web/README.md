@@ -1,3 +1,15 @@
+### Release plan
+
+使用Maven的profile加resource filter功能，进行指定profile进行发布
+
+#### preparing environment  
+
+mvn clean package -P mysql
+#将前端发布后的内容置于src/main/resources/static/目录
+scp -P8022 target/*.war tomcat_ro@202.82.101.179:/tomcat_remote_onboard/TOMCAT/ROOT.war
+
+
+
 ### Environment Setup
 
 #### Setup JDK 8
@@ -32,7 +44,7 @@ mvnw spring-boot:run -DskipITs=true -DskipTests=true -Dmaven.test.skip=true -Ddo
 
 #### On MacOS or Linux OS 
 ```
-~/.bashrc and ~/.bash_profile are scripts that might be executed when bash is invoked. The ~/.bashrc file gets executed when you run bash using an interactive shell that is not a login shell. The ~/.bash_profile only gets executed during a login shell. What does this all mean? The paragraphs below explains interactive shells, login shells, .bashrc, .bash_profile and other bash scripts that are executed during login.
+~/.bashrc and ~/.bash_profile are scripts that might be executed when bash is invoked. The ~/.bashrc file gets executed when you run bash using an interactive shell that is not a principal shell. The ~/.bash_profile only gets executed during a principal shell. What does this all mean? The paragraphs below explains interactive shells, principal shells, .bashrc, .bash_profile and other bash scripts that are executed during principal.
 ```
 
 Create alias in bash_profile, then we can execute these commands everywhere.

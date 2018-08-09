@@ -1,13 +1,14 @@
 package com.minlia.rocket.security.rebecca.service.batis;
 
 import com.minlia.rocket.data.batis.abstraction.service.AbstractBatisService;
+import com.minlia.rocket.security.rebecca.body.PermissionPageableQueryRequestBody;
 import com.minlia.rocket.security.rebecca.body.PermissionQueryRequestBody;
 import com.minlia.rocket.security.rebecca.entity.Permission;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface PermissionBatisService extends
-    AbstractBatisService<Permission,Long, PermissionQueryRequestBody> {
+    AbstractBatisService<Permission,Long, PermissionQueryRequestBody,PermissionPageableQueryRequestBody> {
 
   /**
    * 通过用户id获取

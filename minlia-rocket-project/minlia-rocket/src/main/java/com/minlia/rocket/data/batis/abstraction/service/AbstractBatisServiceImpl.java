@@ -2,9 +2,11 @@ package com.minlia.rocket.data.batis.abstraction.service;
 
 import com.google.common.collect.Lists;
 import com.minlia.rocket.abstraction.service.ConditionalService;
+import com.minlia.rocket.abstraction.service.PageableConditionalService;
 import com.minlia.rocket.data.adapter.PageResponseBodyAdapter;
-import com.minlia.rocket.data.body.AbstractQueryRequestBody;
 import com.minlia.rocket.data.body.PageResponseBody;
+import com.minlia.rocket.data.body.PageableQueryRequestBody;
+import com.minlia.rocket.data.body.QueryRequestBody;
 import com.minlia.rocket.data.body.ToggleRequestBody;
 import com.minlia.rocket.data.interfaces.AbstractRawService;
 import java.io.Serializable;
@@ -19,11 +21,12 @@ import org.springframework.util.CollectionUtils;
 /**
  * @author will
  */
-public abstract class AbstractBatisServiceImpl<ENTITY extends Serializable, ID extends Serializable, QUERY extends AbstractQueryRequestBody>
+public abstract class AbstractBatisServiceImpl<ENTITY extends Serializable, ID extends Serializable, QUERY extends QueryRequestBody, PAGEABLE_QUERY extends PageableQueryRequestBody>
     extends AbstractRawService<ENTITY, ID>
     implements
-    AbstractBatisService<ENTITY, ID, QUERY>,
-    ConditionalService<ENTITY, QUERY> {
+    AbstractBatisService<ENTITY, ID, QUERY, PAGEABLE_QUERY>,
+    ConditionalService<ENTITY, QUERY>,
+    PageableConditionalService<ENTITY, PAGEABLE_QUERY> {
 
 
   /**
@@ -158,17 +161,18 @@ public abstract class AbstractBatisServiceImpl<ENTITY extends Serializable, ID e
 
 
   @Override
-  public PageResponseBody<ENTITY> findAllByCondition(QUERY queryRequestBody,
+  public PageResponseBody<ENTITY> findAllByCondition(PAGEABLE_QUERY queryRequestBody,
       Pageable pageable) {
     com.baomidou.mybatisplus.plugins.Page<ENTITY> page = new com.baomidou.mybatisplus.plugins.Page<ENTITY>();
     //当jpa oneBasedIndexParameter时需要+1
-    page.setCurrent(pageable.getPageNumber() + 1);
+    page.setCurrent(pageable.getPageNumber());// + 1
     page.setSize(pageable.getPageSize());
 
     page.setAscs(getSortPropertiesList(pageable, Direction.ASC));
     page.setDescs(getSortPropertiesList(pageable, Direction.DESC));
     com.baomidou.mybatisplus.plugins.Page<ENTITY> pagedResult = page
-        .setRecords(getBatisDao().selectPage(page, getFindAllSpecification(queryRequestBody)));
+        .setRecords(
+            getBatisDao().selectPage(page, getFindAllPageableSpecification(queryRequestBody)));
     return PageResponseBodyAdapter.adapt(pagedResult);
   }
 

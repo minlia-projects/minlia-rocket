@@ -1,0 +1,30 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import ${superServiceImplClassPackage};
+import ${cfg.bodyPackage}.${entity}QueryRequestBody;
+import ${cfg.bodyPackage}.${entity}PageableQueryRequestBody;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.minlia.rocket.data.batis.abstraction.AbstractMapper;
+
+/**
+ * @description: $!{table.comment}服务实现类
+ * @copyright: ${cfg.copyright} ${cfg.year}
+ * @createTime: ${cfg.createTime}
+ * @author: ${author}
+ * @version: ${cfg.version}
+ */
+@Service
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${entity},Long,${entity}QueryRequestBody,${entity}PageableQueryRequestBody> implements ${table.serviceName} {
+
+@Autowired
+private ${table.mapperName} dao;
+
+@Override
+public AbstractMapper<${entity}> getBatisDao() {
+    return dao;
+}
+}

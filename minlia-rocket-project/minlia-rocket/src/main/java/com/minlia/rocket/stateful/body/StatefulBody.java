@@ -17,6 +17,9 @@ package com.minlia.rocket.stateful.body;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.minlia.rocket.data.body.PageResponseBody;
+import com.minlia.rocket.stateful.body.impl.FailureResponseBody;
+import com.minlia.rocket.stateful.body.impl.SuccessResponseBody;
 import com.minlia.rocket.stateful.generator.SnowFlakeUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -31,7 +34,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "statefulBody", description = "StatefulBody")
+@ApiModel(value = "StatefulBody", description = "StatefulBody",subTypes = {ApiResponseBody.class,FailureResponseBody.class,SuccessResponseBody.class,PageResponseBody.class})
 public class StatefulBody<T> implements Body {
 
   public static final String SUCCESS_MESSAGE = "OK";

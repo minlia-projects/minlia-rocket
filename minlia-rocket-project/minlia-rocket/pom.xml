@@ -183,6 +183,26 @@
       <artifactId>commons-collections4</artifactId>
     </dependency>
 
+
+    <!-- MapStruct -->
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-jdk8</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+
+
+    <dependency>
+      <groupId>io.github.benas</groupId>
+      <artifactId>random-beans</artifactId>
+    </dependency>
+
   </dependencies>
 
 

@@ -1,0 +1,21 @@
+package ${cfg.bodyPackage};
+
+import ${package.Entity}.${entity};
+import io.swagger.annotations.ApiModel;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+/**
+ * @description: $!{table.comment}QueryRequestBody
+ * @copyright: ${cfg.copyright} ${cfg.year}
+ * @createTime: ${cfg.createTime}
+ * @author: ${author}
+ * @version: ${cfg.version}
+ */
+@Data
+@Accessors(chain = true)
+@ApiModel(value = "${entity}QueryRequestBody",subTypes = {${entity}PageableQueryRequestBody.class})
+public class ${entity}QueryRequestBody implements com.minlia.rocket.data.body.QueryRequestBody<${entity}> {
+
+
+}

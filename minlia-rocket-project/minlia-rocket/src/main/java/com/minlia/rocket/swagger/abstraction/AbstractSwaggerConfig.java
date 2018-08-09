@@ -2,6 +2,7 @@ package com.minlia.rocket.swagger.abstraction;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import springfox.documentation.annotations.ApiIgnore;
@@ -40,6 +41,7 @@ public class AbstractSwaggerConfig {
         .securitySchemes(newArrayList(apiKey))
         .securityContexts(newArrayList(securityContext))
         .apiInfo(apiInfo)
+        .useDefaultResponseMessages(false)
         .ignoredParameterTypes(ApiIgnore.class);
 
     return docket;

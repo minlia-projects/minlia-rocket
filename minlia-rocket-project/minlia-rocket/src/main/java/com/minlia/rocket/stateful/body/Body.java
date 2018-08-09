@@ -17,6 +17,8 @@ package com.minlia.rocket.stateful.body;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.minlia.rocket.data.body.PageResponseBody;
+import io.swagger.annotations.ApiModel;
 
 
 /**
@@ -26,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 //@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE, creatorVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@ApiModel(value = "Body", description = "Body",subTypes = {StatefulBody.class,ApiRequestBody.class,PageResponseBody.class,WithIdBody.class,WithIdItemBody.class,WithResultBody.class,WithNameRequestBody.class,WithItemsBody.class})
 public interface Body extends java.io.Serializable {
 
 }

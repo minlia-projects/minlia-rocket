@@ -8,7 +8,7 @@ import lombok.Data;
  * @author will
  */
 @Data
-@ApiModel(value = "withResultBody", description = "带结果的主体")
+@ApiModel(value = "WithResultBody", description = "WithResultBody")
 public class WithResultBody<T> implements Body {
 
   /**

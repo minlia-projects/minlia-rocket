@@ -3,6 +3,7 @@ package com.minlia.rocket.security.rebecca.service.batis.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.minlia.rocket.data.batis.abstraction.AbstractMapper;
 import com.minlia.rocket.data.batis.abstraction.service.AbstractBatisServiceImpl;
+import com.minlia.rocket.security.rebecca.body.PermissionPageableQueryRequestBody;
 import com.minlia.rocket.security.rebecca.body.PermissionQueryRequestBody;
 import com.minlia.rocket.security.rebecca.dao.PermissionDao;
 import com.minlia.rocket.security.rebecca.entity.Permission;
@@ -17,12 +18,11 @@ import org.springframework.util.StringUtils;
  */
 @Transactional
 public class PermissionBatisServiceImpl extends
-    AbstractBatisServiceImpl<Permission, Long, PermissionQueryRequestBody> implements
+    AbstractBatisServiceImpl<Permission, Long, PermissionQueryRequestBody,PermissionPageableQueryRequestBody> implements
     PermissionBatisService {
 
   @Autowired
   private PermissionDao permissionDao;
-  ;
 
   @Override
   public List<Permission> findByUserId(Long userId) {
@@ -45,6 +45,12 @@ public class PermissionBatisServiceImpl extends
   @Override
   public EntityWrapper<Permission> getFindAllSpecification(
       PermissionQueryRequestBody queryRequestBody) {
+    return this.getConditions(queryRequestBody);
+  }
+
+  @Override
+  public EntityWrapper<Permission> getFindAllPageableSpecification(
+      PermissionPageableQueryRequestBody queryRequestBody) {
     return this.getConditions(queryRequestBody);
   }
 
