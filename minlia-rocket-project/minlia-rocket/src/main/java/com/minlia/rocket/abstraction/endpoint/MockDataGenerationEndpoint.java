@@ -1,34 +1,24 @@
 package com.minlia.rocket.abstraction.endpoint;
 
-import com.google.common.collect.Lists;
 import com.minlia.rocket.constants.EnvironmentProperties;
-import com.minlia.rocket.context.EnvironmentHolder;
 import com.minlia.rocket.data.entity.WithIdEntity;
 import com.minlia.rocket.data.interfaces.IRawService;
 import com.minlia.rocket.loggable.annotation.Loggable;
 import com.minlia.rocket.stateful.Responses;
 import com.minlia.rocket.stateful.body.StatefulBody;
-import com.minlia.rocket.stateful.body.WithIdBody;
-import com.minlia.rocket.stateful.body.WithIdItemBody;
-import com.minlia.rocket.stateful.body.WithItemsBody;
-import com.minlia.rocket.stateful.body.WithResultBody;
 import com.minlia.rocket.stateful.body.impl.SuccessResponseBody;
-import com.sun.deploy.util.ReflectionUtil;
+import io.github.benas.randombeans.EnhancedRandomBuilder;
+import io.github.benas.randombeans.api.EnhancedRandom;
 import io.swagger.annotations.ApiOperation;
 import java.io.Serializable;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import io.github.benas.randombeans.EnhancedRandomBuilder;
-import io.github.benas.randombeans.api.EnhancedRandom;
 /**
  * @author will
  */
@@ -66,8 +56,11 @@ public interface MockDataGenerationEndpoint<ENTITY extends Serializable, ID exte
       beforeMocked(entityGenerated);
       WithIdEntity<ID> idEntity=(WithIdEntity<ID>)entityGenerated;
 
-      idEntity
-      ENTITY created = getRawService().save(idEntity);
+      idEntity.setId(null);
+
+      ENTITY entityGeneratedWithIdChanged=(ENTITY)idEntity;
+
+      ENTITY created = getRawService().save(entityGeneratedWithIdChanged);
 
 //      WithIdBody withIdBody=new WithIdBody();
 //

@@ -18,7 +18,7 @@ public abstract class WithIdEntity<ID extends Serializable> implements Serializa
   public abstract ID getId();
 
   public abstract ID setId(ID id);
-  
+
   @Override
   @Transient
   @org.springframework.data.annotation.Transient
