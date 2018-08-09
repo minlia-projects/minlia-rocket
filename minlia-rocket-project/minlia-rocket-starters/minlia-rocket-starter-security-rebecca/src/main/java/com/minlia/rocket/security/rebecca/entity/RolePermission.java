@@ -18,7 +18,7 @@ import lombok.Data;
 @Entity
 @Table(name = "map_role_permission")
 @TableName("map_role_permission")
-public class RolePermission extends AbstractEntity {
+public class RolePermission extends AbstractEntity<Long> {
 
   private static final long serialVersionUID = 1L;
   @Id

@@ -21,7 +21,7 @@ import lombok.Data;
 @Entity
 @Table(name = "role")
 @TableName("role")
-public class Role extends AbstractEntity {
+public class Role extends AbstractEntity<Long> {
 
   private static final long serialVersionUID = 1L;
   @Id
