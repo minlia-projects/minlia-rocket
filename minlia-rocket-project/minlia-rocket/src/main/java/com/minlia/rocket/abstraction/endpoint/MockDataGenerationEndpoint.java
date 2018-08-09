@@ -64,8 +64,10 @@ public interface MockDataGenerationEndpoint<ENTITY extends Serializable, ID exte
       ENTITY entityGenerated = (ENTITY)enhancedRandom.nextObject(entity.getClass());
 
       beforeMocked(entityGenerated);
+      WithIdEntity<ID> idEntity=(WithIdEntity<ID>)entityGenerated;
 
-      ENTITY created = getRawService().save(entityGenerated);
+      idEntity
+      ENTITY created = getRawService().save(idEntity);
 
 //      WithIdBody withIdBody=new WithIdBody();
 //
