@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -71,7 +72,8 @@ public class Translation extends AbstractEntity<Long> {
     return id;
   }
 
-  public void setId(long id) {
+  @Override
+  public void setId(Long id) {
     this.id = id;
   }
 

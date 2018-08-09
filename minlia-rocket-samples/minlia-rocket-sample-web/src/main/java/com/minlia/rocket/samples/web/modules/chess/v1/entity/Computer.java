@@ -24,7 +24,7 @@ import javax.persistence.Id;
 @TableName(value="computer",resultMap="BaseResultMap")
 @Table(name = "computer")
 @Entity
-public class Computer extends AbstractEntity {
+public class Computer extends AbstractEntity<Long> {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,10 +35,12 @@ public class Computer extends AbstractEntity {
     private String content;
     private String name;
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

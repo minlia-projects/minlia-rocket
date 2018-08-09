@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @TableName(value = "merchant", resultMap = "BaseResultMap")
 @Table(name = "merchant")
 @Entity
-public class Merchant extends AbstractEntity {
+public class Merchant extends AbstractEntity<Long> {
 
   private static final long serialVersionUID = 1L;
 
@@ -39,6 +39,7 @@ public class Merchant extends AbstractEntity {
     return id;
   }
 
+  @Override
   public void setId(Long id) {
     this.id = id;
   }
