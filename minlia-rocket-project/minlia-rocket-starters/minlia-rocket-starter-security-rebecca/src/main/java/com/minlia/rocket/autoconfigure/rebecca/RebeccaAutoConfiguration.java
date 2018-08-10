@@ -106,12 +106,4 @@ public class RebeccaAutoConfiguration {
   }
 
 
-
-
-//  @Configuration
-//  @ComponentScan(value = {"com.minlia.rocket.security.rebecca.endpoint"})
-//  public static class InternalRebeccaEndpointConfig {
-//
-//  }
-
 }

@@ -7,7 +7,9 @@ import com.minlia.rocket.enumeration.Status;
 import com.minlia.rocket.security.rebecca.body.UserPageableQueryRequestBody;
 import com.minlia.rocket.security.rebecca.body.UserQueryRequestBody;
 import com.minlia.rocket.security.rebecca.dao.PermissionDao;
+import com.minlia.rocket.security.rebecca.dao.UserRoleDao;
 import com.minlia.rocket.security.rebecca.entity.Permission;
+import com.minlia.rocket.security.rebecca.entity.Role;
 import com.minlia.rocket.security.rebecca.entity.User;
 import com.minlia.rocket.security.rebecca.repository.UserRepository;
 import com.minlia.rocket.security.rebecca.service.jpa.UserJpaService;
@@ -38,8 +40,8 @@ public class UserJpaServiceImpl implements UserJpaService {
   @Autowired
   private UserRepository userRepository;
 
-//    @Autowired
-//    private UserRoleDao userRoleMapper;
+    @Autowired
+    private UserRoleDao userRoleMapper;
 
   @Autowired
   private PermissionDao permissionDao;
@@ -57,8 +59,8 @@ public class UserJpaServiceImpl implements UserJpaService {
     List<User> list = userRepository.findByUsername(username);
     if (list != null && list.size() > 0) {
       User user = list.get(0);
-//            List<Role> roleList = userRoleMapper.findByUserId(user.getId());
-//            user.setRoles(roleList);
+            List<Role> roleList = userRoleMapper.findByUserId(user.getId());
+            user.setRoles(roleList);
       List<Permission> permissionList = permissionDao.findByUserId(user.getId());
       user.setPermissions(permissionList);
       return user;

@@ -15,7 +15,7 @@ spring:
     continue-on-error: true
     initialization-mode: always
 #    schema: classpath:/data/schema-mysql.sql
-#    data: classpath:/data/data-mysql.sql
+    data: classpath:/data/data-mysql.sql
     url: jdbc:log4jdbc:mysql://127.0.0.1:3306/a_minlia_rocket_dev_v1?createDatabaseIfNotExist=true&useUnicode=true&useUnicode=true&characterEncoding=utf8&autoReconnect=true&verifyServerCertificate=false&useSSL=false&sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false&allowMultiQueries=true
     driver-class-name: net.sf.log4jdbc.DriverSpy
     username: root
@@ -33,7 +33,7 @@ spring:
     # 自动生成表结构
     generate-ddl: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
 
 
 ## Mybatis-plus

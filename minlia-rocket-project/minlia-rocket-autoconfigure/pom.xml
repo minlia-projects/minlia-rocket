@@ -71,6 +71,12 @@
       <optional>true</optional>
     </dependency>
 
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-bean-validators</artifactId>
+      <optional>true</optional>
+    </dependency>
+
     <!--for mybatis starter-->
     <dependency>
       <groupId>org.mybatis</groupId>

@@ -30,7 +30,7 @@ import javax.persistence.Id;
 @TableName(value="${table.name}",resultMap="BaseResultMap")
 @Table(name = "${table.name}")
 @Entity
-public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
+public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}>#else<Long>#end {
 #elseif(${activeRecord})
 public class ${entity} extends Model<${entity}> {
 #else

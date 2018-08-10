@@ -33,6 +33,7 @@ public interface AuthenticationService {
     PasswordEncoder passwordEncoder;
     passwordEncoder = ContextHolder.getContext().getBean(PasswordEncoder.class);
 
+
     Boolean isPasswordEmpty = StringUtils.isEmpty(authentication.getCredentials().toString());
 
     //密码是否为空

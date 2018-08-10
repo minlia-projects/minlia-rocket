@@ -17,7 +17,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.util.StopWatch;
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -41,6 +43,8 @@ import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfi
 @ConditionalOnClass({Swagger2DocumentationConfiguration.class,
     ApiOperation.class})
 @EnableSwagger2
+@Import(BeanValidatorPluginsConfiguration.class)
+
 @Slf4j
 public class SwaggerAutoConfiguration {
 
