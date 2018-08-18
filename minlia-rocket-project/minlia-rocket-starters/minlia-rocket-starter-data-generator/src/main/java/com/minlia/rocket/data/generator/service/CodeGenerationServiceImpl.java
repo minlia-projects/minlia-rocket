@@ -55,11 +55,14 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
       version = body.getVersion();
     }
 
-//    final String projectBase = "./target/code_generated";
-     String projectBase = body.getProjectBasePath();
+     String projectBaseTmp = "./target/code_generated";
+//     String projectBase = body.getProjectBasePath();
 
-    File projectBaseFile= new File(projectBase);
-    projectBase=projectBaseFile.getAbsolutePath();
+    if (!StringUtils.isEmpty(body.getProjectBasePath())) {
+      projectBaseTmp = body.getProjectBasePath();
+    }
+
+    final String projectBase =projectBaseTmp;
 
     String author = "will";
 
@@ -70,8 +73,11 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     // 全局配置
     GlobalConfig gc = new GlobalConfig();
 
-    String outputDir=projectBase + String.format("%ssrc%smain%sjava%s",File.separator,File.separator,File.separator,File.separator);
+    String outputDir=projectBase + "/src/main/java/";
+
     gc.setOutputDir(outputDir);
+
+
 
     gc.setFileOverride(true);
     gc.setActiveRecord(false);
@@ -111,7 +117,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
 
     if (null != body.getTablePrefixes() && body.getTablePrefixes().size() > 0) {
       String[] entityArray = new String[body.getTablePrefixes().size()];
-      strategy.setTablePrefix(body.getTablePrefixes().toArray(entityArray));// 此处可以修改为您的表前缀
+      strategy.setTablePrefix(body.getEntitiesInclude().toArray(entityArray));// 此处可以修改为您的表前缀
     }
 
 
@@ -203,17 +209,13 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     // 自定义 vue文件 生成
     List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
 
-    String finalProjectBase = projectBase;
-
-   String srcMainJava= String.format("%ssrc%smain%sjava%s",File.separator,File.separator,File.separator,File.separator);
-   String srcMainResourcesDao= String.format("%ssrc%smain%sresources%sdao%s",File.separator,File.separator,File.separator,File.separator,File.separator);
-
     focList.add(new FileOutConfig("/templates/rocket/vue.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
         String vueFileName = tableInfo.getEntityName().substring(0, 1).toLowerCase() +
             tableInfo.getEntityName().substring(1, tableInfo.getEntityName().length()) + ".vue";
-        return finalProjectBase + File.separator+"pages"+File.separator + resPrefix + File.separator + vueFileName;
+        String filename= projectBase + "/pages/" + resPrefix + "/" + vueFileName;
+        return asOsRelatedFullPath(filename);
       }
     });
 
@@ -221,9 +223,12 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/repository.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return finalProjectBase + srcMainJava+ pc.getParent().replaceAll("\\.", File.separator)
-            + File.separator+"repository"+File.separator + tableInfo.getEntityName()
+        String filename= projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+            + "/repository/" + tableInfo.getEntityName()
             + "Repository.java";
+
+
+        return asOsRelatedFullPath(filename);
       }
     });
 
@@ -231,9 +236,12 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/jpaService.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return finalProjectBase + srcMainJava + pc.getParent().replaceAll("\\.", File.separator)
-            +File.separator+ "service"+File.separator + tableInfo.getEntityName()
+        String filename= projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+            + "/service/" + tableInfo.getEntityName()
             + "JpaService.java";
+
+
+        return asOsRelatedFullPath(filename);
       }
     });
 
@@ -241,9 +249,11 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/jpaServiceImpl.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return finalProjectBase + srcMainJava + pc.getParent().replaceAll("\\.", File.separator)
-            + File.separator+"service"+File.separator + tableInfo.getEntityName()
+        String filename=  projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+            + "/service/" + tableInfo.getEntityName()
             + "JpaServiceImpl.java";
+
+        return asOsRelatedFullPath(filename);
       }
     });
 
@@ -252,9 +262,11 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/queryRequestBody.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return finalProjectBase + srcMainJava+ pc.getParent().replaceAll("\\.", File.separator)
-            + File.separator+"body"+File.separator + tableInfo.getEntityName()
+        String filename=  projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+            + "/body/" + tableInfo.getEntityName()
             + "QueryRequestBody.java";
+
+        return asOsRelatedFullPath(filename);
       }
     });
 
@@ -263,9 +275,11 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/pageableQueryRequestBody.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return finalProjectBase + srcMainJava + pc.getParent().replaceAll("\\.", File.separator)
-            + File.separator+"body"+File.separator + tableInfo.getEntityName()
+        String filename=  projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+            + "/body/" + tableInfo.getEntityName()
             + "PageableQueryRequestBody.java";
+
+        return asOsRelatedFullPath(filename);
       }
     });
 
@@ -273,8 +287,10 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return finalProjectBase +srcMainResourcesDao + tableInfo.getEntityName()
+        String filename=  projectBase + "//src//main//resources//dao//" + tableInfo.getEntityName()
             + "Dao.xml";
+
+        return asOsRelatedFullPath(filename);
       }
     });
 
@@ -405,5 +421,15 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     return dataSourceConfig;
 
   }
+
+  private String asOsRelatedFullPath(String path){
+    String ret= path.replace("//",File.separator);
+    ret=ret.replaceAll("/",File.separator);
+    return ret;
+  }
+
+
+
+
 
 }
