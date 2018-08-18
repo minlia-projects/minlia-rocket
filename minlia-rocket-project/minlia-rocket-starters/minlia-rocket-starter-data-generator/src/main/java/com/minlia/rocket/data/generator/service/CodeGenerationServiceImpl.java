@@ -91,7 +91,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
 //        strategy.setInclude(new String[]{"t_sys_king","t_web_article_category","t_web_banner","t_web_config","t_web_friend"}); // 需要生成的表
 //    strategy.setInclude(new String[]{"King","Queen","Rook","Bishop","Knight","Pawn"}); // 需要生成的表
-    strategy.setInclude(new String[]{"Computer"}); // 需要生成的表
+    strategy.setInclude(new String[]{"Tokeys"}); // 需要生成的表
 
     strategy.setTableFillList(tableFillList);
     // strategy.setExclude(new String[]{"test"}); // 排除生成的表
@@ -121,7 +121,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
 
     // 包配置
     PackageConfig pc = new PackageConfig();
-    pc.setParent("com.minlia.rocket.samples.web.modules.chess");
+    pc.setParent("com.minlia.rocket.samples.web.modules.tokeys");
     pc.setModuleName("v1");
     pc.setController("endpoint");
     pc.setMapper("dao");
