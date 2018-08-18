@@ -23,7 +23,7 @@ public class CodeGenerationRequestBody implements Body {
   @ApiModelProperty(value = "tablePrefixes", notes = "表前缀" )
   private List<String> tablePrefixes;
 
-  @ApiModelProperty(value = "projectBasePath", notes = "目标项目根目录",example = "./target/code_generated")
+  @ApiModelProperty(value = "projectBasePath", notes = "目标项目根目录",example = "\\target\\code_generated")
   private String projectBasePath;
 
   @ApiModelProperty(value = "entitiesInclude", notes = "生成时包含的表名" )
