@@ -20,6 +20,7 @@ import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.minlia.rocket.data.generator.body.CodeGenerationRequestBody;
 import com.minlia.rocket.data.generator.util.DateUtil;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -55,7 +56,10 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     }
 
 //    final String projectBase = "./target/code_generated";
-    final String projectBase = body.getProjectBasePath();
+     String projectBase = body.getProjectBasePath();
+
+    File projectBaseFile= new File(projectBase);
+    projectBase=projectBaseFile.getAbsolutePath();
 
     String author = "will";
 
@@ -65,7 +69,10 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
 
     // 全局配置
     GlobalConfig gc = new GlobalConfig();
-    gc.setOutputDir(projectBase + "/src/main/java//");
+
+    String outputDir=projectBase + String.format("%ssrc%smain%sjava%s",File.separator,File.separator,File.separator,File.separator);
+    gc.setOutputDir(outputDir);
+
     gc.setFileOverride(true);
     gc.setActiveRecord(false);
     gc.setEnableCache(false);// XML 二级缓存
@@ -104,7 +111,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
 
     if (null != body.getTablePrefixes() && body.getTablePrefixes().size() > 0) {
       String[] entityArray = new String[body.getTablePrefixes().size()];
-      strategy.setTablePrefix(body.getEntitiesInclude().toArray(entityArray));// 此处可以修改为您的表前缀
+      strategy.setTablePrefix(body.getTablePrefixes().toArray(entityArray));// 此处可以修改为您的表前缀
     }
 
 
@@ -196,12 +203,17 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     // 自定义 vue文件 生成
     List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
 
+    String finalProjectBase = projectBase;
+
+   String srcMainJava= String.format("%ssrc%smain%sjava%s",File.separator,File.separator,File.separator,File.separator);
+   String srcMainResourcesDao= String.format("%ssrc%smain%sresources%sdao%s",File.separator,File.separator,File.separator,File.separator,File.separator);
+
     focList.add(new FileOutConfig("/templates/rocket/vue.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
         String vueFileName = tableInfo.getEntityName().substring(0, 1).toLowerCase() +
             tableInfo.getEntityName().substring(1, tableInfo.getEntityName().length()) + ".vue";
-        return projectBase + "/pages/" + resPrefix + "/" + vueFileName;
+        return finalProjectBase + File.separator+"pages"+File.separator + resPrefix + File.separator + vueFileName;
       }
     });
 
@@ -209,8 +221,8 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/repository.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
-            + "/repository/" + tableInfo.getEntityName()
+        return finalProjectBase + srcMainJava+ pc.getParent().replaceAll("\\.", File.separator)
+            + File.separator+"repository"+File.separator + tableInfo.getEntityName()
             + "Repository.java";
       }
     });
@@ -219,8 +231,8 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/jpaService.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
-            + "/service/" + tableInfo.getEntityName()
+        return finalProjectBase + srcMainJava + pc.getParent().replaceAll("\\.", File.separator)
+            +File.separator+ "service"+File.separator + tableInfo.getEntityName()
             + "JpaService.java";
       }
     });
@@ -229,8 +241,8 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/jpaServiceImpl.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
-            + "/service/" + tableInfo.getEntityName()
+        return finalProjectBase + srcMainJava + pc.getParent().replaceAll("\\.", File.separator)
+            + File.separator+"service"+File.separator + tableInfo.getEntityName()
             + "JpaServiceImpl.java";
       }
     });
@@ -240,8 +252,8 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/queryRequestBody.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
-            + "/body/" + tableInfo.getEntityName()
+        return finalProjectBase + srcMainJava+ pc.getParent().replaceAll("\\.", File.separator)
+            + File.separator+"body"+File.separator + tableInfo.getEntityName()
             + "QueryRequestBody.java";
       }
     });
@@ -251,8 +263,8 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/pageableQueryRequestBody.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
-            + "/body/" + tableInfo.getEntityName()
+        return finalProjectBase + srcMainJava + pc.getParent().replaceAll("\\.", File.separator)
+            + File.separator+"body"+File.separator + tableInfo.getEntityName()
             + "PageableQueryRequestBody.java";
       }
     });
@@ -261,7 +273,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return projectBase + "//src//main//resources//dao//" + tableInfo.getEntityName()
+        return finalProjectBase +srcMainResourcesDao + tableInfo.getEntityName()
             + "Dao.xml";
       }
     });
