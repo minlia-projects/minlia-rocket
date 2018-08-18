@@ -1,5 +1,6 @@
 package com.minlia.rocket.data.generator.endpoint;
 
+import com.minlia.rocket.data.generator.body.CodeGenerationRequestBody;
 import com.minlia.rocket.data.generator.service.CodeGenerationService;
 import com.minlia.rocket.loggable.annotation.Loggable;
 import com.minlia.rocket.stateful.Responses;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,8 +32,8 @@ public class CodeGenerationV2Endpoint {
   @ApiOperationSince(value = "2.0.0")
   @ApiOperation(value = "Code Generation", httpMethod = "POST", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public @ResponseBody
-  ResponseEntity<StatefulBody> generation() {
-    codeGenerationService.generation();
+  ResponseEntity<StatefulBody> generation(@RequestBody CodeGenerationRequestBody body) {
+    codeGenerationService.generation(body);
     return Responses.ok(SuccessResponseBody.builder().build());
   }
 }

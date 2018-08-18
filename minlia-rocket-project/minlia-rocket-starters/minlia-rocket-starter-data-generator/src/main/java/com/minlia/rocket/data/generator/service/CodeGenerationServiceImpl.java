@@ -18,6 +18,7 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.minlia.rocket.data.generator.body.CodeGenerationRequestBody;
 import com.minlia.rocket.data.generator.util.DateUtil;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 
@@ -39,16 +41,27 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
   private DataSourceProperties dataSourceProperties;
 
   @Override
-  public void generation() {
+  public void generation(CodeGenerationRequestBody body) {
     log.debug("Starting code generation...");
 
     AutoGenerator mpg = new AutoGenerator();
     final int year = Calendar.getInstance().get(Calendar.YEAR);
     final String createTime = DateUtil.dateToString(new Date(), "yyyy-MM-dd HH:mm:ss");
-    final String version = "1.0";
 
-    final String projectBase = "./target/code_generated";
+    String version = "1.0";
+
+    if (!StringUtils.isEmpty(body.getVersion())) {
+      version = body.getVersion();
+    }
+
+//    final String projectBase = "./target/code_generated";
+    final String projectBase = body.getProjectBasePath();
+
     String author = "will";
+
+    if (!StringUtils.isEmpty(body.getAuthor())) {
+      author = body.getAuthor();
+    }
 
     // 全局配置
     GlobalConfig gc = new GlobalConfig();
@@ -86,12 +99,25 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     final String resPrefix = "endpoint";
     // 策略配置
     StrategyConfig strategy = new StrategyConfig();
-     strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
+    strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
     strategy.setTablePrefix(new String[]{"t_"});// 此处可以修改为您的表前缀
     strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
 //        strategy.setInclude(new String[]{"t_sys_king","t_web_article_category","t_web_banner","t_web_config","t_web_friend"}); // 需要生成的表
 //    strategy.setInclude(new String[]{"King","Queen","Rook","Bishop","Knight","Pawn"}); // 需要生成的表
-    strategy.setInclude(new String[]{"Tokeys"}); // 需要生成的表
+
+
+    if (null != body.getEntitiesInclude() && body.getEntitiesInclude().size() > 0) {
+      String[] entityArray = new String[body.getEntitiesInclude().size()];
+      strategy.setInclude(body.getEntitiesInclude().toArray(entityArray));
+    }
+
+
+//    if (null != body.getEntitiesExclude() && body.getEntitiesExclude().size() > 0) {
+//      String[] entityArray = new String[body.getEntitiesExclude().size()];
+//      strategy.setExclude(body.getEntitiesExclude().toArray(entityArray));
+//    }
+
+//    strategy.setInclude(new String[]{"Tokeys"}); // 需要生成的表
 
     strategy.setTableFillList(tableFillList);
     // strategy.setExclude(new String[]{"test"}); // 排除生成的表
@@ -99,7 +125,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     strategy.setSuperEntityClass("com.minlia.rocket.data.entity.AbstractEntity");
     // 自定义实体，公共字段
     strategy.setSuperEntityColumns(
-        new String[]{  "created_by", "created_date", "last_modified_by",
+        new String[]{"created_by", "created_date", "last_modified_by",
             "last_modified_date", "data_status"});
     // 自定义 mapper 父类
     //strategy.setSuperMapperClass("com.baomidou.demo.TestMapper");
@@ -121,36 +147,44 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
 
     // 包配置
     PackageConfig pc = new PackageConfig();
-    pc.setParent("com.minlia.rocket.samples.web.modules.tokeys");
-    pc.setModuleName("v1");
+
+    if (!StringUtils.isEmpty(body.getParentPackageName())) {
+      pc.setParent(body.getParentPackageName());
+    }
+
+    if (!StringUtils.isEmpty(body.getModuleName())) {
+      pc.setModuleName(body.getModuleName());
+    }
+
+//    pc.setParent("com.minlia.rocket.samples.web.modules.security");
+//    pc.setModuleName("v1");
     pc.setController("endpoint");
     pc.setMapper("dao");
     pc.setXml("dao");
-    pc.setService("service" );
-    pc.setServiceImpl("service" );
-    pc.setEntity("entity" );
+    pc.setService("service");
+    pc.setServiceImpl("service");
+    pc.setEntity("entity");
     mpg.setPackageInfo(pc);
 
-
-    String parentPackageName=pc.getParent();//+(StringUtils.isEmpty(pc.getModuleName())?"":"."+pc.getModuleName());
+    String parentPackageName = pc
+        .getParent();//+(StringUtils.isEmpty(pc.getModuleName())?"":"."+pc.getModuleName());
     // 注入自定义配置，可以在 VM 中使用 cfg.abc 【可无】
+    String finalVersion = version;
     InjectionConfig cfg = new InjectionConfig() {
       @Override
       public void initMap() {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("year", year);
         map.put("copyright", "");
-        map.put("repositoryPackage", parentPackageName+".repository");
-        map.put("bodyPackage", parentPackageName+".body");
+        map.put("repositoryPackage", parentPackageName + ".repository");
+        map.put("bodyPackage", parentPackageName + ".body");
         map.put("createTime", createTime);
-        map.put("version", version);
+        map.put("version", finalVersion);
         map.put("apiPrefix", apiPrefix);
         map.put("resPrefix", resPrefix);
         this.setMap(map);
       }
     };
-
-
 
     // 自定义 vue文件 生成
     List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
@@ -164,64 +198,57 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
       }
     });
 
-
     //自定义Repository生成
     focList.add(new FileOutConfig("/templates/rocket/repository.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return projectBase + "//src//main//java//"+pc.getParent().replaceAll("\\.","/")+"/repository/" + tableInfo.getEntityName()
+        return projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+            + "/repository/" + tableInfo.getEntityName()
             + "Repository.java";
       }
     });
-
-
 
     //自定义JpaService生成
     focList.add(new FileOutConfig("/templates/rocket/jpaService.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return projectBase + "//src//main//java//"+pc.getParent().replaceAll("\\.","/")+"/service/" + tableInfo.getEntityName()
+        return projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+            + "/service/" + tableInfo.getEntityName()
             + "JpaService.java";
       }
     });
-
 
     //自定义JpaService实现类生成
     focList.add(new FileOutConfig("/templates/rocket/jpaServiceImpl.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return projectBase + "//src//main//java//"+pc.getParent().replaceAll("\\.","/")+"/service/" + tableInfo.getEntityName()
+        return projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+            + "/service/" + tableInfo.getEntityName()
             + "JpaServiceImpl.java";
       }
     });
-
-
-
-
-
-
 
     //自定义QueryRequestBody生成
 
     focList.add(new FileOutConfig("/templates/rocket/queryRequestBody.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return projectBase + "//src//main//java//"+pc.getParent().replaceAll("\\.","/")+"/body/" + tableInfo.getEntityName()
+        return projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+            + "/body/" + tableInfo.getEntityName()
             + "QueryRequestBody.java";
       }
     });
-
 
     //自定义PageableQueryRequestBody生成
 
     focList.add(new FileOutConfig("/templates/rocket/pageableQueryRequestBody.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        return projectBase + "//src//main//java//"+pc.getParent().replaceAll("\\.","/")+"/body/" + tableInfo.getEntityName()
+        return projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+            + "/body/" + tableInfo.getEntityName()
             + "PageableQueryRequestBody.java";
       }
     });
-
 
 //    // 调整 xml 生成目录演示
     focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
