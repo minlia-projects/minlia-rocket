@@ -425,7 +425,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
   private String asOsRelatedFullPath(String path){
     String ret= path.replace("//",File.separator);
     ret=ret.replace("/",File.separator);
-    log.info("Generated file path: ",ret);
+    log.debug("Generated file path: {}",ret);
     return ret;
   }
 
