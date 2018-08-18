@@ -20,6 +20,9 @@ public class CodeGenerationRequestBody implements Body {
   @ApiModelProperty(value = "version", notes = "目标代码版本号" ,example = "1.0.0")
   private String version;
 
+  @ApiModelProperty(value = "tablePrefixes", notes = "表前缀" )
+  private List<String> tablePrefixes;
+
   @ApiModelProperty(value = "projectBasePath", notes = "目标项目根目录",example = "./target/code_generated")
   private String projectBasePath;
 

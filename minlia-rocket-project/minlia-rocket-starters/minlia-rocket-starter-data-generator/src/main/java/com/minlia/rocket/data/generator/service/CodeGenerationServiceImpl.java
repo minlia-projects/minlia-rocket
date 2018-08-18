@@ -101,6 +101,13 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     StrategyConfig strategy = new StrategyConfig();
     strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
     strategy.setTablePrefix(new String[]{"t_"});// 此处可以修改为您的表前缀
+
+    if (null != body.getTablePrefixes() && body.getTablePrefixes().size() > 0) {
+      String[] entityArray = new String[body.getTablePrefixes().size()];
+      strategy.setTablePrefix(body.getEntitiesInclude().toArray(entityArray));// 此处可以修改为您的表前缀
+    }
+
+
     strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
 //        strategy.setInclude(new String[]{"t_sys_king","t_web_article_category","t_web_banner","t_web_config","t_web_friend"}); // 需要生成的表
 //    strategy.setInclude(new String[]{"King","Queen","Rook","Bishop","Knight","Pawn"}); // 需要生成的表
