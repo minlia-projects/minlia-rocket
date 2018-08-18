@@ -117,7 +117,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
 
     if (null != body.getTablePrefixes() && body.getTablePrefixes().size() > 0) {
       String[] entityArray = new String[body.getTablePrefixes().size()];
-      strategy.setTablePrefix(body.getEntitiesInclude().toArray(entityArray));// 此处可以修改为您的表前缀
+      strategy.setTablePrefix(body.getTablePrefixes().toArray(entityArray));// 此处可以修改为您的表前缀
     }
 
 
@@ -223,7 +223,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/repository.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        String filename= projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+        String filename= projectBase + "/src/main/java/" + pc.getParent().replaceAll("\\.", "/")
             + "/repository/" + tableInfo.getEntityName()
             + "Repository.java";
 
@@ -236,7 +236,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/jpaService.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        String filename= projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+        String filename= projectBase + "/src/main/java/" + pc.getParent().replaceAll("\\.", "/")
             + "/service/" + tableInfo.getEntityName()
             + "JpaService.java";
 
@@ -245,11 +245,11 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
       }
     });
 
-    //自定义JpaService实现类生成
+//    /自定义JpaService实现类生成
     focList.add(new FileOutConfig("/templates/rocket/jpaServiceImpl.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        String filename=  projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+        String filename=  projectBase + "/src/main/java/" + pc.getParent().replaceAll("\\.", "/")
             + "/service/" + tableInfo.getEntityName()
             + "JpaServiceImpl.java";
 
@@ -262,7 +262,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/queryRequestBody.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        String filename=  projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+        String filename=  projectBase + "/src/main/java/" + pc.getParent().replaceAll("\\.", "/")
             + "/body/" + tableInfo.getEntityName()
             + "QueryRequestBody.java";
 
@@ -275,7 +275,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/rocket/pageableQueryRequestBody.java.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        String filename=  projectBase + "//src//main//java//" + pc.getParent().replaceAll("\\.", "/")
+        String filename=  projectBase + "/src/main/java/" + pc.getParent().replaceAll("\\.", "/")
             + "/body/" + tableInfo.getEntityName()
             + "PageableQueryRequestBody.java";
 
@@ -287,7 +287,7 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
     focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
       @Override
       public String outputFile(TableInfo tableInfo) {
-        String filename=  projectBase + "//src//main//resources//dao//" + tableInfo.getEntityName()
+        String filename=  projectBase + "/src/main/resources/dao/" + tableInfo.getEntityName()
             + "Dao.xml";
 
         return asOsRelatedFullPath(filename);
@@ -424,7 +424,8 @@ public class CodeGenerationServiceImpl implements CodeGenerationService {
 
   private String asOsRelatedFullPath(String path){
     String ret= path.replace("//",File.separator);
-    ret=ret.replaceAll("/",File.separator);
+    ret=ret.replace("/",File.separator);
+    log.info("Generated file path: ",ret);
     return ret;
   }
 
