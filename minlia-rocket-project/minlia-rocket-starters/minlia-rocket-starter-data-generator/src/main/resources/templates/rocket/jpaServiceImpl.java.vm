@@ -5,6 +5,21 @@ import com.minlia.rocket.data.jpa.abstraction.AbstractRepository;
 import ${cfg.repositoryPackage}.${entity}Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ${cfg.bodyPackage}.${entity}QueryRequestBody;
+import ${cfg.bodyPackage}.${entity}PageableQueryRequestBody;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.lang.Nullable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @description: $!{table.comment}Jpa服务实现类
@@ -15,6 +30,89 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ${entity}JpaServiceImpl implements ${entity}JpaService {
+
+
+
+  @Override
+  public Specification<${entity}> getFindAllPageableSpecification(${entity}PageableQueryRequestBody queryRequestBody) {
+    return this.getConditions(queryRequestBody);
+  }
+
+  @Override
+  public Specification<${entity}> getFindAllSpecification(${entity}QueryRequestBody queryRequestBody) {
+    return this.getConditions(queryRequestBody);
+  }
+
+  @Override
+  public Specification<${entity}> getCountSpecification(${entity}QueryRequestBody queryRequestBody) {
+    return this.getConditions(queryRequestBody);
+  }
+
+  @Override
+  public Specification<${entity}> getExistsSpecification(${entity}QueryRequestBody queryRequestBody) {
+    return this.getConditions(queryRequestBody);
+  }
+
+  @Override
+  public Specification<${entity}> getDeleteByConditionSpecification(
+      ${entity}QueryRequestBody queryRequestBody) {
+    return this.getConditions(queryRequestBody);
+  }
+
+
+  public Specification<${entity}> getConditions(${entity}QueryRequestBody queryRequestBody) {
+    return new Specification<${entity}>() {
+      @Nullable
+      @Override
+
+      public Predicate toPredicate(Root<${entity}> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+          List<Predicate> list = new ArrayList<Predicate>();
+          
+//        Path<String> usernameField = root.get("username");
+//        Path<String> mobileField = root.get("mobile");
+//        Path<String> emailField = root.get("email");
+//        Path<Gender> genderField = root.get("gender");
+//        Path<Integer> typeField = root.get("type");
+//        Path<Status> statusField = root.get("status");
+//        Path<Date> createdDateField = root.get("createdDate");
+//
+//        //模糊搜素
+//        if (!StringUtils.isEmpty(queryRequestBody.get${entity}name())) {
+//          list.add(cb.like(usernameField, '%' + queryRequestBody.get${entity}name() + '%'));
+//        }
+//        if (!StringUtils.isEmpty(queryRequestBody.getMobile())) {
+//          list.add(cb.like(mobileField, '%' + queryRequestBody.getMobile() + '%'));
+//        }
+//        if (!StringUtils.isEmpty(queryRequestBody.getEmail())) {
+//          list.add(cb.like(emailField, '%' + queryRequestBody.getEmail() + '%'));
+//        }
+//
+//        //性别
+//        if (queryRequestBody.getGender() != null) {
+//          list.add(cb.equal(genderField, queryRequestBody.getGender()));
+//        }
+//        //类型
+//        if (queryRequestBody.getType() != null) {
+//          list.add(cb.equal(typeField, queryRequestBody.getType()));
+//        }
+//        //状态
+//        if (queryRequestBody.getStatus() != null) {
+//          list.add(cb.equal(statusField, queryRequestBody.getStatus()));
+//        }
+//        //创建时间
+//        if (!StringUtils.isEmpty(queryRequestBody.getStartDate()) && !StringUtils.isEmpty(queryRequestBody.getEndDate())) {
+//          Date start = DateUtil.parse(queryRequestBody.getStartDate());
+//          Date end = DateUtil.parse(queryRequestBody.getEndDate());
+//          list.add(cb.between(createdDateField, start, DateUtil.endOfDay(end)));
+//        }
+
+        Predicate[] arr = new Predicate[list.size()];
+        cq.where(list.toArray(arr));
+        return null;
+      }
+    };
+  }
+
   @Autowired
   private ${entity}Repository jpaRepository;
 
@@ -22,4 +120,7 @@ public class ${entity}JpaServiceImpl implements ${entity}JpaService {
   public AbstractRepository<${entity}, Long> getJpaRepository() {
     return jpaRepository;
   }
+
+
+
 }

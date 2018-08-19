@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author will
+ */
 @RestController
-@RequestMapping(value = "/api/v2/data/generation")
+@RequestMapping(value = "/api/v1/open/code/generation")
 @ApiOperation(value = "Code Generation Endpoint", tags = "Code Generation", notes = "Code Generation Endpoint")
 @Slf4j
 public class CodeGenerationV2Endpoint {
@@ -29,7 +32,7 @@ public class CodeGenerationV2Endpoint {
 
   @PostMapping
   @Loggable
-  @ApiOperationSince(value = "2.0.0")
+  @ApiOperationSince(value = "1.0.0")
   @ApiOperation(value = "Code Generation", httpMethod = "POST", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public @ResponseBody
   ResponseEntity<StatefulBody> generation(@RequestBody CodeGenerationRequestBody body) {

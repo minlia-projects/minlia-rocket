@@ -1,4 +1,4 @@
-package com.minlia.rocket.samples.web.modules.chess.v1.config;
+package com.minlia.rocket.samples.web.modules.config;
 
 import com.minlia.rocket.swagger.abstraction.AbstractSwaggerConfig;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -11,14 +11,14 @@ import springfox.documentation.spring.web.plugins.Docket;
  */
 @Configuration
 @ConditionalOnProperty(prefix = "system.swagger",name = "enabled",havingValue = "true")
-public class ComputerSwaggerConfig extends AbstractSwaggerConfig {
+public class MerchantSwaggerConfig extends AbstractSwaggerConfig {
   /**
    * 自定义当前前缀endpoint的组名
    * @return
    */
   @Bean
-  public Docket computerSwagger(){
-    return createNewDocket("Computer", "/api/v1/open/computer/.*");
+  public Docket merchantSwagger(){
+    return createNewDocket("Chess", "/api/v1/endpoint/v1/.*");
   }
 
 }
