@@ -1,4 +1,4 @@
-package com.minlia.rocket.samples.web.endpoint;
+package com.minlia.rocket.samples.web.showcases.problem.endpoint;
 
 import com.minlia.rocket.context.ContextHolder;
 import com.minlia.rocket.i18n.system.SystemMessageSource;
@@ -6,24 +6,13 @@ import com.minlia.rocket.loggable.annotation.Loggable;
 import com.minlia.rocket.problem.ApiPreconditions;
 import com.minlia.rocket.property.SystemProperties;
 //import com.minlia.rocket.security.rebecca.body.UserQueryRequestBody;
-import com.minlia.rocket.stateful.Responses;
-import com.minlia.rocket.stateful.body.StatefulBody;
-import com.minlia.rocket.stateful.body.impl.SuccessResponseBody;
-import com.minlia.rocket.swagger.annotation.ApiOperationSince;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.zalando.problem.Status;
 
