@@ -26,7 +26,8 @@ import ${superControllerClassPackage};
  * @version: ${cfg.version}
  */
 @RestController
-@RequestMapping("/${cfg.apiPrefix}/v1/${cfg.resPrefix}#if(${package.ModuleName})/${package.ModuleName}#end/${table.entityPath}")
+##@RequestMapping("/${cfg.apiPrefix}/v1/${cfg.resPrefix}#if(${package.ModuleName})/${package.ModuleName}#end/${table.entityPath}")
+@RequestMapping("/${cfg.apiPrefix}/#if(${package.ModuleName})/${package.ModuleName}#end/${table.entityPath}")
 #if(${superControllerClass})
 public class ${table.controllerName} implements ${superControllerClass}<${entity},Long,${entity}QueryRequestBody,${entity}PageableQueryRequestBody> {
 
