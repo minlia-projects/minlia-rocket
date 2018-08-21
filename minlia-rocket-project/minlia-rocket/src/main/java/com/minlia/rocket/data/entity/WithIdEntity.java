@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
+import org.springframework.data.domain.Persistable;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -29,6 +30,19 @@ public abstract class WithIdEntity<ID extends Serializable> implements Serializa
 
 
   /**
+   * 判断是否为新实体
+   *
+   * @return 是否为新实体
+   */
+  @Transient
+  @org.springframework.data.annotation.Transient
+  @JsonIgnore
+  @JSONField(serialize = false)
+  public boolean isNew() {
+    return (null == getId());
+  }
+
+  /**
    * 判断是否为空
    *
    * @return 是否为空
@@ -41,7 +55,6 @@ public abstract class WithIdEntity<ID extends Serializable> implements Serializa
     return (null == getId());
   }
 
-
   /**
    * 判断是否相等
    *
@@ -52,6 +65,7 @@ public abstract class WithIdEntity<ID extends Serializable> implements Serializa
   @Transient
   @org.springframework.data.annotation.Transient
   @JSONField(serialize = false)
+  @JsonIgnore
   public boolean equals(Object obj) {
     if (obj == this) {
       return true;
@@ -59,12 +73,13 @@ public abstract class WithIdEntity<ID extends Serializable> implements Serializa
     if (isEmpty() || obj == null || !getClass().isAssignableFrom(obj.getClass())) {
       return false;
     }
-    AbstractEntity entity = (AbstractEntity) obj;
+    WithIdEntity entity = (WithIdEntity) obj;
     if (entity.isEmpty()) {
       return false;
     }
     return getId().equals(entity.getId());
   }
+
 
 
   @Override
