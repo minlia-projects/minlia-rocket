@@ -20,11 +20,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.minlia.rocket.stateful.generator.SnowFlakeUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.Date;
 import lombok.Data;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.util.Date;
 
 /**
  * @author will
@@ -176,7 +177,7 @@ public class StatefulBody<T> implements Body {
    * 新增便利性方法
    */
   public boolean isSuccess() {
-    return null != status && status.equals(SUCCESS);
+    return null != code && code.equals(SUCCESS);
   }
 
 
