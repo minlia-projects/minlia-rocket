@@ -11,7 +11,7 @@
 
   <properties>
     <main.basedir>${basedir}</main.basedir>
-    <revision>2.0.4.RELEASE</revision>
+    <revision>2.0.4.1-SNAPSHOT</revision>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
